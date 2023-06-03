@@ -1,7 +1,7 @@
 // global styles shared across the entire site
-import * as React from 'react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 import * as Fathom from 'fathom-client'
 // used for rendering equations (optional)
@@ -24,7 +24,7 @@ import { fathomConfig, fathomId, posthogConfig, posthogId } from '@/lib/config'
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
-  React.useEffect(() => {
+  useEffect(() => {
     function onRouteChangeComplete() {
       if (fathomId) {
         Fathom.trackPageview()

@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import * as types from 'notion-types'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'

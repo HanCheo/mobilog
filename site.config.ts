@@ -2,7 +2,7 @@ import { siteConfig } from './lib/site-config'
 
 export default siteConfig({
   // the site's root Notion page (required)
-  rootNotionPageId: process.env.NOTION_PAGE_ID,
+  rootNotionPageId: '163d55e42ba04e0b8f8d5a9038d62c35',
 
   // if you want to restrict pages to a single notion workspace (optional)
   // (this should be a Notion ID; see the docs for how to extract this)
@@ -43,7 +43,7 @@ export default siteConfig({
   // example:
   //
   pageUrlOverrides: {
-    '/about': process.env.ABOUT_PAGE_ID,
+    '/about': '748a220c402647feafd533ac52a4449f'
     // '/bar': '0be6efce9daf42688f65c76b89f8eb27'
   },
 
@@ -54,8 +54,8 @@ export default siteConfig({
   navigationLinks: [
     {
       title: 'About',
-      pageId: process.env.ABOUT_PAGE_ID
-    },
+      pageId: '748a220c402647feafd533ac52a4449f'
+    }
     // {
     //   title: 'Contact',
     //   pageId: '6a29ebcb935a4f0689fe661ab5f3b8d1'

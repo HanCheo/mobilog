@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { FC, memo, useCallback, useEffect, useState } from 'react'
 
 import { FaEnvelopeOpenText } from '@react-icons/all-files/fa/FaEnvelopeOpenText'
 import { FaGithub } from '@react-icons/all-files/fa/FaGithub'
@@ -17,11 +17,11 @@ import styles from './styles.module.css'
 
 // TODO: merge the data and icons from PageSocial with the social links in Footer
 
-export const FooterImpl: React.FC = () => {
-  const [hasMounted, setHasMounted] = React.useState(false)
+export const FooterImpl: FC = () => {
+  const [hasMounted, setHasMounted] = useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
 
-  const onToggleDarkMode = React.useCallback(
+  const onToggleDarkMode = useCallback(
     (e) => {
       e.preventDefault()
       toggleDarkMode()
@@ -29,7 +29,7 @@ export const FooterImpl: React.FC = () => {
     [toggleDarkMode]
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true)
   }, [])
 
@@ -139,4 +139,4 @@ export const FooterImpl: React.FC = () => {
   )
 }
 
-export const Footer = React.memo(FooterImpl)
+export const Footer = memo(FooterImpl)

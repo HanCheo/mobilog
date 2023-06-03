@@ -1,8 +1,8 @@
-import * as React from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { FC, ReactNode, useMemo } from 'react'
 
 import cs from 'classnames'
 import { PageBlock } from 'notion-types'
@@ -102,7 +102,7 @@ const Tweet = ({ id }: { id: string }) => {
 
 const propertyLastEditedTimeValue = (
   { block, pageHeader },
-  defaultFn: () => React.ReactNode
+  defaultFn: () => ReactNode
 ) => {
   if (pageHeader && block?.last_edited_time) {
     return `Last updated ${formatDate(block?.last_edited_time, {
@@ -115,7 +115,7 @@ const propertyLastEditedTimeValue = (
 
 const propertyDateValue = (
   { data, schema, pageHeader },
-  defaultFn: () => React.ReactNode
+  defaultFn: () => ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'published') {
     const publishDate = data?.[0]?.[1]?.[0]?.[1]?.start_date
@@ -132,7 +132,7 @@ const propertyDateValue = (
 
 const propertyTextValue = (
   { schema, pageHeader },
-  defaultFn: () => React.ReactNode
+  defaultFn: () => ReactNode
 ) => {
   if (pageHeader && schema?.name?.toLowerCase() === 'author') {
     return <b>{defaultFn()}</b>
@@ -141,7 +141,7 @@ const propertyTextValue = (
   return defaultFn()
 }
 
-export const NotionPage: React.FC<types.PageProps> = ({
+export const NotionPage: FC<types.PageProps> = ({
   site,
   recordMap,
   error,
@@ -150,7 +150,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const router = useRouter()
   const lite = useSearchParam('lite')
 
-  const components = React.useMemo(
+  const components = useMemo(
     () => ({
       nextImage: Image,
       nextLink: Link,
@@ -173,7 +173,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const { isDarkMode } = useDarkMode()
 
-  const siteMapPageUrl = React.useMemo(() => {
+  const siteMapPageUrl = useMemo(() => {
     const params: any = {}
     if (lite) params.lite = lite
 
@@ -192,14 +192,14 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const showTableOfContents = !!isBlogPost
   const minTableOfContentsItems = 3
 
-  const pageAside = React.useMemo(
+  const pageAside = useMemo(
     () => (
       <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
     ),
     [block, recordMap, isBlogPost]
   )
 
-  const footer = React.useMemo(() => <Footer />, [])
+  const footer = useMemo(() => <Footer />, [])
 
   if (router.isFallback) {
     return <Loading />

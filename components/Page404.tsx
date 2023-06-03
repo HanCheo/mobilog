@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import * as types from '@/lib/types'
 
 import { PageHead } from './PageHead'
