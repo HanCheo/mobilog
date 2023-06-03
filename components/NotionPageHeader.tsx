@@ -1,3 +1,5 @@
+import { FC, useCallback, useEffect, useState } from 'react'
+
 import * as types from 'notion-types'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
@@ -10,14 +12,14 @@ import { useDarkMode } from '@/lib/use-dark-mode'
 import styles from './styles.module.css'
 
 const ToggleThemeButton = () => {
-  const [hasMounted, setHasMounted] = React.useState(false)
+  const [hasMounted, setHasMounted] = useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true)
   }, [])
 
-  const onToggleTheme = React.useCallback(() => {
+  const onToggleTheme = useCallback(() => {
     toggleDarkMode()
   }, [toggleDarkMode])
 
@@ -31,7 +33,7 @@ const ToggleThemeButton = () => {
   )
 }
 
-export const NotionPageHeader: React.FC<{
+export const NotionPageHeader: FC<{
   block: types.CollectionViewPageBlock | types.PageBlock
 }> = ({ block }) => {
   const { components, mapPageUrl } = useNotionContext()
