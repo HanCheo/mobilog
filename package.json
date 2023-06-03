@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "description": "moby-blog base in notion",
-  "author": "Moby <05.hanch.it@gmail.com",
+  "author": "Moby <05.hanch.it@gmail.com>",
   "repository": "hancheo/mobilog",
   "license": "MIT",
   "scripts": {
