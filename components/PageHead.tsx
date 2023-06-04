@@ -27,6 +27,7 @@ export const PageHead: React.FC<
         name='viewport'
         content='width=device-width, initial-scale=1, shrink-to-fit=no'
       />
+      <link rel='apple-touch-icon' href='/apple-touch-icon.png'></link>
 
       <meta
         name='theme-color'

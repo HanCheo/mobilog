@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { FC, useCallback, useEffect, useState } from 'react'
 
 import * as types from 'notion-types'
@@ -9,6 +10,7 @@ import { Breadcrumbs, Header, Search, useNotionContext } from 'react-notion-x'
 import { isSearchEnabled, navigationLinks, navigationStyle } from '@/lib/config'
 import { useDarkMode } from '@/lib/use-dark-mode'
 
+import { Logo } from './icons'
 import styles from './styles.module.css'
 
 const ToggleThemeButton = () => {
@@ -45,8 +47,15 @@ export const NotionPageHeader: FC<{
   return (
     <header className='notion-header'>
       <div className='notion-nav-header'>
-        <Breadcrumbs block={block} rootOnly={true} />
+        <div className='flex justify-center items-center space-x-1'>
+          <div className='hover:cursor-pointer'>
+            <Link href='/'>
+              <Logo height={52} width={52} />
+            </Link>
+          </div>
 
+          <Breadcrumbs block={block} rootOnly={true} />
+        </div>
         <div className='notion-nav-header-rhs breadcrumbs'>
           {navigationLinks
             ?.map((link, index) => {
