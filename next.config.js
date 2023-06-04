@@ -9,9 +9,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer({
   staticPageGenerationTimeout: 300,
   webpack: (config) => {
-    if (process.env.NODE_ENV !== 'production') {
-      config.plugins.push(new dotenv({ silent: true }))
-    }
+    config.plugins.push(new dotenv({ silent: true }))
+
     return config
   },
   images: {
