@@ -1,6 +1,7 @@
 type LogoProps = {
   width: number
   height: number
+  fill: string
 }
 
 export const Logo = (props: LogoProps) => (

@@ -39,6 +39,7 @@ export const NotionPageHeader: FC<{
   block: types.CollectionViewPageBlock | types.PageBlock
 }> = ({ block }) => {
   const { components, mapPageUrl } = useNotionContext()
+  const { isDarkMode } = useDarkMode()
 
   if (navigationStyle === 'default') {
     return <Header block={block} />
@@ -50,7 +51,7 @@ export const NotionPageHeader: FC<{
         <div className='flex justify-center items-center space-x-1'>
           <div className='hover:cursor-pointer'>
             <Link href='/'>
-              <Logo height={52} width={52} />
+              <Logo height={52} width={52} fill={isDarkMode ? '#F5F5F5' : ''} />
             </Link>
           </div>
 
