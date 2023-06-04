@@ -12,8 +12,7 @@ import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 
 import * as config from '@/lib/config'
 import { useDarkMode } from '@/lib/use-dark-mode'
-
-import styles from './styles.module.css'
+import styles from '@/styles/styles.module.css'
 
 // TODO: merge the data and icons from PageSocial with the social links in Footer
 
@@ -41,10 +40,8 @@ export const FooterImpl: FC = () => {
         {hasMounted && (
           <a
             className={styles.toggleDarkMode}
-            href='#'
             role='button'
             onClick={onToggleDarkMode}
-            title='Toggle dark mode'
           >
             {isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
           </a>

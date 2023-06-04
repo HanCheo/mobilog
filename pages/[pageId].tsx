@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 
-import { NotionPage } from '@/components/NotionPage'
+import { NotionPage } from '@/layouts/NotionPage'
+
 import { domain, isDev } from '@/lib/config'
 import { getSiteMap } from '@/lib/get-site-map'
 import { resolveNotionPage } from '@/lib/resolve-notion-page'

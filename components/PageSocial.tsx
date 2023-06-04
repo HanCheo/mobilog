@@ -1,8 +1,7 @@
+import styles from '@/layouts/PageSocial.module.css'
 import cs from 'classnames'
 
 import * as config from '@/lib/config'
-
-import styles from './PageSocial.module.css'
 
 interface SocialLink {
   name: string
@@ -70,7 +69,7 @@ const socialLinks: SocialLink[] = [
 
 export const PageSocial: React.FC = () => {
   return (
-    <div className={styles.pageSocial}>
+    <div className={cs(styles.pageSocial, 'mt-5')}>
       {socialLinks.map((action) => (
         <a
           className={cs(styles.action, styles[action.name])}

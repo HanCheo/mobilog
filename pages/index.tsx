@@ -1,4 +1,5 @@
-import { NotionPage } from '@/components/NotionPage'
+import { NotionPage } from '@/layouts/NotionPage'
+
 import { domain } from '@/lib/config'
 import { resolveNotionPage } from '@/lib/resolve-notion-page'
 

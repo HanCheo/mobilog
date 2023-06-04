@@ -1,5 +1,6 @@
-import { PageHead } from '../components/PageHead'
-import styles from '../components/styles.module.css'
+import { PageHead } from '@/layouts/PageHead'
+
+import styles from '@/styles/styles.module.css'
 
 const ErrorPage: React.FC<{ statusCode: number }> = ({ statusCode }) => {
   const title = 'Error'

@@ -2,11 +2,19 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FC, ReactNode, useMemo } from 'react'
+import { FC, ReactNode, createElement, useMemo } from 'react'
 
+import { Footer } from '@/layouts/Footer'
+import { PageHead } from '@/layouts/PageHead'
 import cs from 'classnames'
+import { PageHeader } from 'layouts/Header/PageHeader'
 import { PageBlock } from 'notion-types'
-import { formatDate, getBlockTitle, getPageProperty } from 'notion-utils'
+import {
+  formatDate,
+  getBlockTitle,
+  getPageProperty,
+  getTextContent
+} from 'notion-utils'
 import BodyClassName from 'react-body-classname'
 import { NotionRenderer } from 'react-notion-x'
 import TweetEmbed from 'react-tweet-embed'
@@ -14,62 +22,81 @@ import { useSearchParam } from 'react-use'
 
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
+import { Loading } from '@/components/Loading'
+import { PageSocial } from '@/components/PageSocial'
 import { mapImageUrl } from '@/lib/map-image-url'
 import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
 import { searchNotion } from '@/lib/search-notion'
 import { useDarkMode } from '@/lib/use-dark-mode'
+import styles from '@/styles/styles.module.css'
 
-import { Footer } from './Footer'
-import { Loading } from './Loading'
-import { NotionPageHeader } from './NotionPageHeader'
 import { Page404 } from './Page404'
-import { PageAside } from './PageAside'
-import { PageHead } from './PageHead'
-import styles from './styles.module.css'
 
 // -----------------------------------------------------------------------------
 // dynamic imports for optional components
 // -----------------------------------------------------------------------------
 
-const Code = dynamic(() =>
-  import('react-notion-x/build/third-party/code').then(async (m) => {
-    // add / remove any prism syntaxes here
-    await Promise.all([
-      import('prismjs/components/prism-markup-templating.js'),
-      import('prismjs/components/prism-markup.js'),
-      import('prismjs/components/prism-bash.js'),
-      import('prismjs/components/prism-c.js'),
-      import('prismjs/components/prism-cpp.js'),
-      import('prismjs/components/prism-csharp.js'),
-      import('prismjs/components/prism-docker.js'),
-      import('prismjs/components/prism-java.js'),
-      import('prismjs/components/prism-js-templates.js'),
-      import('prismjs/components/prism-coffeescript.js'),
-      import('prismjs/components/prism-diff.js'),
-      import('prismjs/components/prism-git.js'),
-      import('prismjs/components/prism-go.js'),
-      import('prismjs/components/prism-graphql.js'),
-      import('prismjs/components/prism-handlebars.js'),
-      import('prismjs/components/prism-less.js'),
-      import('prismjs/components/prism-makefile.js'),
-      import('prismjs/components/prism-markdown.js'),
-      import('prismjs/components/prism-objectivec.js'),
-      import('prismjs/components/prism-ocaml.js'),
-      import('prismjs/components/prism-python.js'),
-      import('prismjs/components/prism-reason.js'),
-      import('prismjs/components/prism-rust.js'),
-      import('prismjs/components/prism-sass.js'),
-      import('prismjs/components/prism-scss.js'),
-      import('prismjs/components/prism-solidity.js'),
-      import('prismjs/components/prism-sql.js'),
-      import('prismjs/components/prism-stylus.js'),
-      import('prismjs/components/prism-swift.js'),
-      import('prismjs/components/prism-wasm.js'),
-      import('prismjs/components/prism-yaml.js')
-    ])
-    return m.Code
-  })
-)
+const Code = dynamic(async () => (props: any) => {
+  switch (getTextContent(props.block.properties.language)) {
+    case 'Mermaid':
+      return createElement(
+        dynamic(
+          () => {
+            return import('@/components/notion-blocks/Mermaid').then(
+              (module) => module.default
+            )
+          },
+          { ssr: false }
+        ),
+        props
+      )
+    default:
+      return createElement(
+        dynamic(() => {
+          return import('react-notion-x/build/third-party/code').then(
+            async (module) => {
+              // Additional prismjs syntax
+              await Promise.all([
+                import('prismjs/components/prism-markup-templating'),
+                import('prismjs/components/prism-markup'),
+                import('prismjs/components/prism-bash'),
+                import('prismjs/components/prism-c'),
+                import('prismjs/components/prism-cpp'),
+                import('prismjs/components/prism-csharp'),
+                import('prismjs/components/prism-docker'),
+                import('prismjs/components/prism-java'),
+                import('prismjs/components/prism-js-templates'),
+                import('prismjs/components/prism-coffeescript'),
+                import('prismjs/components/prism-diff'),
+                import('prismjs/components/prism-git'),
+                import('prismjs/components/prism-go'),
+                import('prismjs/components/prism-graphql'),
+                import('prismjs/components/prism-handlebars'),
+                import('prismjs/components/prism-less'),
+                import('prismjs/components/prism-makefile'),
+                import('prismjs/components/prism-markdown'),
+                import('prismjs/components/prism-objectivec'),
+                import('prismjs/components/prism-ocaml'),
+                import('prismjs/components/prism-python'),
+                import('prismjs/components/prism-reason'),
+                import('prismjs/components/prism-rust'),
+                import('prismjs/components/prism-sass'),
+                import('prismjs/components/prism-scss'),
+                import('prismjs/components/prism-solidity'),
+                import('prismjs/components/prism-sql'),
+                import('prismjs/components/prism-stylus'),
+                import('prismjs/components/prism-swift'),
+                import('prismjs/components/prism-wasm'),
+                import('prismjs/components/prism-yaml')
+              ])
+              return module.Code
+            }
+          )
+        }),
+        props
+      )
+  }
+})
 
 const Collection = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then(
@@ -160,7 +187,9 @@ export const NotionPage: FC<types.PageProps> = ({
       Pdf,
       Modal,
       Tweet,
-      Header: NotionPageHeader,
+      Header: ({ block }) => (
+        <PageHeader block={block} collection={recordMap?.collection} />
+      ),
       propertyLastEditedTimeValue,
       propertyTextValue,
       propertyDateValue
@@ -184,20 +213,8 @@ export const NotionPage: FC<types.PageProps> = ({
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
 
-  // const isRootPage =
-  //   parsePageId(block?.id) === parsePageId(site?.rootNotionPageId)
-  const isBlogPost =
-    block?.type === 'page' && block?.parent_table === 'collection'
-
-  const showTableOfContents = !!isBlogPost
+  const showTableOfContents = true
   const minTableOfContentsItems = 3
-
-  const pageAside = useMemo(
-    () => (
-      <PageAside block={block} recordMap={recordMap} isBlogPost={isBlogPost} />
-    ),
-    [block, recordMap, isBlogPost]
-  )
 
   const footer = useMemo(() => <Footer />, [])
 
@@ -210,14 +227,6 @@ export const NotionPage: FC<types.PageProps> = ({
   }
 
   const title = getBlockTitle(block, recordMap) || site.name
-
-  console.log('notion page', {
-    isDev: config.isDev,
-    title,
-    pageId,
-    rootNotionPageId: site.rootNotionPageId,
-    recordMap
-  })
 
   if (!config.isServer) {
     // add important objects to the window global for easy debugging
@@ -276,7 +285,7 @@ export const NotionPage: FC<types.PageProps> = ({
         mapPageUrl={siteMapPageUrl}
         mapImageUrl={mapImageUrl}
         searchNotion={config.isSearchEnabled ? searchNotion : null}
-        pageAside={pageAside}
+        pageAside={<PageSocial />}
         footer={footer}
       />
     </>
