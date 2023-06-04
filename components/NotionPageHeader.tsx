@@ -39,7 +39,12 @@ export const NotionPageHeader: FC<{
   block: types.CollectionViewPageBlock | types.PageBlock
 }> = ({ block }) => {
   const { components, mapPageUrl } = useNotionContext()
+  const [hasMounted, setHasMounted] = useState(false)
   const { isDarkMode } = useDarkMode()
+
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
 
   if (navigationStyle === 'default') {
     return <Header block={block} />
@@ -49,11 +54,15 @@ export const NotionPageHeader: FC<{
     <header className='notion-header'>
       <div className='notion-nav-header'>
         <div className='flex justify-center items-center space-x-1'>
-          <div className='hover:cursor-pointer'>
-            <Link href='/'>
-              <Logo height={52} width={52} fill={isDarkMode ? '#F5F5F5' : ''} />
-            </Link>
-          </div>
+          <Link href='/'>
+            <div className='hover:cursor-pointer'>
+              <Logo
+                height={52}
+                width={52}
+                fill={hasMounted && isDarkMode ? '#F5F5F5' : ''}
+              />
+            </div>
+          </Link>
 
           <Breadcrumbs block={block} rootOnly={true} />
         </div>
