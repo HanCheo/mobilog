@@ -91,7 +91,7 @@ export const PageHeader: FC<{
           <RightNavigation block={block} />
         </div>
       </header>
-      <div ref={sentinelRef} className='absolute h-5' />
+      <div ref={sentinelRef} className='absolute top-0' />
     </>
   )
 }
