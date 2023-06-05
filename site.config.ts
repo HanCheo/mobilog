@@ -43,8 +43,8 @@ export default siteConfig({
   // example:
   //
   pageUrlOverrides: {
-    '/about': process.env.NEXT_PUBLIC_ABOUT_PAGE_ID
-    // '/bar': '0be6efce9daf42688f65c76b89f8eb27'
+    '/about': process.env.NEXT_PUBLIC_ABOUT_PAGE_ID,
+    '/contact': process.env.NEXT_PUBLIC_CONTACT_PAGE_ID
   },
 
   // whether to use the default notion navigation style or a custom one with links to
@@ -55,10 +55,10 @@ export default siteConfig({
     {
       title: 'About',
       pageId: process.env.NEXT_PUBLIC_ABOUT_PAGE_ID
+    },
+    {
+      title: 'Contact',
+      pageId: process.env.NEXT_PUBLIC_CONTACT_PAGE_ID
     }
-    // {
-    //   title: 'Contact',
-    //   pageId: '6a29ebcb935a4f0689fe661ab5f3b8d1'
-    // }
   ]
 })
