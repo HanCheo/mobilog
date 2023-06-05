@@ -17,7 +17,6 @@ import {
 } from 'notion-utils'
 import BodyClassName from 'react-body-classname'
 import { NotionRenderer } from 'react-notion-x'
-import TweetEmbed from 'react-tweet-embed'
 import { useSearchParam } from 'react-use'
 
 import * as config from '@/lib/config'
@@ -32,18 +31,14 @@ import styles from '@/styles/styles.module.css'
 
 import { Page404 } from './Page404'
 
-// -----------------------------------------------------------------------------
-// dynamic imports for optional components
-// -----------------------------------------------------------------------------
-
 const Code = dynamic(async () => (props: any) => {
   switch (getTextContent(props.block.properties.language)) {
     case 'Mermaid':
       return createElement(
         dynamic(
           () => {
-            return import('@/components/notion-blocks/Mermaid').then(
-              (module) => module.default
+            return import('@/components/notion-blocks').then(
+              ({ Mermaid }) => Mermaid
             )
           },
           { ssr: false }
@@ -123,10 +118,6 @@ const Modal = dynamic(
   }
 )
 
-const Tweet = ({ id }: { id: string }) => {
-  return <TweetEmbed tweetId={id} />
-}
-
 const propertyLastEditedTimeValue = (
   { block, pageHeader },
   defaultFn: () => ReactNode
@@ -186,7 +177,6 @@ export const NotionPage: FC<types.PageProps> = ({
       Equation,
       Pdf,
       Modal,
-      Tweet,
       Header: ({ block }) => (
         <PageHeader block={block} collection={recordMap?.collection} />
       ),
@@ -213,7 +203,8 @@ export const NotionPage: FC<types.PageProps> = ({
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
 
-  const showTableOfContents = true
+  const showTableOfContents =
+    block?.type === 'page' && block?.parent_table === 'collection'
   const minTableOfContentsItems = 3
 
   const footer = useMemo(() => <Footer />, [])
@@ -228,6 +219,9 @@ export const NotionPage: FC<types.PageProps> = ({
 
   const title = getBlockTitle(block, recordMap) || site.name
 
+  const canonicalPageUrl =
+    !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
+
   if (!config.isServer) {
     // add important objects to the window global for easy debugging
     const g = window as any
@@ -235,9 +229,6 @@ export const NotionPage: FC<types.PageProps> = ({
     g.recordMap = recordMap
     g.block = block
   }
-
-  const canonicalPageUrl =
-    !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||

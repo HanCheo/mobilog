@@ -14,7 +14,7 @@ type MermaidProps = {
   }
 }
 
-export default function Mermaid({ block }: MermaidProps) {
+export const Mermaid = ({ block }: MermaidProps) => {
   const { isDarkMode } = useDarkMode()
 
   useEffect(() => {
