@@ -78,7 +78,7 @@ export const PageHeader: FC<{
                   !isIndexPath ? 'hover:cursor-pointer' : 'pointer-events-none'
                 }`}
               >
-                <Logo height={48} width={48} fill={`var(--fg-color)`} />
+                <Logo height={38} width={38} fill={`var(--fg-color)`} />
               </div>
             </Link>
 
