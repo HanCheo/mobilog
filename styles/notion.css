@@ -237,6 +237,13 @@
   }
 }
 
+@media only screen and (min-width: 1300px) and (min-height: 300px) {
+  .notion-page-content-has-aside .notion-page-content-inner {
+      width: calc(var(--notion-max-width) - 48px);
+      max-width: calc(var(--notion-max-width) - 48px);
+  }
+}
+
 .notion-block-ab9a258d6cf444f3bb40dc2600feae91 .notion-page-link {
   justify-content: center;
   padding: 2em;
@@ -401,6 +408,7 @@
     background: hsla(203, 8%, 20%, 0.8);
   }
 }
+
 
 .notion-bookmark:hover {
   border-image: linear-gradient(90.68deg, #b439df 0.26%, #e5337e 102.37%);
