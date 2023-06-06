@@ -21,6 +21,7 @@ import { useSearchParam } from 'react-use'
 
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
+import { Comment } from '@/components/Comment'
 import { Loading } from '@/components/Loading'
 import { PageSocial } from '@/components/PageSocial'
 import { mapImageUrl } from '@/lib/map-image-url'
@@ -207,7 +208,15 @@ export const NotionPage: FC<types.PageProps> = ({
     block?.type === 'page' && block?.parent_table === 'collection'
   const minTableOfContentsItems = 3
 
-  const footer = useMemo(() => <Footer />, [])
+  const footer = useMemo(
+    () => (
+      <>
+        <Comment />
+        <Footer />
+      </>
+    ),
+    []
+  )
 
   if (router.isFallback) {
     return <Loading />

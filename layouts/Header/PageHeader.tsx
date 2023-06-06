@@ -85,7 +85,7 @@ export const PageHeader: FC<{
             <div
               className={`page-title ${showPageTitle ? 'opacity-visible' : ''}`}
             >
-              <Breadcrumbs block={block} rootOnly={true} />
+              <Breadcrumbs block={block} rootOnly={false} />
             </div>
           </div>
           <RightNavigation block={block} />
