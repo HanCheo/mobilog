@@ -58,14 +58,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       getPageProperty<string>('Description', block, recordMap) ||
       config.description
     const url = getCanonicalPageUrl(config.site, recordMap)(pageId)
-    const lastUpdatedTime = getPageProperty<number>(
-      'Last Updated',
+    const lastEditedTime = getPageProperty<number>(
+      'Last edited time',
       block,
       recordMap
     )
     const publishedTime = getPageProperty<number>('Published', block, recordMap)
-    const date = lastUpdatedTime
-      ? new Date(lastUpdatedTime)
+    const date = lastEditedTime
+      ? new Date(lastEditedTime)
       : publishedTime
       ? new Date(publishedTime)
       : undefined

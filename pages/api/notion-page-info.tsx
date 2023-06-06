@@ -82,15 +82,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   //   getPageProperty<string>('Description', block, recordMap) ||
   //   libConfig.description
 
-  // const lastUpdatedTime = getPageProperty<number>(
-  //   'Last Updated',
+  // const lastEditedTime = getPageProperty<number>(
+  //   'Last edited time',
   //   block,
   //   recordMap
   // )
   const publishedTime = getPageProperty<number>('Published', block, recordMap)
   const datePublished = publishedTime ? new Date(publishedTime) : undefined
-  // const dateUpdated = lastUpdatedTime
-  //   ? new Date(lastUpdatedTime)
+  // const dateUpdated = lastEditedTime
+  //   ? new Date(lastEditedTime)
   //   : publishedTime
   //   ? new Date(publishedTime)
   //   : undefined

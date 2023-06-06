@@ -119,19 +119,6 @@ const Modal = dynamic(
   }
 )
 
-const propertyLastEditedTimeValue = (
-  { block, pageHeader },
-  defaultFn: () => ReactNode
-) => {
-  if (pageHeader && block?.last_edited_time) {
-    return `Last updated ${formatDate(block?.last_edited_time, {
-      month: 'long'
-    })}`
-  }
-
-  return defaultFn()
-}
-
 const propertyDateValue = (
   { data, schema, pageHeader },
   defaultFn: () => ReactNode
@@ -181,7 +168,6 @@ export const NotionPage: FC<types.PageProps> = ({
       Header: ({ block }) => (
         <PageHeader block={block} collection={recordMap?.collection} />
       ),
-      propertyLastEditedTimeValue,
       propertyTextValue,
       propertyDateValue
     }),
