@@ -10,7 +10,7 @@ export default siteConfig({
 
   // basic site info (required)
   name: 'Mobilog',
-  domain: 'https://mobilog.vercel.app/',
+  domain: 'mobilog.vercel.app',
   author: 'Moby',
 
   // open graph metadata (optional)
