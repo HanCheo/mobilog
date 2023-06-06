@@ -211,11 +211,11 @@ export const NotionPage: FC<types.PageProps> = ({
   const footer = useMemo(
     () => (
       <>
-        <Comment />
+        {showTableOfContents && <Comment />}
         <Footer />
       </>
     ),
-    []
+    [showTableOfContents]
   )
 
   if (router.isFallback) {
