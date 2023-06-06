@@ -8,6 +8,8 @@
 
 Custom blog base on Next.js [Notion Starter Kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
 
+BlogPost CMS is Notion
+
 ### Customizing
 - Page Route
 - Header
