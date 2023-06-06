@@ -6,7 +6,7 @@ import * as types from 'notion-types'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import cs from 'classnames'
-import { Breadcrumbs, Search, useNotionContext } from 'react-notion-x'
+import { Search, useNotionContext } from 'react-notion-x'
 
 import { Logo } from '@/components/icons'
 import { isSearchEnabled, navigationLinks } from '@/lib/config'
@@ -71,10 +71,10 @@ export const PageHeader: FC<{
     <>
       <header className='notion-header'>
         <div className='notion-nav-header notion-nav-header-width' ref={navRef}>
-          <div className='flex justify-center items-center space-x-1'>
+          <div className='flex items-center space-x-1'>
             <Link href='/'>
               <div
-                className={`flex justify-center items-center ${
+                className={`flex items-center ${
                   !isIndexPath ? 'hover:cursor-pointer' : 'pointer-events-none'
                 }`}
               >
@@ -85,7 +85,8 @@ export const PageHeader: FC<{
             <div
               className={`page-title ${showPageTitle ? 'opacity-visible' : ''}`}
             >
-              <Breadcrumbs block={block} rootOnly={false} />
+              {/* <Breadcrumbs block={block} rootOnly={false} /> */}
+              {block.properties.title}
             </div>
           </div>
           <RightNavigation block={block} />
@@ -104,7 +105,7 @@ const RightNavigation = ({
   const { components, mapPageUrl } = useNotionContext()
 
   return (
-    <div className='notion-nav-header-rhs breadcrumbs'>
+    <div className='notion-nav-header-rhs breadcrumbs justify-end'>
       {navigationLinks
         ?.map((link, index) => {
           if (!link.pageId && !link.url) {
