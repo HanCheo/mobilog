@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://transitivebullsh.it/nextjs-notion-starter-kit">
-    <img alt="Example article page" src="https://github.com/HanCheo/mobilog/assets/38929712/f99dd772-94f6-4d59-a41a-865631ae33b5" width="689">
+  <a href="https://mobilog.vercel.app">
+    <img alt="mobilog page" src="https://github.com/HanCheo/mobilog/assets/38929712/f99dd772-94f6-4d59-a41a-865631ae33b5" width="689">
   </a>
 </p>
 
