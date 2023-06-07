@@ -3,10 +3,8 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import * as Fathom from 'fathom-client'
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css'
-import posthog from 'posthog-js'
 // used for code syntax highlighting (optional)
 import 'prismjs/themes/prism-coy.css'
 // core styles shared by all of react-notion-x (required)
@@ -19,34 +17,24 @@ import 'styles/notion.css'
 // global style overrides for prism theme (optional)
 import 'styles/prism-theme.css'
 
-import { fathomConfig, fathomId, posthogConfig, posthogId } from '@/lib/config'
+import { GA_TRACKING_ID, pageview } from '@/lib/gtag'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    function onRouteChangeComplete() {
-      if (fathomId) {
-        Fathom.trackPageview()
+    function onRouteChangeComplete(url: string) {
+      if (GA_TRACKING_ID) {
+        pageview(url)
       }
-
-      if (posthogId) {
-        posthog.capture('$pageview')
-      }
-    }
-
-    if (fathomId) {
-      Fathom.load(fathomId, fathomConfig)
-    }
-
-    if (posthogId) {
-      posthog.init(posthogId, posthogConfig)
     }
 
     router.events.on('routeChangeComplete', onRouteChangeComplete)
+    router.events.on('hashChangeComplete', onRouteChangeComplete)
 
     return () => {
-      router.events.off('routeChangeComplete', onRouteChangeComplete)
+      router.events.off('routeChangeComplete', onRouteChangeComplete),
+        router.events.off('hashChangeComplete', onRouteChangeComplete)
     }
   }, [router.events])
 
