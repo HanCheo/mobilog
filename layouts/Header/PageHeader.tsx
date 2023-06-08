@@ -71,7 +71,7 @@ export const PageHeader: FC<{
     <>
       <header className='notion-header'>
         <div className='notion-nav-header notion-nav-header-width' ref={navRef}>
-          <div className='flex items-center space-x-1'>
+          <div className='flex items-center space-x-1 flex-shrink-1 w-full overflow-hidden pr-4'>
             <Link href='/'>
               <div
                 className={`flex items-center ${
@@ -83,7 +83,7 @@ export const PageHeader: FC<{
             </Link>
 
             <div
-              className={`page-title ${showPageTitle ? 'opacity-visible' : ''}`}
+              className={`page-title whitespace-nowrap text-ellipsis ${showPageTitle ? 'opacity-visible' : ''}`}
             >
               {/* <Breadcrumbs block={block} rootOnly={false} /> */}
               {block.properties.title}
@@ -105,7 +105,7 @@ const RightNavigation = ({
   const { components, mapPageUrl } = useNotionContext()
 
   return (
-    <div className='notion-nav-header-rhs breadcrumbs justify-end'>
+    <div className='notion-nav-header-rhs breadcrumbs justify-end flex-shrink-1 w-full'>
       {navigationLinks
         ?.map((link, index) => {
           if (!link.pageId && !link.url) {
