@@ -17,10 +17,8 @@ export default siteConfig({
   description: 'Moby Blog',
 
   // social usernames (optional)
-  // twitter: '#'
   github: 'HanCheo',
   linkedin: 'hancheol-kim-ba56b31b7',
-  // mastodon: '#', // optional mastodon profile URL, provides link verification
   // newsletter: '#', // optional newsletter URL
   // youtube: '#', // optional youtube channel name or `channel/UCGbXXXXXXXXXXXXXXXXXXXXXX`
 

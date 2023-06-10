@@ -16,7 +16,6 @@ import {
   getPageProperty,
   getTextContent
 } from 'notion-utils'
-import BodyClassName from 'react-body-classname'
 import { NotionRenderer } from 'react-notion-x'
 import { useSearchParam } from 'react-use'
 
@@ -246,9 +245,6 @@ export const NotionPage: FC<types.PageProps> = ({
         image={socialImage}
         url={canonicalPageUrl}
       />
-
-      {isLiteMode && <BodyClassName className='notion-lite' />}
-      {isDarkMode && <BodyClassName className='dark-mode' />}
 
       <NotionRenderer
         bodyClassName={cs(
