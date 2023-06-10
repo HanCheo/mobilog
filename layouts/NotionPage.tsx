@@ -6,6 +6,7 @@ import { FC, ReactNode, createElement, useMemo } from 'react'
 
 import { Footer } from '@/layouts/Footer'
 import { PageHead } from '@/layouts/PageHead'
+import { useTheme } from '@/providers/ThemeProvider'
 import cs from 'classnames'
 import { PageHeader } from 'layouts/Header/PageHeader'
 import { PageBlock } from 'notion-types'
@@ -27,7 +28,6 @@ import { PageSocial } from '@/components/PageSocial'
 import { mapImageUrl } from '@/lib/map-image-url'
 import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
 import { searchNotion } from '@/lib/search-notion'
-import { useDarkMode } from '@/lib/use-dark-mode'
 import styles from '@/styles/styles.module.css'
 
 import { Page404 } from './Page404'
@@ -177,7 +177,7 @@ export const NotionPage: FC<types.PageProps> = ({
   // lite mode is for oembed
   const isLiteMode = lite === 'true'
 
-  const { isDarkMode } = useDarkMode()
+  const { isDarkMode } = useTheme()
 
   const siteMapPageUrl = useMemo(() => {
     const params: any = {}

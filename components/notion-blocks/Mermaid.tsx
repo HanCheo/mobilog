@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { useTheme } from '@/providers/ThemeProvider'
 import mermaid from 'mermaid'
 import { getTextContent } from 'notion-utils'
 
 import { BlockMap } from '@/lib/types'
-import { useDarkMode } from '@/lib/use-dark-mode'
 
 type MermaidProps = {
   block: BlockMap & {
@@ -15,7 +15,7 @@ type MermaidProps = {
 }
 
 export const Mermaid = ({ block }: MermaidProps) => {
-  const { isDarkMode } = useDarkMode()
+  const { isDarkMode } = useTheme()
 
   useEffect(() => {
     mermaid.initialize({ theme: isDarkMode ? 'dark' : 'neutral' })

@@ -1,4 +1,4 @@
-export const GA_TRACKING_ID = 'G-XP2LK1YHND' // 측정ID 설정: .env 파일로 관리해도된다.
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url) => {

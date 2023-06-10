@@ -1,9 +1,8 @@
+import { useTheme } from '@/providers/ThemeProvider'
 import Giscus from '@giscus/react'
 
-import { useDarkMode } from '@/lib/use-dark-mode'
-
 export const Comment = () => {
-  const { isDarkMode } = useDarkMode()
+  const { isDarkMode } = useTheme()
 
   return (
     <div className='m-auto px-6 max-w-5xl w-full'>

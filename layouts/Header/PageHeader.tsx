@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 
 import * as types from 'notion-types'
+import { useTheme } from '@/providers/ThemeProvider'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import cs from 'classnames'
@@ -10,27 +11,14 @@ import { Search, useNotionContext } from 'react-notion-x'
 
 import { Logo } from '@/components/icons'
 import { isSearchEnabled, navigationLinks } from '@/lib/config'
-import { useDarkMode } from '@/lib/use-dark-mode'
 import styles from '@/styles/styles.module.css'
 
 const ToggleThemeButton = () => {
-  const [hasMounted, setHasMounted] = useState(false)
-  const { isDarkMode, toggleDarkMode } = useDarkMode()
-
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
-
-  const onToggleTheme = useCallback(() => {
-    toggleDarkMode()
-  }, [toggleDarkMode])
+  const { isDarkMode, toggleTheme } = useTheme()
 
   return (
-    <div
-      className={cs('breadcrumb', 'button', !hasMounted && styles.hidden)}
-      onClick={onToggleTheme}
-    >
-      {hasMounted && isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
+    <div className={cs('breadcrumb', 'button')} onClick={toggleTheme}>
+      {isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
     </div>
   )
 }
@@ -83,7 +71,9 @@ export const PageHeader: FC<{
             </Link>
 
             <div
-              className={`page-title whitespace-nowrap text-ellipsis ${showPageTitle ? 'opacity-visible' : ''}`}
+              className={`page-title whitespace-nowrap text-ellipsis ${
+                showPageTitle ? 'opacity-visible' : ''
+              }`}
             >
               {/* <Breadcrumbs block={block} rootOnly={false} /> */}
               {block.properties.title}

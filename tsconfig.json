@@ -21,6 +21,7 @@
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
       "@/layouts/*": ["layouts/*"],
+      "@/providers/*": ["providers/*"],
       "@/styles/*": ["styles/*"]
     }
   },
