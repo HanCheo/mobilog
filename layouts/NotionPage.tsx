@@ -208,8 +208,7 @@ export const NotionPage: FC<types.PageProps> = ({
 
   const title = getBlockTitle(block, recordMap) || site.name
 
-  const canonicalPageUrl =
-    !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
+  const canonicalPageUrl = !config.isDev && getCanonicalPageUrl(site)(pageId)
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
