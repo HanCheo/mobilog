@@ -1,10 +1,11 @@
-import Head from 'next/head'
+import { default as NextHead } from 'next/head'
 
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
 import { getSocialImageUrl } from '@/lib/get-social-image-url'
+import { FC } from 'react'
 
-export const PageHead: React.FC<
+export const Head: FC<
   types.PageProps & {
     title?: string
     description?: string
@@ -20,7 +21,7 @@ export const PageHead: React.FC<
   const socialImageUrl = getSocialImageUrl(pageId) || image
 
   return (
-    <Head>
+    <NextHead>
       <meta charSet='utf-8' />
       <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
       <meta
@@ -88,6 +89,6 @@ export const PageHead: React.FC<
       <meta property='og:title' content={title} />
       <meta name='twitter:title' content={title} />
       <title>{title}</title>
-    </Head>
+    </NextHead>
   )
 }

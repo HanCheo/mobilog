@@ -9,7 +9,7 @@ import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import cs from 'classnames'
 import { Search, useNotionContext } from 'react-notion-x'
 
-import { Logo } from '@/components/icons'
+import { Icon } from '@/components'
 import { isSearchEnabled, navigationLinks } from '@/lib/config'
 import styles from '@/styles/styles.module.css'
 
@@ -23,7 +23,7 @@ const ToggleThemeButton = () => {
   )
 }
 
-export const PageHeader: FC<{
+export const Header: FC<{
   block: types.CollectionViewPageBlock | types.PageBlock
   collection?: types.CollectionMap
 }> = ({ block }) => {
@@ -66,7 +66,7 @@ export const PageHeader: FC<{
                   !isIndexPath ? 'hover:cursor-pointer' : 'pointer-events-none'
                 }`}
               >
-                <Logo height={38} width={38} fill={`var(--fg-color)`} />
+                <Icon.Logo height={38} width={38} fill={`var(--fg-color)`} />
               </div>
             </Link>
 

@@ -18,10 +18,13 @@
     "typeRoots": ["./node_modules/@types"],
     "incremental": true,
     "paths": {
+      "@/components": ["components/index.ts"],
       "@/components/*": ["components/*"],
+      "@/lib": ["lib/index.ts"],
       "@/lib/*": ["lib/*"],
-      "@/layouts/*": ["layouts/*"],
+      "@/layouts": ["layouts/index.ts"],
       "@/providers/*": ["providers/*"],
+      "@/styles": ["styles/index.ts"],
       "@/styles/*": ["styles/*"]
     }
   },

@@ -6,7 +6,6 @@ import pMap from 'p-map'
 import pMemoize from 'p-memoize'
 
 import { defaultPageCover, defaultPageIcon } from './config'
-import { db } from './db'
 import { mapImageUrl } from './map-image-url'
 
 export async function getPreviewImageMap(
@@ -23,7 +22,7 @@ export async function getPreviewImageMap(
       urls,
       async (url) => {
         const cacheKey = normalizeUrl(url)
-        return [cacheKey, await getPreviewImage(url, { cacheKey })]
+        return [cacheKey, await getPreviewImage(url)]
       },
       {
         concurrency: 8
@@ -34,38 +33,16 @@ export async function getPreviewImageMap(
   return previewImagesMap
 }
 
-async function createPreviewImage(
-  url: string,
-  { cacheKey }: { cacheKey: string }
-): Promise<PreviewImage | null> {
+async function createPreviewImage(url: string): Promise<PreviewImage | null> {
   try {
-    try {
-      const cachedPreviewImage = await db.get(cacheKey)
-      if (cachedPreviewImage) {
-        return cachedPreviewImage
-      }
-    } catch (err) {
-      // ignore redis errors
-      console.warn(`redis error get "${cacheKey}"`, err.message)
-    }
-
     const { body } = await got(url, { responseType: 'buffer' })
     const result = await lqip(body)
-    console.log('lqip', { ...result.metadata, url, cacheKey })
 
     const previewImage = {
       originalWidth: result.metadata.originalWidth,
       originalHeight: result.metadata.originalHeight,
       dataURIBase64: result.metadata.dataURIBase64
     }
-
-    try {
-      await db.set(cacheKey, previewImage)
-    } catch (err) {
-      // ignore redis errors
-      console.warn(`redis error set "${cacheKey}"`, err.message)
-    }
-
     return previewImage
   } catch (err) {
     console.warn('failed to create preview image', url, err.message)

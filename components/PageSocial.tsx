@@ -1,4 +1,4 @@
-import styles from '@/layouts/PageSocial.module.css'
+import styles from '@/styles/pageSocial.module.css'
 import cs from 'classnames'
 
 import * as config from '@/lib/config'

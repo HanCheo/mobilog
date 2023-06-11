@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 
-import { NotionPage } from '@/layouts/NotionPage'
+import { NotionPage } from '@/layouts'
 
 import { domain, isDev } from '@/lib/config'
 import { getSiteMap } from '@/lib/get-site-map'
@@ -13,7 +13,7 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   const rawPageId = context.params.pageId as string
 
   try {
-    const props = await resolveNotionPage(domain, rawPageId)
+    const props = await resolveNotionPage(rawPageId)
 
     return { props, revalidate: 10 }
   } catch (err) {

@@ -3,6 +3,11 @@ import type { AppProps } from 'next/app'
 
 import { GooglaAnalyticsProvider } from '@/providers/GoogleAnalyticsProvider'
 import { ThemeProvider } from '@/providers/ThemeProvider'
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css'
 // used for code syntax highlighting (optional)
@@ -10,19 +15,23 @@ import 'prismjs/themes/prism-coy.css'
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css'
 import 'styles/global.css'
-// this might be better for dark mode
-// import 'prismjs/themes/prism-okaidia.css'
 // global style overrides for notion
 import 'styles/notion.css'
 // global style overrides for prism theme (optional)
-import 'styles/prism-theme.css'
+import { useState } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
-    <GooglaAnalyticsProvider>
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </GooglaAnalyticsProvider>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <GooglaAnalyticsProvider>
+          <ThemeProvider>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </GooglaAnalyticsProvider>
+      </Hydrate>
+    </QueryClientProvider>
   )
 }

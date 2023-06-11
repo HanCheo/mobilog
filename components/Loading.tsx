@@ -1,9 +1,9 @@
 import styles from '@/styles/styles.module.css'
+import * as Icon from './icons'
+import { FC } from 'react'
 
-import { LoadingIcon } from './LoadingIcon'
-
-export const Loading: React.FC = () => (
+export const Loading: FC = () => (
   <div className={styles.container}>
-    <LoadingIcon />
+    <Icon.Loading />
   </div>
 )

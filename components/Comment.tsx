@@ -1,7 +1,8 @@
 import { useTheme } from '@/providers/ThemeProvider'
 import Giscus from '@giscus/react'
+import { FC } from 'react'
 
-export const Comment = () => {
+export const Comment: FC = () => {
   const { isDarkMode } = useTheme()
 
   return (

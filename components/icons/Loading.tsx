@@ -2,7 +2,7 @@ import cs from 'classnames'
 
 import styles from '@/styles/styles.module.css'
 
-export const LoadingIcon = (props) => {
+export const Loading = (props) => {
   const { className, ...rest } = props
   return (
     <svg

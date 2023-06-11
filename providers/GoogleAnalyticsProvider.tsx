@@ -9,7 +9,7 @@ import {
   useEffect
 } from 'react'
 
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
 export const GaScript = () =>
   process.env.VERCEL_ENV === 'production' ? (
@@ -100,4 +100,4 @@ export const GooglaAnalyticsProvider: FC<PropsWithChildren<unknown>> = ({
   )
 }
 
-export const useTheme = () => useContext(GooglaAnalyticsContext)
+export const useGoogleAnaliytics = () => useContext(GooglaAnalyticsContext)

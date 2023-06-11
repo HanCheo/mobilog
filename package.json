@@ -21,11 +21,12 @@
     "test:lint": "eslint '**/*.{ts,tsx}'",
     "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check"
   },
-  "browserslist": ["last 2 version", ">1%"],
+  "browserslist": [
+    "last 2 version",
+    ">1%"
+  ],
   "dependencies": {
     "@giscus/react": "^2.2.8",
-    "@keyvhq/core": "^1.6.9",
-    "@keyvhq/redis": "^1.6.10",
     "@react-icons/all-files": "^4.1.0",
     "@tanstack/react-query": "^4.29.12",
     "@vercel/og": "^0.0.19",
@@ -42,6 +43,7 @@
     "notion-utils": "^6.16.0",
     "p-map": "^5.3.0",
     "p-memoize": "^6.0.1",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-notion-x": "^6.15.6",
@@ -74,10 +76,5 @@
   },
   "resolutions": {
     "@types/react": "^18.2.0"
-  },
-  "overrides": {
-    "cacheable-request": {
-      "keyv": "npm:@keyvhq/core@~1.6.6"
-    }
   }
 }

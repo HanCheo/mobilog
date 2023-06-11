@@ -407,6 +407,9 @@
     background: hsla(203, 8%, 20%, 0.8);
   }
 }
+.notion-aside-table-of-contents-header {
+  display: none;
+}
 
 
 .notion-bookmark:hover {

@@ -3,13 +3,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, ReactNode, createElement, useMemo } from 'react'
-
-import { Footer } from '@/layouts/Footer'
-import { PageHead } from '@/layouts/PageHead'
+import {
+  Footer,
+  Head,
+  Header,
+  Comment,
+  Loading,
+  PageSocial
+} from '@/components'
 import { useTheme } from '@/providers/ThemeProvider'
 import cs from 'classnames'
 import { format } from 'date-fns'
-import { PageHeader } from 'layouts/Header/PageHeader'
 import { PageBlock } from 'notion-types'
 import { getBlockTitle, getPageProperty, getTextContent } from 'notion-utils'
 import { NotionRenderer } from 'react-notion-x'
@@ -17,15 +21,11 @@ import { useSearchParam } from 'react-use'
 
 import * as config from '@/lib/config'
 import * as types from '@/lib/types'
-import { Comment } from '@/components/Comment'
-import { Loading } from '@/components/Loading'
-import { PageSocial } from '@/components/PageSocial'
 import { mapImageUrl } from '@/lib/map-image-url'
 import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
 import { searchNotion } from '@/lib/search-notion'
 import styles from '@/styles/styles.module.css'
-
-import { Page404 } from './Page404'
+import { NotFoundPage } from './NotFoundPage'
 
 const Code = dynamic(async () => (props: any) => {
   switch (getTextContent(props.block.properties.language)) {
@@ -33,8 +33,8 @@ const Code = dynamic(async () => (props: any) => {
       return createElement(
         dynamic(
           () => {
-            return import('@/components/notion-blocks').then(
-              ({ Mermaid }) => Mermaid
+            return import('@/components').then(
+              ({ NotionBlock }) => NotionBlock.Mermaid
             )
           },
           { ssr: false }
@@ -147,6 +147,7 @@ export const NotionPage: FC<types.PageProps> = ({
   pageId
 }) => {
   const router = useRouter()
+
   const lite = useSearchParam('lite')
 
   const components = useMemo(
@@ -159,7 +160,7 @@ export const NotionPage: FC<types.PageProps> = ({
       Pdf,
       Modal,
       Header: ({ block }) => (
-        <PageHeader block={block} collection={recordMap?.collection} />
+        <Header block={block} collection={recordMap?.collection} />
       ),
       propertyTextValue,
       propertyDateValue
@@ -202,7 +203,7 @@ export const NotionPage: FC<types.PageProps> = ({
   }
 
   if (error || !site || !block) {
-    return <Page404 site={site} pageId={pageId} error={error} />
+    return <NotFoundPage site={site} pageId={pageId} error={error} />
   }
 
   const title = getBlockTitle(block, recordMap) || site.name
@@ -223,7 +224,7 @@ export const NotionPage: FC<types.PageProps> = ({
 
   return (
     <>
-      <PageHead
+      <Head
         pageId={pageId}
         site={site}
         title={title}

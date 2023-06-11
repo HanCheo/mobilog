@@ -1,3 +1,3 @@
-import { Page404 } from '@/layouts/Page404'
+import { NotFoundPage } from '@/layouts'
 
-export default Page404
+export default NotFoundPage
