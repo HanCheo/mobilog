@@ -1,8 +1,7 @@
 // global styles shared across the entire site
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 
+import { GooglaAnalyticsProvider } from '@/providers/GoogleAnalyticsProvider'
 import { ThemeProvider } from '@/providers/ThemeProvider'
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css'
@@ -18,30 +17,12 @@ import 'styles/notion.css'
 // global style overrides for prism theme (optional)
 import 'styles/prism-theme.css'
 
-import { GA_TRACKING_ID, pageview } from '@/lib/gtag'
-
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter()
-
-  useEffect(() => {
-    function onRouteChangeComplete(url: string) {
-      if (GA_TRACKING_ID) {
-        pageview(url)
-      }
-    }
-
-    router.events.on('routeChangeComplete', onRouteChangeComplete)
-    router.events.on('hashChangeComplete', onRouteChangeComplete)
-
-    return () => {
-      router.events.off('routeChangeComplete', onRouteChangeComplete),
-        router.events.off('hashChangeComplete', onRouteChangeComplete)
-    }
-  }, [router.events])
-
   return (
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <GooglaAnalyticsProvider>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </GooglaAnalyticsProvider>
   )
 }

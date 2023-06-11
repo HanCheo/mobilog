@@ -8,14 +8,10 @@ import { Footer } from '@/layouts/Footer'
 import { PageHead } from '@/layouts/PageHead'
 import { useTheme } from '@/providers/ThemeProvider'
 import cs from 'classnames'
+import { format } from 'date-fns'
 import { PageHeader } from 'layouts/Header/PageHeader'
 import { PageBlock } from 'notion-types'
-import {
-  formatDate,
-  getBlockTitle,
-  getPageProperty,
-  getTextContent
-} from 'notion-utils'
+import { getBlockTitle, getPageProperty, getTextContent } from 'notion-utils'
 import { NotionRenderer } from 'react-notion-x'
 import { useSearchParam } from 'react-use'
 
@@ -126,9 +122,7 @@ const propertyDateValue = (
     const publishDate = data?.[0]?.[1]?.[0]?.[1]?.start_date
 
     if (publishDate) {
-      return `${formatDate(publishDate, {
-        month: 'long'
-      })}`
+      return `${format(new Date(publishDate), 'yyyy-MM-dd')}`
     }
   }
 
@@ -215,14 +209,6 @@ export const NotionPage: FC<types.PageProps> = ({
 
   const canonicalPageUrl =
     !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
-
-  if (!config.isServer) {
-    // add important objects to the window global for easy debugging
-    const g = window as any
-    g.pageId = pageId
-    g.recordMap = recordMap
-    g.block = block
-  }
 
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||

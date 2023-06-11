@@ -9,7 +9,7 @@ import { BlockMap } from '@/lib/types'
 type MermaidProps = {
   block: BlockMap & {
     properties: BlockMap['properties'] & {
-      title?: any
+      title?: string
     }
   }
 }
@@ -21,7 +21,7 @@ export const Mermaid = ({ block }: MermaidProps) => {
     mermaid.initialize({ theme: isDarkMode ? 'dark' : 'neutral' })
   }, [isDarkMode])
 
-  const source = getTextContent(block.properties.title)
+  const source = getTextContent(block.properties.title ?? '')
   const container = useRef(null)
   const [svg, setSVG] = useState('')
 
