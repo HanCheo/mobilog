@@ -9,7 +9,7 @@ import { BlockMap } from '@/lib/types'
 type MermaidProps = {
   block: BlockMap & {
     properties: BlockMap['properties'] & {
-      title?: string
+      title?: any
     }
   }
 }
