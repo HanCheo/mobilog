@@ -21,7 +21,6 @@ export interface SiteConfig {
 
   isPreviewImageSupportEnabled?: boolean
   isTweetEmbedSupportEnabled?: boolean
-  isRedisEnabled?: boolean
   isSearchEnabled?: boolean
 
   includeNotionIdInUrls?: boolean

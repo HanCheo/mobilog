@@ -1,4 +1,3 @@
-import { ExtendedRecordMap } from 'notion-types'
 import { parsePageId, uuidToId } from 'notion-utils'
 import { getCanonicalPageId } from './get-canonical-page-id'
 import { Site } from './types'
@@ -7,7 +6,7 @@ import { Site } from './types'
 // (they're nice for debugging and speed up local dev)
 
 export const mapPageUrl =
-  (site: Site, recordMap: ExtendedRecordMap, searchParams: URLSearchParams) =>
+  (site: Site, searchParams: URLSearchParams) =>
   (pageId = '') => {
     const pageUuid = parsePageId(pageId, { uuid: true })
 
