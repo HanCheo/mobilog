@@ -1,3 +1,4 @@
+import { host } from '@/lib/config'
 import { useQuery } from '@tanstack/react-query'
 import { FC } from 'react'
 
@@ -12,7 +13,7 @@ type GetCollectionInfoResponse = {
 }
 
 const getCollectionInfo = (): Promise<GetCollectionInfoResponse> => {
-  return fetch('http://localhost:3000/api/tags').then((response) => {
+  return fetch(`${host}/api/tags`).then((response) => {
     return response.json() as unknown as GetCollectionInfoResponse
   })
 }

@@ -6,7 +6,7 @@ export const Comment: FC = () => {
   const { isDarkMode } = useTheme()
 
   return (
-    <div className='m-auto px-6 max-w-5xl w-full'>
+    <div className='m-auto px-6 max-w-1200 w-full'>
       <Giscus
         repo='HanCheo/mobilog'
         repoId='R_kgDOJo538Q'

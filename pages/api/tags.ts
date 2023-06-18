@@ -1,5 +1,10 @@
 import { notion } from '@/lib/notion-api'
 import { NextApiRequest, NextApiResponse } from 'next'
+import pMemoize from 'p-memoize'
+
+const collectionDataMemo = pMemoize(notion.getCollectionData, {
+  cacheKey: (...args) => JSON.stringify(args)
+})
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'GET') {
@@ -7,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const collectionInfo = await notion.getCollectionData(
+    const collectionInfo = await collectionDataMemo(
       process.env.NEXT_PUBLIC_NOTION_COLLECTION_ID,
       process.env.NEXT_PUBLIC_NOTION_COLLECTION_VIEW_ID,
       {

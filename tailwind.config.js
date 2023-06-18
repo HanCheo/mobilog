@@ -7,8 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        1200: '1200px'
+      },
       width: {
-        1024: '1024px'
+        1200: '1200px'
       }
     }
   },

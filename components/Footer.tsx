@@ -10,7 +10,7 @@ import styles from '@/styles/styles.module.css'
 
 export const FooterImpl: FC = () => (
   <footer className={styles.footer}>
-    <div className={styles.copyright}>Copyright 2022 {config.author}</div>
+    <div className={styles.copyright}>Copyright 2023 {config.author}</div>
 
     <div className={styles.social}>
       {config.github && (
