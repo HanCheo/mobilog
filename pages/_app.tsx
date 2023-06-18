@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 
 import { GooglaAnalyticsProvider } from '@/providers/GoogleAnalyticsProvider'
 import { ThemeProvider } from '@/providers/ThemeProvider'
+import { Analytics } from '@vercel/analytics/react'
 import {
   Hydrate,
   QueryClient,
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <Analytics />
         <GooglaAnalyticsProvider>
           <ThemeProvider>
             <Component {...pageProps} />
