@@ -7,6 +7,7 @@ export default siteConfig({
   // if you want to restrict pages to a single notion workspace (optional)
   // (this should be a Notion ID; see the docs for how to extract this)
   rootNotionSpaceId: process.env.NEXT_PUBLIC_NOTION_ROOT_SPACE_ID,
+  pageCollectionId: process.env.NEXT_PUBLIC_NOTION_COLLECTION_ID,
 
   // basic site info (required)
   name: 'Mobilog',

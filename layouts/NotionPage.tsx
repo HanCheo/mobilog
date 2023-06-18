@@ -231,7 +231,6 @@ export const NotionPage: FC<types.PageProps> = ({
         image={socialImage}
         url={canonicalPageUrl}
       />
-
       <NotionRenderer
         bodyClassName={cs(
           styles.notion,
