@@ -22,19 +22,45 @@ const getAllPages = pMemoize(getAllPagesImpl, {
   cacheKey: (...args) => JSON.stringify(args)
 })
 
+const getPage = async (pageId: string, ...args) => {
+  console.log(`\n notion get page: ${uuidToId(pageId)} ${args}`)
+  return notion.getPage(pageId, ...args)
+}
+
+const getPageMemo = pMemoize(getPage, {
+  cacheKey: (...args) => JSON.stringify(args)
+})
+
+const TYPE_PROPERTIES_NAME = 'xnm['
+
+const isPostType = (page: types.Block) => {
+  return page?.properties[TYPE_PROPERTIES_NAME]?.[0][0] === 'Post'
+}
+
+export const getPostsCanonical = async () => {
+  const partialSiteMap = await getAllPages(
+    config.rootNotionPageId,
+    config.rootNotionSpaceId
+  )
+  const allPages = Object.entries(partialSiteMap.canonicalPageMap)
+
+  const allPosts = allPages.filter(([, pageId]) => {
+    const page = partialSiteMap.pageMap[pageId].block[pageId].value
+
+    return isPostType(page)
+  })
+
+  return allPosts
+}
+
 async function getAllPagesImpl(
   rootNotionPageId: string,
   rootNotionSpaceId: string
 ): Promise<Partial<types.SiteMap>> {
-  const getPage = async (pageId: string, ...args) => {
-    console.log('\nnotion getPage', uuidToId(pageId))
-    return notion.getPage(pageId, ...args)
-  }
-
   const pageMap = await getAllPagesInSpace(
     rootNotionPageId,
     rootNotionSpaceId,
-    getPage
+    getPageMemo
   )
 
   const canonicalPageMap = Object.keys(pageMap).reduce(
