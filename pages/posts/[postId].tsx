@@ -8,7 +8,7 @@ import { PageProps, Params } from '@/lib/types'
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   context
 ) => {
-  const rawPostId = context.params.PostId as string
+  const rawPostId = context.params.postId as string
 
   try {
     const props = await resolveNotionPage(rawPostId)
