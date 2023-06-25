@@ -1,7 +1,7 @@
 import styles from '@/styles/pageSocial.module.css'
 import cs from 'classnames'
 
-import * as config from 'back/lib/config'
+import * as config from 'server/lib/config'
 
 interface SocialLink {
   name: string

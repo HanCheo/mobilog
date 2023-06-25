@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next'
 
-import { host } from 'back/lib/config'
+import { host } from 'server/lib/config'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {

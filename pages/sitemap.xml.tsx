@@ -1,8 +1,8 @@
 import type { GetServerSideProps } from 'next'
 
-import { host } from 'back/lib/config'
-import { getSiteMap } from 'back/service/getSiteMap'
-import type { SiteMap } from 'back/lib/types'
+import { host } from 'server/lib/config'
+import { getSiteMap } from 'server/service/getSiteMap'
+import type { SiteMap } from 'server/lib/types'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {

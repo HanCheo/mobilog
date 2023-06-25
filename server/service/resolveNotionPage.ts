@@ -3,8 +3,8 @@ import { parsePageId } from 'notion-utils'
 
 import * as acl from '../lib/acl'
 import { pageUrlAdditions, pageUrlOverrides, site } from '../lib/config'
-import { getSiteMap } from '../service/getSiteMap'
-import { getPage } from '../service/getPage'
+import { getSiteMap } from './getSiteMap'
+import { getPage } from './getPage'
 
 export async function resolveNotionPage(rawPageId?: string) {
   let pageId: string

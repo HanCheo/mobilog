@@ -4,7 +4,7 @@ import { useTheme } from 'client/providers/ThemeProvider'
 import mermaid from 'mermaid'
 import { getTextContent } from 'notion-utils'
 
-import { BlockMap } from 'back/lib/types'
+import { BlockMap } from 'server/lib/types'
 
 type MermaidProps = {
   block: BlockMap & {

@@ -1,4 +1,4 @@
-import { notion } from 'back/lib/notion-api'
+import { notion } from 'server/lib/notion-api'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
