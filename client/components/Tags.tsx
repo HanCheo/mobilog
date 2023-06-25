@@ -32,7 +32,7 @@ export const Tags: FC = () => {
           tags.options?.map(({ id, value }) => (
             <div
               key={id}
-              className='border-solid border rounded-3xl p-1 px-2 cursor-pointer hover:bg-bg-color-0'
+              className='border-solid border rounded-3xl p-1 px-2 cursor-pointer hover:bg-bg-color-0 flex-wrap'
             >
               {value}
             </div>

@@ -75,11 +75,6 @@ body {
   opacity: 1;
 }
 
-.notion-gallery-grid {
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-}
-
-
 .notion-header .notion-nav-header-width {
   width: var(--notion-max-width);
 }
