@@ -14,7 +14,7 @@ import 'katex/dist/katex.min.css'
 // used for code syntax highlighting (optional)
 import 'prismjs/themes/prism-coy.css'
 // core styles shared by all of react-notion-x (required)
-import 'react-notion-x/src/styles.css'
+import '@/styles/react-notion-x.css'
 import '@/styles/global.css'
 // global style overrides for notion
 import '@/styles/notion.css'

@@ -62,10 +62,6 @@ body {
 }
 
 
-.notion-header .notion-nav-header-width {
-  width: var(--notion-max-width);
-}
-
 
 .notion-header .page-title {
   width: 0;
@@ -83,6 +79,10 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
+
+.notion-header .notion-nav-header-width {
+  width: var(--notion-max-width);
+}
 
 @media only screen and (max-width: 1200px) {
   .notion-header .notion-nav-header-width {
@@ -115,20 +115,6 @@ body {
 
 .notion-hr {
   margin: 2em 0;
-}
-
-@media only screen and (max-width: 920px) {
-  .index-page.notion-page {
-    padding-left: 2vw;
-    padding-right: 2vw;
-  }
-}
-
-@media only screen and (max-width: 720px) {
-  .notion-page {
-    padding-left: 2vw;
-    padding-right: 2vw;
-  }
 }
 
 @media only screen and (max-width: 600px) {
