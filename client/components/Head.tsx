@@ -2,7 +2,7 @@ import { default as NextHead } from 'next/head'
 
 import * as config from '@/config/config'
 import * as types from '@/config/types'
-import { getSocialImageUrl } from 'server/lib/get-social-image-url'
+import { getSocialImageUrl } from '@/client/libs/getSocialImageUrl'
 import { FC } from 'react'
 
 export const Head: FC<

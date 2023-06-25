@@ -1,4 +1,4 @@
-import { PageProps } from './types'
+import { PageProps } from '@/config/types'
 
 export function pageAcl({ site, recordMap, pageId }: PageProps): PageProps {
   if (!site) {

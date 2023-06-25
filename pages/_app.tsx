@@ -20,7 +20,7 @@ import '@/styles/global.css'
 import '@/styles/notion.css'
 // global style overrides for prism theme (optional)
 import { useState } from 'react'
-import { Footer } from 'client/components'
+import { Footer } from '@/client/components'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())

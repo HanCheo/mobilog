@@ -2,7 +2,7 @@ import { host } from '@/config/config'
 import { useQuery } from '@tanstack/react-query'
 import { FC } from 'react'
 
-type GetCollectionInfoResponse = {
+type GetTagsResponse = {
   name: 'Tags'
   options: {
     id: string
@@ -12,26 +12,23 @@ type GetCollectionInfoResponse = {
   type: 'multi_select'
 }
 
-const getCollectionInfo = (): Promise<GetCollectionInfoResponse> => {
+const getTags = (): Promise<GetTagsResponse> => {
   return fetch(`${host}/api/tags`).then((response) => {
-    return response.json() as unknown as GetCollectionInfoResponse
+    return response.json() as unknown as GetTagsResponse
   })
 }
 
 export const Tags: FC = () => {
-  const { data: collectionTags, isLoading } = useQuery({
-    queryKey: ['collectionInfo'],
-    queryFn: getCollectionInfo
+  const { data: tags, isLoading } = useQuery({
+    queryKey: ['/api/tags'],
+    queryFn: getTags
   })
 
   return (
     <>
       {!isLoading &&
-        collectionTags.options?.map(({ id, value }) => (
-          <div
-            key={id}
-            className='notion-property-multi_select-item notion-item-default'
-          >
+        tags.options?.map(({ id, value }) => (
+          <div key={id} className='br-1'>
             {value}
           </div>
         ))}

@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next'
 
 import { host } from '@/config/config'
-import { getSiteMap } from 'server/service/getSiteMap'
+import { getSiteMap } from '@/server/services/getSiteMap'
 import type { SiteMap } from '@/config/types'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {

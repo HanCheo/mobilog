@@ -6,7 +6,7 @@ import pMap from 'p-map'
 import pMemoize from 'p-memoize'
 
 import { defaultPageCover, defaultPageIcon } from '@/config/config'
-import { mapImageUrl } from '../lib/map-image-url'
+import { mapImageUrl } from '../libs/map-image-url'
 
 export async function getPreviewImageMap(
   recordMap: ExtendedRecordMap

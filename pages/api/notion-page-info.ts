@@ -11,8 +11,8 @@ import {
 } from 'notion-utils'
 
 import * as libConfig from '@/config/config'
-import { mapImageUrl } from 'server/lib/map-image-url'
-import { notion } from 'server/lib/notion-api'
+import { mapImageUrl } from '@/server/libs/map-image-url'
+import { notion } from '@/server/libs/notion-api'
 import { NotionPageInfo } from '@/config/types'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

@@ -1,7 +1,7 @@
 import { getPageTitle, parsePageId } from 'notion-utils'
 
 import * as config from '@/config/config'
-import { getPage } from '../service/getPage'
+import { getPage } from '../services/getPage'
 
 export const oembed = async ({
   url,

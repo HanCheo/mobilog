@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import * as types from '@/config/types'
-import { searchNotion } from '@/server/service/searchNotion'
+import { searchNotion } from '@/server/services/searchNotion'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {

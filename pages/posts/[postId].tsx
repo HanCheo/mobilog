@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
 import { NotionPage } from 'client/layouts'
 import { domain, isDev } from '@/config/config'
-import { resolveNotionPage } from 'server/service/resolveNotionPage'
+import { resolveNotionPage } from '@/server/services/resolveNotionPage'
 import { PageProps, Params } from '@/config/types'
-import { getPostsCanonical } from 'server/service/getAllPosts'
+import { getPostsCanonical } from '@/server/services/getAllPosts'
 
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   context

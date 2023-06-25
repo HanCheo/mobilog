@@ -14,9 +14,9 @@ import { useSearchParam } from 'react-use'
 
 import * as config from '@/config/config'
 import * as types from '@/config/types'
-import { mapImageUrl } from 'server/lib/map-image-url'
-import { getCanonicalPageUrl, mapPageUrl } from 'server/lib/map-page-url'
-import { searchNotion } from 'server/service/searchNotion'
+import { mapImageUrl } from '@/server/libs/map-image-url'
+import { getCanonicalPageUrl, mapPageUrl } from '@/server/libs/map-page-url'
+import { searchNotion } from '@/server/services/searchNotion'
 import styles from '@/styles/styles.module.css'
 import { NotFoundPage } from './NotFoundPage'
 
