@@ -1,5 +1,5 @@
 import styles from '@/styles/styles.module.css'
-import { Head } from '@/components'
+import { Head } from 'front/components'
 
 export const ErrorPage: React.FC<{ statusCode: number }> = ({ statusCode }) => {
   const title = 'Error'

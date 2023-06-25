@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, ReactNode, createElement, useMemo } from 'react'
-import { Head, Header, Comment, Loading, PageSocial } from '@/components'
-import { useTheme } from '@/providers/ThemeProvider'
+import { Head, Header, Comment, Loading, PageSocial } from 'front/components'
+import { useTheme } from 'front/providers/ThemeProvider'
 import cs from 'classnames'
 import { format } from 'date-fns'
 import { PageBlock } from 'notion-types'
@@ -12,11 +12,11 @@ import { getBlockTitle, getPageProperty, getTextContent } from 'notion-utils'
 import { NotionRenderer } from 'react-notion-x'
 import { useSearchParam } from 'react-use'
 
-import * as config from '@/lib/config'
-import * as types from '@/lib/types'
-import { mapImageUrl } from '@/lib/map-image-url'
-import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
-import { searchNotion } from '@/lib/search-notion'
+import * as config from 'back/lib/config'
+import * as types from 'back/lib/types'
+import { mapImageUrl } from 'back/lib/map-image-url'
+import { getCanonicalPageUrl, mapPageUrl } from 'back/lib/map-page-url'
+import { searchNotion } from 'back/lib/search-notion'
 import styles from '@/styles/styles.module.css'
 import { NotFoundPage } from './NotFoundPage'
 
@@ -26,7 +26,7 @@ const Code = dynamic(async () => (props: any) => {
       return createElement(
         dynamic(
           () => {
-            return import('@/components').then(
+            return import('front/components').then(
               ({ NotionBlock }) => NotionBlock.Mermaid
             )
           },

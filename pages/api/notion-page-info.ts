@@ -10,10 +10,10 @@ import {
   parsePageId
 } from 'notion-utils'
 
-import * as libConfig from '@/lib/config'
-import { mapImageUrl } from '@/lib/map-image-url'
-import { notion } from '@/lib/notion-api'
-import { NotionPageInfo } from '@/lib/types'
+import * as libConfig from 'back/lib/config'
+import { mapImageUrl } from 'back/lib/map-image-url'
+import { notion } from 'back/lib/notion-api'
+import { NotionPageInfo } from 'back/lib/types'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {

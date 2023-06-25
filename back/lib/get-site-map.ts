@@ -1,5 +1,5 @@
 import * as config from './config'
-import { getAllPages } from './get-all-pages'
+import { getAllPages } from './getAllPages'
 import * as types from './types'
 
 export async function getSiteMap(): Promise<types.SiteMap> {

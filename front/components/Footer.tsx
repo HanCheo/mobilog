@@ -5,7 +5,7 @@ import { FaGithub } from '@react-icons/all-files/fa/FaGithub'
 import { FaLinkedin } from '@react-icons/all-files/fa/FaLinkedin'
 import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
 
-import * as config from '@/lib/config'
+import * as config from 'back/lib/config'
 import styles from '@/styles/styles.module.css'
 
 export const FooterImpl: FC = () => (

@@ -1,4 +1,4 @@
-import { getAllPages } from './get-all-pages'
+import { getAllPages } from './getAllPages'
 import * as types from './types'
 import * as config from './config'
 

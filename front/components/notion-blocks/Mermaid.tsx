@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useTheme } from '@/providers/ThemeProvider'
+import { useTheme } from 'front/providers/ThemeProvider'
 import mermaid from 'mermaid'
 import { getTextContent } from 'notion-utils'
 
-import { BlockMap } from '@/lib/types'
+import { BlockMap } from 'back/lib/types'
 
 type MermaidProps = {
   block: BlockMap & {

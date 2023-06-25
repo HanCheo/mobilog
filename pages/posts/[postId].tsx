@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
-import { NotionPage } from '@/layouts'
-import { domain, isDev } from '@/lib/config'
-import { resolveNotionPage } from '@/lib/resolve-notion-page'
-import { PageProps, Params } from '@/lib/types'
-import { getPostsCanonical } from '@/lib/get-all-posts'
+import { NotionPage } from '@/front/layouts'
+import { domain, isDev } from '@/back/lib/config'
+import { resolveNotionPage } from '@/back/lib/resolve-notion-page'
+import { PageProps, Params } from '@/back/lib/types'
+import { getPostsCanonical } from '@/back/lib/getAllPosts'
 
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   context
@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   } catch (err) {
     console.error('post error', domain, rawPostId, err)
 
-    // we don't want to publish the error version of this page, so
+    // we don't want to publish the error version of this page, sos
     // let next.js know explicitly that incremental SSG failed
     throw err
   }

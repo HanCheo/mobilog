@@ -1,8 +1,8 @@
 import { default as NextHead } from 'next/head'
 
-import * as config from '@/lib/config'
-import * as types from '@/lib/types'
-import { getSocialImageUrl } from '@/lib/get-social-image-url'
+import * as config from 'back/lib/config'
+import * as types from 'back/lib/types'
+import { getSocialImageUrl } from 'back/lib/get-social-image-url'
 import { FC } from 'react'
 
 export const Head: FC<

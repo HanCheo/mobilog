@@ -1,6 +1,6 @@
-import { Head } from '@/components'
+import { Head } from 'front/components'
 
-import * as types from '@/lib/types'
+import * as types from 'back/lib/types'
 import styles from '@/styles/styles.module.css'
 
 export const NotFoundPage: React.FC<types.PageProps> = ({

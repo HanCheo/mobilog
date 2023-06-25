@@ -18,14 +18,17 @@
     "typeRoots": ["./node_modules/@types"],
     "incremental": true,
     "paths": {
-      "@/components": ["components/index.ts"],
-      "@/components/*": ["components/*"],
-      "@/lib": ["lib/index.ts"],
-      "@/lib/*": ["lib/*"],
-      "@/layouts": ["layouts/index.ts"],
-      "@/providers/*": ["providers/*"],
-      "@/styles": ["styles/index.ts"],
-      "@/styles/*": ["styles/*"]
+      "@/front": ["front/index.ts"],
+      "@/front/*": ["front/*"],
+      "@/components": ["front/components/index.ts"],
+      "@/components/*": ["front/components/*"],
+      "@/lib": ["back/lib/index.ts"],
+      "@/lib/*": ["back/lib/*"],
+      "@/back": ["back/index.ts"],
+      "@/back/*": ["back/*"],
+      "@/layouts": ["front/layouts/index.ts"],
+      "@/providers/*": ["front/providers/*"],
+      "@/styles/*": ["front/styles/*"]
     }
   },
   "exclude": ["node_modules", "*.js"],
