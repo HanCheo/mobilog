@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next'
-import { NotionPage } from '@/front/layouts'
+import { NotionPage } from 'client/layouts'
 import { domain, isDev } from '@/back/lib/config'
 import { resolveNotionPage } from '@/back/service/resolveNotionPage'
 import { PageProps, Params } from '@/back/lib/types'

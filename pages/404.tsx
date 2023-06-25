@@ -1,3 +1,3 @@
-import { NotFoundPage } from 'front/layouts'
+import { NotFoundPage } from 'client/layouts'
 
 export default NotFoundPage

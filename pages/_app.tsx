@@ -1,8 +1,8 @@
 // global styles shared across the entire site
 import type { AppProps } from 'next/app'
 
-import { GooglaAnalyticsProvider } from 'front/providers/GoogleAnalyticsProvider'
-import { ThemeProvider } from 'front/providers/ThemeProvider'
+import { GooglaAnalyticsProvider } from 'client/providers/GoogleAnalyticsProvider'
+import { ThemeProvider } from 'client/providers/ThemeProvider'
 import { Analytics } from '@vercel/analytics/react'
 import {
   Hydrate,
@@ -20,7 +20,7 @@ import '@/styles/global.css'
 import '@/styles/notion.css'
 // global style overrides for prism theme (optional)
 import { useState } from 'react'
-import { Footer } from 'front/components'
+import { Footer } from 'client/components'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())

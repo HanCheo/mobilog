@@ -1,3 +1,3 @@
-import { ErrorPage } from 'front/layouts'
+import { ErrorPage } from 'client/layouts'
 
 export default ErrorPage

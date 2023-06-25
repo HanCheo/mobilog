@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useTheme } from 'front/providers/ThemeProvider'
+import { useTheme } from 'client/providers/ThemeProvider'
 import mermaid from 'mermaid'
 import { getTextContent } from 'notion-utils'
 

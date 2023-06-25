@@ -1,4 +1,4 @@
-import { useTheme } from 'front/providers/ThemeProvider'
+import { useTheme } from 'client/providers/ThemeProvider'
 import Giscus from '@giscus/react'
 import { FC } from 'react'
 

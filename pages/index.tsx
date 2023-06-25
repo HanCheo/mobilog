@@ -1,4 +1,4 @@
-import { NotionPage } from 'front/layouts'
+import { NotionPage } from 'client/layouts'
 
 import { domain } from 'back/lib/config'
 import { resolveNotionPage } from 'back/service/resolveNotionPage'

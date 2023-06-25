@@ -1,6 +1,6 @@
 import { Head, Html, Main, NextScript } from 'next/document'
 
-import { GaScript } from 'front/providers/GoogleAnalyticsProvider'
+import { GaScript } from 'client/providers/GoogleAnalyticsProvider'
 import { IconContext } from '@react-icons/all-files'
 
 export default () => {

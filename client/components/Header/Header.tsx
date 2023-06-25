@@ -3,13 +3,13 @@ import { useRouter } from 'next/router'
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 
 import * as types from 'notion-types'
-import { useTheme } from 'front/providers/ThemeProvider'
+import { useTheme } from 'client/providers/ThemeProvider'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import cs from 'classnames'
 import { Search, useNotionContext } from 'react-notion-x'
 
-import { Icon } from 'front/components'
+import { Icon } from 'client/components'
 import { isSearchEnabled, navigationLinks } from 'back/lib/config'
 import styles from '@/styles/styles.module.css'
 

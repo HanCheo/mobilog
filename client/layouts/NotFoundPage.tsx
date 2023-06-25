@@ -1,4 +1,4 @@
-import { Head } from 'front/components'
+import { Head } from 'client/components'
 
 import * as types from 'back/lib/types'
 import styles from '@/styles/styles.module.css'
