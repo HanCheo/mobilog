@@ -23,6 +23,52 @@ const ToggleThemeButton = () => {
   )
 }
 
+const RightNavigation = ({
+  block
+}: {
+  block: types.CollectionViewPageBlock | types.PageBlock
+}) => {
+  const { components, mapPageUrl } = useNotionContext()
+
+  return (
+    <div className='notion-nav-header-rhs breadcrumbs justify-end flex-shrink-1 w-full'>
+      {navigationLinks
+        ?.map((link, index) => {
+          if (!link.pageId && !link.url) {
+            return null
+          }
+
+          if (link.pageId) {
+            return (
+              <components.PageLink
+                href={mapPageUrl(link.pageId)}
+                key={index}
+                className={cs(styles.navLink, 'breadcrumb', 'button')}
+              >
+                {link.title}
+              </components.PageLink>
+            )
+          } else {
+            return (
+              <components.Link
+                href={link.url}
+                key={index}
+                className={cs(styles.navLink, 'breadcrumb', 'button')}
+              >
+                {link.title}
+              </components.Link>
+            )
+          }
+        })
+        .filter(Boolean)}
+
+      <ToggleThemeButton />
+
+      {isSearchEnabled && <Search block={block} title={null} />}
+    </div>
+  )
+}
+
 export const Header: FC<{
   block: types.CollectionViewPageBlock | types.PageBlock
   collection?: types.CollectionMap
@@ -84,51 +130,5 @@ export const Header: FC<{
       </header>
       <div ref={sentinelRef} className='absolute top-0' />
     </>
-  )
-}
-
-const RightNavigation = ({
-  block
-}: {
-  block: types.CollectionViewPageBlock | types.PageBlock
-}) => {
-  const { components, mapPageUrl } = useNotionContext()
-
-  return (
-    <div className='notion-nav-header-rhs breadcrumbs justify-end flex-shrink-1 w-full'>
-      {navigationLinks
-        ?.map((link, index) => {
-          if (!link.pageId && !link.url) {
-            return null
-          }
-
-          if (link.pageId) {
-            return (
-              <components.PageLink
-                href={mapPageUrl(link.pageId)}
-                key={index}
-                className={cs(styles.navLink, 'breadcrumb', 'button')}
-              >
-                {link.title}
-              </components.PageLink>
-            )
-          } else {
-            return (
-              <components.Link
-                href={link.url}
-                key={index}
-                className={cs(styles.navLink, 'breadcrumb', 'button')}
-              >
-                {link.title}
-              </components.Link>
-            )
-          }
-        })
-        .filter(Boolean)}
-
-      <ToggleThemeButton />
-
-      {isSearchEnabled && <Search block={block} title={null} />}
-    </div>
   )
 }

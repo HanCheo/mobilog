@@ -3,14 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, ReactNode, createElement, useMemo } from 'react'
-import {
-  Footer,
-  Head,
-  Header,
-  Comment,
-  Loading,
-  PageSocial
-} from '@/components'
+import { Head, Header, Comment, Loading, PageSocial } from '@/components'
 import { useTheme } from '@/providers/ThemeProvider'
 import cs from 'classnames'
 import { format } from 'date-fns'
@@ -188,13 +181,8 @@ export const NotionPage: FC<types.PageProps> = ({
     block?.type === 'page' && block?.parent_table === 'collection'
   const minTableOfContentsItems = 3
 
-  const footer = useMemo(
-    () => (
-      <>
-        {showTableOfContents && <Comment />}
-        <Footer />
-      </>
-    ),
+  const NotionFooter = useMemo(
+    () => showTableOfContents && <Comment />,
     [showTableOfContents]
   )
 
@@ -253,7 +241,7 @@ export const NotionPage: FC<types.PageProps> = ({
         mapImageUrl={mapImageUrl}
         searchNotion={config.isSearchEnabled ? searchNotion : null}
         pageAside={<PageSocial />}
-        footer={footer}
+        footer={NotionFooter}
       />
     </>
   )
