@@ -7,7 +7,7 @@
  * places to add some flare.
  */
 
-.notion {
+body {
   --notion-max-width: 1200px;
   --notion-header-height: 54px;
 }
@@ -23,9 +23,6 @@
   line-height: 1.65;
 }
 
-.index-page {
-  --notion-max-width: 1200px;
-}
 
 .notion-text {
   padding: 0.5em 2px;

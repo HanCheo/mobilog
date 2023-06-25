@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, ReactNode, createElement, useMemo } from 'react'
-import { Head, Header, Comment, Loading, PageSocial } from 'client/components'
+import { Head, Comment, Loading, PageSocial } from 'client/components'
 import { useTheme } from 'client/providers/ThemeProvider'
 import cs from 'classnames'
 import { format } from 'date-fns'
@@ -152,9 +152,7 @@ export const NotionPage: FC<types.PageProps> = ({
       Equation,
       Pdf,
       Modal,
-      Header: ({ block }) => (
-        <Header block={block} collection={recordMap?.collection} />
-      ),
+      Header: () => null,
       propertyTextValue,
       propertyDateValue
     }),

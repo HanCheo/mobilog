@@ -7,10 +7,10 @@ import { useTheme } from 'client/providers/ThemeProvider'
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
 import cs from 'classnames'
-import { Search, useNotionContext } from 'react-notion-x'
+import { useNotionContext } from 'react-notion-x'
 
 import { Icon } from 'client/components'
-import { isSearchEnabled, navigationLinks } from '@/config/config'
+import { navigationLinks } from '@/config/config'
 import styles from '@/styles/styles.module.css'
 
 const ToggleThemeButton = () => {
@@ -23,11 +23,12 @@ const ToggleThemeButton = () => {
   )
 }
 
-const RightNavigation = ({
-  block
-}: {
-  block: types.CollectionViewPageBlock | types.PageBlock
-}) => {
+// {
+//   block
+// }: {
+//   block?: types.CollectionViewPageBlock | types.PageBlock
+// }
+const RightNavigation = () => {
   const { components, mapPageUrl } = useNotionContext()
 
   return (
@@ -64,16 +65,16 @@ const RightNavigation = ({
 
       <ToggleThemeButton />
 
-      {isSearchEnabled && <Search block={block} title={null} />}
+      {/* {isSearchEnabled && <Search block={block} title={null} />} */}
     </div>
   )
 }
 
 export const Header: FC<{
-  block: types.CollectionViewPageBlock | types.PageBlock
-  collection?: types.CollectionMap
+  block?: types.CollectionViewPageBlock | types.PageBlock
 }> = ({ block }) => {
   const [showPageTitle, setShowPageTitle] = useState(false)
+  const [pageTitle, setPageTitle] = useState('')
   const navRef = useRef<HTMLDivElement>(undefined)
   const sentinelRef = useRef<HTMLDivElement>(undefined)
   const router = useRouter()
@@ -88,6 +89,12 @@ export const Header: FC<{
       setShowPageTitle(!entry.isIntersecting)
     }
   }, [])
+
+  useEffect(() => {
+    if (showPageTitle && document?.title != pageTitle) {
+      setPageTitle(document?.title ?? '')
+    }
+  }, [pageTitle, showPageTitle])
 
   useEffect(() => {
     const sentinelEl = sentinelRef.current
@@ -122,10 +129,11 @@ export const Header: FC<{
               }`}
             >
               {/* <Breadcrumbs block={block} rootOnly={false} /> */}
-              {block.properties.title}
+              {block?.properties.title ?? pageTitle}
             </div>
           </div>
-          <RightNavigation block={block} />
+          {/* <RightNavigation block={block} /> */}
+          <RightNavigation />
         </div>
       </header>
       <div ref={sentinelRef} className='absolute top-0' />

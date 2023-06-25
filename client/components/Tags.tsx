@@ -25,13 +25,16 @@ export const Tags: FC = () => {
   })
 
   return (
-    <>
+    <div className='flex'>
       {!isLoading &&
         tags.options?.map(({ id, value }) => (
-          <div key={id} className='br-1'>
+          <div
+            key={id}
+            className='border-solid border rounded-3xl p-2 hover:bg-stone-100 cursor-pointer'
+          >
             {value}
           </div>
         ))}
-    </>
+    </div>
   )
 }
