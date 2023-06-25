@@ -1,7 +1,7 @@
 import { NotionPage } from 'front/layouts'
 
 import { domain } from 'back/lib/config'
-import { resolveNotionPage } from 'back/lib/resolve-notion-page'
+import { resolveNotionPage } from 'back/service/resolveNotionPage'
 
 export const getStaticProps = async () => {
   try {

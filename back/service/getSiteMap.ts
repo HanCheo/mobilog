@@ -1,6 +1,6 @@
-import * as config from './config'
+import * as config from '../lib/config'
 import { getAllPages } from './getAllPages'
-import * as types from './types'
+import * as types from '../lib/types'
 
 export async function getSiteMap(): Promise<types.SiteMap> {
   const partialSiteMap = await getAllPages(

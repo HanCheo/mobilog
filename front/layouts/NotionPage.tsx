@@ -16,7 +16,7 @@ import * as config from 'back/lib/config'
 import * as types from 'back/lib/types'
 import { mapImageUrl } from 'back/lib/map-image-url'
 import { getCanonicalPageUrl, mapPageUrl } from 'back/lib/map-page-url'
-import { searchNotion } from 'back/lib/search-notion'
+import { searchNotion } from '@/back/service/searchNotion'
 import styles from '@/styles/styles.module.css'
 import { NotFoundPage } from './NotFoundPage'
 

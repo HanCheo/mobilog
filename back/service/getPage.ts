@@ -1,15 +1,14 @@
-import { ExtendedRecordMap, SearchParams, SearchResults } from 'notion-types'
+import { notion } from '@/lib/notion-api'
+import { ExtendedRecordMap } from 'notion-types'
 import { mergeRecordMaps } from 'notion-utils'
 import pMap from 'p-map'
 import pMemoize from 'p-memoize'
-
 import {
   isPreviewImageSupportEnabled,
   navigationLinks,
   navigationStyle
-} from './config'
-import { notion } from './notion-api'
-import { getPreviewImageMap } from './preview-images'
+} from '../lib/config'
+import { getPreviewImageMap } from './getPreviewImage'
 
 const getNavigationLinkPages = pMemoize(
   async (): Promise<ExtendedRecordMap[]> => {
@@ -61,8 +60,4 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   }
 
   return recordMap
-}
-
-export async function search(params: SearchParams): Promise<SearchResults> {
-  return notion.search(params)
 }

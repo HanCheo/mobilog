@@ -1,10 +1,10 @@
 import { ExtendedRecordMap } from 'notion-types'
 import { parsePageId } from 'notion-utils'
 
-import * as acl from './acl'
-import { pageUrlAdditions, pageUrlOverrides, site } from './config'
-import { getSiteMap } from './get-site-map'
-import { getPage } from './notion'
+import * as acl from '../lib/acl'
+import { pageUrlAdditions, pageUrlOverrides, site } from '../lib/config'
+import { getSiteMap } from '../service/getSiteMap'
+import { getPage } from '../service/getPage'
 
 export async function resolveNotionPage(rawPageId?: string) {
   let pageId: string

@@ -10,7 +10,7 @@ import {
 import RSS from 'rss'
 
 import * as config from 'back/lib/config'
-import { getSiteMap } from 'back/lib/get-site-map'
+import { getSiteMap } from 'back/service/getSiteMap'
 import { getSocialImageUrl } from 'back/lib/get-social-image-url'
 import { getCanonicalPageUrl } from 'back/lib/map-page-url'
 
