@@ -1,6 +1,6 @@
 import { parsePageId } from 'notion-utils'
 
-import { inversePageUrlOverrides } from './config'
+import { inversePageUrlOverrides } from '@/config/config'
 
 export function getCanonicalPageId(pageId: string): string | null {
   const cleanPageId = parsePageId(pageId, { uuid: false })

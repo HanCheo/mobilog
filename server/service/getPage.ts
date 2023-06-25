@@ -7,7 +7,7 @@ import {
   isPreviewImageSupportEnabled,
   navigationLinks,
   navigationStyle
-} from '../lib/config'
+} from '@/config/config'
 import { getPreviewImageMap } from './getPreviewImage'
 
 const getNavigationLinkPages = pMemoize(

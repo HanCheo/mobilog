@@ -10,7 +10,7 @@ import cs from 'classnames'
 import { Search, useNotionContext } from 'react-notion-x'
 
 import { Icon } from 'client/components'
-import { isSearchEnabled, navigationLinks } from 'server/lib/config'
+import { isSearchEnabled, navigationLinks } from '@/config/config'
 import styles from '@/styles/styles.module.css'
 
 const ToggleThemeButton = () => {

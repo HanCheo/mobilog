@@ -6,8 +6,8 @@
  */
 import { parsePageId } from 'notion-utils'
 
-import { getEnv, getSiteConfig } from './get-config-value'
-import { NavigationLink } from './site-config'
+import { getEnv, getSiteConfig } from './getConfigValue'
+import { NavigationLink } from './siteConfig'
 import {
   NavigationStyle,
   PageUrlOverridesInverseMap,

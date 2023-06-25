@@ -1,12 +1,11 @@
-import rawSiteConfig from '../../site.config'
-import { SiteConfig } from './site-config'
+import { SiteConfigType, siteConfig } from './siteConfig'
 
-if (!rawSiteConfig) {
+if (!siteConfig) {
   throw new Error(`Config error: invalid site.config.ts`)
 }
 
 // allow environment variables to override site.config.ts
-let siteConfigOverrides: SiteConfig
+let siteConfigOverrides: SiteConfigType
 
 try {
   if (process.env.NEXT_PUBLIC_SITE_CONFIG) {
@@ -17,13 +16,13 @@ try {
   throw err
 }
 
-const siteConfig: SiteConfig = {
-  ...rawSiteConfig,
+const overrideSiteConfig: SiteConfigType = {
+  ...siteConfig,
   ...siteConfigOverrides
 }
 
 export function getSiteConfig<T>(key: string, defaultValue?: T): T {
-  const value = siteConfig[key]
+  const value = overrideSiteConfig[key]
 
   if (value !== undefined) {
     return value

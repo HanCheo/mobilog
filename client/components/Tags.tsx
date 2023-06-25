@@ -1,4 +1,4 @@
-import { host } from 'server/lib/config'
+import { host } from '@/config/config'
 import { useQuery } from '@tanstack/react-query'
 import { FC } from 'react'
 

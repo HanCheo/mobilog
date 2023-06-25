@@ -2,8 +2,8 @@ import { NextRequest } from 'next/server'
 
 import { ImageResponse } from '@vercel/og'
 
-import { api, apiHost, rootNotionPageId } from 'server/lib/config'
-import { NotionPageInfo } from 'server/lib/types'
+import { api, apiHost, rootNotionPageId } from '@/config/config'
+import { NotionPageInfo } from '@/config/types'
 
 const interRegularFontP = fetch(
   new URL('../../public/fonts/Inter-Regular.ttf', import.meta.url)

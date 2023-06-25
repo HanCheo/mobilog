@@ -1,6 +1,44 @@
-import { siteConfig } from './server/lib/site-config'
+import * as types from './types'
 
-export default siteConfig({
+export type SiteConfigType = {
+  rootNotionPageId: string
+  rootNotionSpaceId?: string
+  pageCollectionId?: string
+
+  name: string
+  domain: string
+  author: string
+  description?: string
+  language?: string
+
+  github?: string
+  linkedin?: string
+  newsletter?: string
+  youtube?: string
+
+  defaultPageIcon?: string | null
+  defaultPageCover?: string | null
+  defaultPageCoverPosition?: number | null
+
+  isPreviewImageSupportEnabled?: boolean
+  isTweetEmbedSupportEnabled?: boolean
+  isSearchEnabled?: boolean
+
+  includeNotionIdInUrls?: boolean
+  pageUrlOverrides?: types.PageUrlOverridesMap
+  pageUrlAdditions?: types.PageUrlOverridesMap
+
+  navigationStyle?: types.NavigationStyle
+  navigationLinks?: Array<NavigationLink>
+}
+
+export interface NavigationLink {
+  title: string
+  pageId?: string
+  url?: string
+}
+
+export const siteConfig: SiteConfigType = {
   // the site's root Notion page (required)
   rootNotionPageId: process.env.NEXT_PUBLIC_NOTION_PAGE_ID,
 
@@ -55,4 +93,4 @@ export default siteConfig({
       pageId: process.env.NEXT_PUBLIC_CONTACT_PAGE_ID
     }
   ]
-})
+}

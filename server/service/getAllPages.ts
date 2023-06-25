@@ -2,7 +2,7 @@ import { getAllPagesInSpace, uuidToId } from 'notion-utils'
 import pMemoize from 'p-memoize'
 import { getCanonicalPageId } from '../lib/get-canonical-page-id'
 import { notion } from '../lib/notion-api'
-import * as types from '../lib/types'
+import * as types from '@/config/types'
 
 const getPage = async (pageId: string, ...args) => {
   console.log(`\n notion get page: ${uuidToId(pageId)} ${args}`)

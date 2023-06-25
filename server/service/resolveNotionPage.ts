@@ -2,7 +2,7 @@ import { ExtendedRecordMap } from 'notion-types'
 import { parsePageId } from 'notion-utils'
 
 import * as acl from '../lib/acl'
-import { pageUrlAdditions, pageUrlOverrides, site } from '../lib/config'
+import { pageUrlAdditions, pageUrlOverrides, site } from '@/config/config'
 import { getSiteMap } from './getSiteMap'
 import { getPage } from './getPage'
 

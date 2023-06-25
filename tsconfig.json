@@ -18,8 +18,10 @@
     "typeRoots": ["./node_modules/@types"],
     "incremental": true,
     "paths": {
-      "@/front": ["client/index.ts"],
-      "@/front/*": ["client/*"],
+      "@/client": ["client/index.ts"],
+      "@/client/*": ["client/*"],
+      "@/config": ["config/index.ts"],
+      "@/config/*": ["config/*"],
       "@/components": ["client/components/index.ts"],
       "@/components/*": ["client/components/*"],
       "@/lib": ["server/lib/index.ts"],

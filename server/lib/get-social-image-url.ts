@@ -1,4 +1,4 @@
-import { api, host } from './config'
+import { api, host } from '@/config/config'
 
 export function getSocialImageUrl(pageId: string) {
   try {

@@ -1,7 +1,7 @@
 import { default as NextHead } from 'next/head'
 
-import * as config from 'server/lib/config'
-import * as types from 'server/lib/types'
+import * as config from '@/config/config'
+import * as types from '@/config/types'
 import { getSocialImageUrl } from 'server/lib/get-social-image-url'
 import { FC } from 'react'
 
