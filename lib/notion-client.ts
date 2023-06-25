@@ -36,7 +36,7 @@ export class NotionAPI {
     apiBaseUrl = 'https://www.notion.so/api/v3',
     authToken,
     activeUser,
-    userTimeZone = 'America/New_York'
+    userTimeZone = 'GMT'
   }: {
     apiBaseUrl?: string
     authToken?: string

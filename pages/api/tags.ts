@@ -21,6 +21,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       { limit: 1 }
     )
 
+    console.log(collectionInfo)
+
     const key = Object.keys(collectionInfo.recordMap.collection)[0]
 
     res.setHeader(

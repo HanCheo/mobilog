@@ -5,16 +5,11 @@
 }
 
 .container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
+  height: calc(100vh - 64px);
   justify-content: center;
   align-items: center;
   padding: 2vmin;
-
   font-size: 16px;
   line-height: 1.5;
   color: rgb(55, 53, 47);
@@ -114,11 +109,16 @@
 }
 
 .footer {
+  position: relative;
   box-shadow: 2px 2px 8px 4px rgba(15, 15, 15, 0.1);
-  margin-top: 1em;
 }
 
 @media only screen and (max-width: 566px) {
+
+.container {
+  height: calc(100vh - 125px);
+}
+
   .footer {
     flex-direction: column;
   }

@@ -27,7 +27,7 @@ export const Tags: FC = () => {
   return (
     <>
       {!isLoading &&
-        collectionTags.options.map(({ id, value }) => (
+        collectionTags.options?.map(({ id, value }) => (
           <div
             key={id}
             className='notion-property-multi_select-item notion-item-default'
