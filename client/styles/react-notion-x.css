@@ -122,7 +122,6 @@
 .notion-app {
   position: relative;
   background: var(--bg-color);
-  min-height: 100vh;
 }
 
 .notion-viewport {
@@ -162,7 +161,6 @@
   flex-direction: column;
   flex-grow: 1;
   align-items: center;
-  min-height: calc(100vh - var(--notion-header-height));
 }
 
 .notion-red,
