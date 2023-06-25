@@ -20,7 +20,7 @@ import 'styles/global.css'
 import 'styles/notion.css'
 // global style overrides for prism theme (optional)
 import { useState } from 'react'
-import { Footer, Tags } from '@/components'
+import { Footer } from '@/components'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
@@ -31,7 +31,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <Analytics />
         <GooglaAnalyticsProvider>
           <ThemeProvider>
-            <Tags />
             <Component {...pageProps} />
             <Footer />
           </ThemeProvider>
