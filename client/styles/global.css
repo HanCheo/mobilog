@@ -24,6 +24,9 @@ body {
   font-family: var(--notion-font);
   overflow-x: hidden;
   background-color: var(--bg-color);
+  color: var(--fg-color);
+  caret-color: var(--fg-color);
+  font-family: var(--notion-font);
 }
 
 .static-tweet blockquote {

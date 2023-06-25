@@ -20,9 +20,10 @@ export const getStaticProps = async () => {
 
 export default function NotionDomainPage(props) {
   return (
-    <>
+    <div>
+      <div className='h-6' />
       <Tags />
       <NotionPage {...props} />
-    </>
+    </div>
   )
 }

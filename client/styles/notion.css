@@ -32,6 +32,10 @@ body {
   line-height: 1.65;
 }
 
+.notion-page-no-cover {
+  margin-top: 24px !important
+}
+
 
 .notion-text {
   padding: 0.5em 2px;
@@ -142,6 +146,12 @@ body {
   display: block;
   text-align: center;
 }
+
+
+.notion-title:empty {
+  display: none;
+}
+
 
 .notion-collection-row {
   padding-bottom: 1em;
