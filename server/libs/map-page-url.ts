@@ -1,6 +1,6 @@
 import { parsePageId, uuidToId } from 'notion-utils'
 import { getCanonicalPageId } from './get-canonical-page-id'
-import { Site } from './types'
+import { Site } from '@/config/types'
 
 // include UUIDs in page URLs during local development but not in production
 // (they're nice for debugging and speed up local dev)
