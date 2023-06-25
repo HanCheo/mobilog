@@ -12,6 +12,15 @@ body {
   --notion-header-height: 54px;
 }
 
+.notion {
+  --notion-max-width: 1200px;
+  --notion-header-height: 54px;
+}
+
+.index-page {
+  --notion-max-width: 1200px;
+}
+
 .notion-frame {
   padding: 0;
 }
