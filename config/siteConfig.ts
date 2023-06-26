@@ -75,8 +75,8 @@ export const siteConfig: SiteConfigType = {
   // example:
   //
   pageUrlOverrides: {
-    '/about': process.env.NEXT_PUBLIC_ABOUT_PAGE_ID,
-    '/contact': process.env.NEXT_PUBLIC_CONTACT_PAGE_ID
+    '/posts/about': process.env.NEXT_PUBLIC_ABOUT_PAGE_ID,
+    '/posts/contact': process.env.NEXT_PUBLIC_CONTACT_PAGE_ID
   },
 
   // whether to use the default notion navigation style or a custom one with links to
