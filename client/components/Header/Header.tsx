@@ -29,7 +29,7 @@ const ToggleThemeButton = () => {
 //   block?: types.CollectionViewPageBlock | types.PageBlock
 // }
 const RightNavigation = () => {
-  const { components, mapPageUrl } = useNotionContext()
+  const { components } = useNotionContext()
 
   return (
     <div className='notion-nav-header-rhs breadcrumbs justify-end flex-shrink-1 w-full'>
@@ -39,30 +39,17 @@ const RightNavigation = () => {
             return null
           }
 
-          if (link.pageId) {
-            return (
+           return (
               <components.PageLink
-                href={mapPageUrl(link.pageId)}
-                key={index}
-                className={cs(styles.navLink, 'breadcrumb', 'button')}
-              >
+                  href={link.url}
+                  key={index}
+                  className={cs(styles.navLink, 'breadcrumb', 'button')}
+                >
                 {link.title}
               </components.PageLink>
-            )
-          } else {
-            return (
-              <components.Link
-                href={link.url}
-                key={index}
-                className={cs(styles.navLink, 'breadcrumb', 'button')}
-              >
-                {link.title}
-              </components.Link>
-            )
-          }
+           )
         })
         .filter(Boolean)}
-
       <ToggleThemeButton />
 
       {/* {isSearchEnabled && <Search block={block} title={null} />} */}
