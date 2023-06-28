@@ -1,4 +1,4 @@
-import { notion } from '@/lib/notion-api'
+import { notion } from '@/server/infra'
 
 type GetTagsResponse = {
   name: string

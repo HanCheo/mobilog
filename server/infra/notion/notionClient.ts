@@ -322,12 +322,17 @@ export class NotionAPI {
     collectionViewId: string,
     collectionView: any,
     {
+      sort,
       limit = 9999,
       searchQuery = '',
       userTimeZone = this._userTimeZone,
       loadContentCover = true,
       gotOptions
     }: {
+      sort?: {
+        propertiy: string
+        driection: 'decending'
+      }
       type?: notion.CollectionViewType
       limit?: number
       searchQuery?: string
@@ -368,7 +373,7 @@ export class NotionAPI {
           loadContentCover
         }
       },
-      sort: [],
+      sort: sort ?? [],
       ...collectionView?.query2,
       filter: {
         filters: filters,
@@ -494,14 +499,32 @@ export class NotionAPI {
     //   )
     // }
 
+    console.log(
+      JSON.stringify({
+        endpoint: 'queryCollection',
+        body: {
+          collection: {
+            id: collectionId
+          },
+          collectionView: {
+            id: collectionViewId
+          },
+          loader
+        },
+        gotOptions
+      })
+    )
+
     return this.fetch<notion.CollectionInstance>({
       endpoint: 'queryCollection',
       body: {
         collection: {
-          id: collectionId
+          id: collectionId,
+          spaceId: process.env.NEXT_PUBLIC_NOTION_ROOT_SPACE_ID
         },
         collectionView: {
-          id: collectionViewId
+          id: collectionViewId,
+          spaceId: process.env.NEXT_PUBLIC_NOTION_ROOT_SPACE_ID
         },
         loader
       },

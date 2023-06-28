@@ -1,4 +1,4 @@
-import { notion } from '@/server/libs/notion-api'
+import { notion } from '@/server/infra'
 import { ExtendedRecordMap } from 'notion-types'
 import { mergeRecordMaps } from 'notion-utils'
 import pMap from 'p-map'

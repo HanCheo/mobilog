@@ -26,7 +26,6 @@ body {
 }
 
 .notion-page {
-  padding-bottom: calc(max(5vh, 32px)) !important;
   padding-left: 24px;
   padding-right: 24px;
   line-height: 1.65;
