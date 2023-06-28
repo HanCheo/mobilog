@@ -1413,7 +1413,6 @@ svg.notion-page-icon {
 
 .notion-collection-card-property:not(:first-child) {
   white-space: nowrap;
-  text-overflow: clip;
 }
 
 .notion-collection-card-property img {

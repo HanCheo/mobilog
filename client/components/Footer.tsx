@@ -34,7 +34,7 @@ export const FooterImpl: FC = () => {
 
   return (
     <div>
-      <div ref={sentinelRef} className='h-16' />
+      <div ref={sentinelRef} className='h-16 max-sm:h-32' />
 
       <footer className={styles.footer} ref={footerRef}>
         <div className={styles.copyright}>Copyright 2023 {config.author}</div>
