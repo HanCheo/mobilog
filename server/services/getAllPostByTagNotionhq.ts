@@ -1,18 +1,15 @@
 import { notionhqClient } from '@/server/infra'
-import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
+import {
+  GetPageablePostsByTagRequest,
+  GetPageablePostsByTagResponse
+} from '../types/GetAllPostByTagNotionhqType'
 
-type GetAllPostByTag = {
-  tag: string
-  limit: number
-  cursor?: string
-}
-
-export const getAllPostByTag = async ({
+export const getPageablePostsByTag = async ({
   tag,
   limit,
   cursor
-}: GetAllPostByTag): Promise<QueryDatabaseResponse> => {
-  return await notionhqClient.databases.query({
+}: GetPageablePostsByTagRequest): Promise<GetPageablePostsByTagResponse> =>
+  (await notionhqClient.databases.query({
     database_id: process.env.NOTIONHQ_DATABASE_ID,
     sorts: [{ property: 'Published', direction: 'descending' }],
     filter: {
@@ -28,5 +25,4 @@ export const getAllPostByTag = async ({
     },
     start_cursor: cursor,
     page_size: limit
-  })
-}
+  })) as GetPageablePostsByTagResponse

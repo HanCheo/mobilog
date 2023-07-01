@@ -499,22 +499,6 @@ export class NotionAPI {
     //   )
     // }
 
-    console.log(
-      JSON.stringify({
-        endpoint: 'queryCollection',
-        body: {
-          collection: {
-            id: collectionId
-          },
-          collectionView: {
-            id: collectionViewId
-          },
-          loader
-        },
-        gotOptions
-      })
-    )
-
     return this.fetch<notion.CollectionInstance>({
       endpoint: 'queryCollection',
       body: {
