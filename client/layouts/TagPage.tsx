@@ -12,7 +12,7 @@ export const TagPage: React.FC = () => {
       <Head title={`${siteConfig.name + (tag ? ' | ' + tag : '')}`} />
       <div className='flex flex-col gap-3 mt-6 px-6 w-full max-w-1200'>
         <Tags />
-        <TagPostList tag={tag} />
+        {tag && <TagPostList tag={tag} />}
       </div>
     </>
   )

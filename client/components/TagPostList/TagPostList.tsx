@@ -30,7 +30,7 @@ export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
     fetchNextPage
   } = useInfiniteQuery({
     queryKey: [tag, PER_PAGE_SIZE],
-    queryFn: ({ pageParam = null }) =>
+    queryFn: ({ pageParam }) =>
       getTagPostList({
         tag,
         limit: PER_PAGE_SIZE,
@@ -62,7 +62,7 @@ export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
 
   if (isLoading) {
     return (
-      <div className='flex w-full py-5 items-center justify-center'>
+      <div className='flex w-full py-20 items-center justify-center'>
         <Icon.Loading />
       </div>
     )
@@ -74,7 +74,9 @@ export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
         <div className='notion-collection-header-title'>{tag}</div>
       </div>
       {postList.pages[0].results.length === 0 ? (
-        <div className='w-full text-center py-8'>작성된 Post가 없습니다.</div>
+        <div className='w-full text-center py-8'>
+          {tag}에 작성된 Post가 없습니다.
+        </div>
       ) : (
         <div className='notion-gallery-grid notion-gallery-grid-size-small'>
           {postList.pages.map((list) =>
