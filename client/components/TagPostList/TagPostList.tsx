@@ -2,8 +2,8 @@ import { host } from '@/config/config'
 import { GetPageablePostsByTagResponse } from '@/server/types'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { FC, useCallback, useEffect, useRef } from 'react'
-import * as Icon from './icons'
-import { PostItem } from './PostItem'
+import * as Icon from '../icons'
+import { PostItem } from '../PostItem'
 
 const getTagPostList = ({
   tag,
@@ -69,7 +69,7 @@ export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
   }
 
   return (
-    <div className='mx-auto max-w-1200 w-full'>
+    <div className='w-full'>
       <div className='notion-collection-header'>
         <div className='notion-collection-header-title'>{tag}</div>
       </div>
@@ -82,7 +82,6 @@ export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
           )}
         </div>
       )}
-
       <div ref={lastRef} />
     </div>
   )

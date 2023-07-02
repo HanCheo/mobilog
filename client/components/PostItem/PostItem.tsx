@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { FC, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { format } from 'date-fns'
-import { Page } from './icons'
+import { Page } from '../icons'
 
 export const PostItem: FC<{ post: Post }> = ({ post }: { post: Post }) => {
   const router = useRouter()
