@@ -46,7 +46,14 @@ export const PostItem: FC<{ post: Post }> = ({ post }: { post: Post }) => {
             <span className='notion-page-link'>
               <span className='notion-page-title'>
                 <div className='notion-page-icon-inline notion-page-icon-image'>
-                  {post.icon ?? <Page />}
+                  {post.icon?.file.url ? (
+                    <img
+                      src={post.icon?.file.url}
+                      alt={post.properties.Name.title[0].plain_text}
+                    />
+                  ) : (
+                    <Page />
+                  )}
                 </div>
                 <span className='notion-page-title-text'>
                   {post.properties.Name.title[0].plain_text ?? ''}
@@ -65,7 +72,7 @@ export const PostItem: FC<{ post: Post }> = ({ post }: { post: Post }) => {
         </div>
         <div className='notion-collection-card-property'>
           <span className='notion-property notion-property-text'>
-            {post.properties.Description.rich_text[0].plain_text ?? ''}
+            {post.properties.Description.rich_text[0]?.plain_text ?? ''}
           </span>
         </div>
         <div className='notion-collection-card-property'>

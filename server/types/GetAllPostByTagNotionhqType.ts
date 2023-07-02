@@ -44,7 +44,13 @@ export type Post = {
         file?: never
       }
   )
-  icon?: string
+  icon?: {
+    type: 'file'
+    file: {
+      expiry_time: string // ISOString
+      url: string
+    }
+  }
   parent: {
     type: 'database_id'
     database_id: string
