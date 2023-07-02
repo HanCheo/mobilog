@@ -1,0 +1,1 @@
+export { TagPostList } from './TagPostList'
