@@ -60,20 +60,16 @@ export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
     }
   }, [handler])
 
-  if (isLoading) {
-    return (
-      <div className='flex w-full py-20 items-center justify-center'>
-        <Icon.Loading />
-      </div>
-    )
-  }
-
   return (
     <div className='w-full'>
       <div className='notion-collection-header'>
         <div className='notion-collection-header-title'>{tag}</div>
       </div>
-      {postList.pages[0].results.length === 0 ? (
+      {isLoading ? (
+        <div className='flex w-full py-20 items-center justify-center'>
+          <Icon.Loading />
+        </div>
+      ) : postList.pages[0].results.length === 0 ? (
         <div className='w-full text-center py-8'>
           {tag}에 작성된 Post가 없습니다.
         </div>
