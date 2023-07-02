@@ -21,6 +21,7 @@ import '@/styles/notion.css'
 // global style overrides for prism theme (optional)
 import { useState } from 'react'
 import { Footer, Header } from '@/client/components'
+import Head from 'next/head'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
@@ -28,6 +29,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <Head>
+          <meta
+            name='naver-site-verification'
+            content='f27a9e9c59cf024a065a45ccd1f034304ec66a43'
+          />
+        </Head>
         <Analytics />
         <GooglaAnalyticsProvider>
           <ThemeProvider>
