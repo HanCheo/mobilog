@@ -1,6 +1,7 @@
 import { NotionPage } from 'client/layouts'
 import { domain } from '@/config/config'
 import { resolveNotionPage } from '@/server/services/resolveNotionPage'
+import { TextTypeAnimator } from '@/client/components'
 
 export const getStaticProps = async () => {
   try {
@@ -19,6 +20,16 @@ export const getStaticProps = async () => {
 export default function NotionDomainPage(props) {
   return (
     <div>
+      <div className='max-w-1200 mx-auto px-6 pt-20 pb-10 font-extrabold text-3xl'>
+        <div>Hello! </div>
+        <div className='flex'>
+          I&apos;m&nbsp;
+          <TextTypeAnimator
+            className='flex flex-wrap break-words text-green-600 dark:text-green-400'
+            sequence={['Software Engineer', 2000, 'Problem Solver', 2000]}
+          />
+        </div>
+      </div>
       <NotionPage {...props} />
       <div className='h-6' />
     </div>

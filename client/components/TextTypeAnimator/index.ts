@@ -1,0 +1,1 @@
+export { TextTypeAnimator } from './TextTypeAnimator'

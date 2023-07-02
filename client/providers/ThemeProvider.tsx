@@ -32,7 +32,7 @@ export const ThemeProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   )
 
   useEffect(() => {
-    document.body.classList.toggle('dark', isDarkMode === THEME.Dark)
+    document.documentElement.classList.toggle('dark', isDarkMode === THEME.Dark)
   }, [isDarkMode])
 
   const toggleTheme = useCallback(() => {
