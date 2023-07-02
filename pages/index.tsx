@@ -1,7 +1,6 @@
 import { NotionPage } from 'client/layouts'
 import { domain } from '@/config/config'
 import { resolveNotionPage } from '@/server/services/resolveNotionPage'
-import { Tags } from '@/client/components'
 
 export const getStaticProps = async () => {
   try {
@@ -21,7 +20,6 @@ export default function NotionDomainPage(props) {
   return (
     <div>
       <NotionPage {...props} />
-      <Tags />
       <div className='h-6' />
     </div>
   )
