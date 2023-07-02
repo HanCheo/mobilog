@@ -4,14 +4,10 @@ import { FC, useCallback } from 'react'
 import { useRouter } from 'next/router'
 
 type GetTagsResponse = {
-  name: 'Tags'
-  options: {
-    id: string
-    color: string
-    value: string
-  }[]
-  type: 'multi_select'
-}
+  id: string
+  color: string
+  name: string
+}[]
 
 type TagsProps = {
   tag?: string
@@ -45,14 +41,14 @@ export const Tags: FC<TagsProps> = () => {
       <div className='notion-collection-header-title'>Tags</div>
       <div className='flex gap-2 flex-wrap mt-3'>
         {!isLoading &&
-          tags.options?.map(({ id, value }) => (
+          tags?.map(({ id, name }) => (
             <button
               key={id}
-              disabled={value === tag}
+              disabled={name === tag}
               className='border-solid border rounded-3xl p-1 px-2 cursor-pointer hover:bg-bg-color-0 flex-wrap disabled:bg-bg-color-0'
-              onClick={() => changeTag(value)}
+              onClick={() => changeTag(name)}
             >
-              {value}
+              {name}
             </button>
           ))}
       </div>

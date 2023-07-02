@@ -1,30 +1,19 @@
-import { notion } from '@/server/infra'
+import { notionhqClient } from '@/server/infra'
 
 type GetTagsResponse = {
+  id: string
+  color: string
   name: string
-  options: {
-    id: string
-    color: string
-    value: string
-  }[]
-  type: 'multi_select'
-}
-
-const NOTION_TAGS_ID_KEY = 'FhBb'
+}[]
 
 export const getTags = async (): Promise<GetTagsResponse> => {
-  const collectionInfo = await notion.getCollectionData(
-    process.env.NEXT_PUBLIC_NOTION_COLLECTION_ID,
-    process.env.NEXT_PUBLIC_NOTION_COLLECTION_VIEW_ID,
-    {
-      type: 'table'
-    },
-    { limit: 1 }
-  )
+  const collectionInfo = await notionhqClient.databases.retrieve({
+    database_id: process.env.NOTIONHQ_DATABASE_ID
+  })
 
-  const key = Object.keys(collectionInfo.recordMap.collection)[0]
+  if (collectionInfo.properties.Tags.type !== 'multi_select') {
+    throw new Error('Tags is not multi-select type')
+  }
 
-  return collectionInfo.recordMap.collection[key].value.schema[
-    NOTION_TAGS_ID_KEY
-  ] as GetTagsResponse
+  return collectionInfo.properties.Tags.multi_select.options
 }
