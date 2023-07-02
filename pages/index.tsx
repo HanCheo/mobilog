@@ -25,7 +25,7 @@ export default function NotionDomainPage(props) {
         <div className='flex'>
           I&apos;m&nbsp;
           <TextTypeAnimator
-            className='flex flex-wrap break-words text-green-600 dark:text-green-400'
+            className='block text-green-600 dark:text-green-400'
             sequence={['Software Engineer', 2000, 'Problem Solver', 2000]}
           />
         </div>
