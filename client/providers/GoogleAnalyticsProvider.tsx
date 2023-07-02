@@ -1,3 +1,4 @@
+import { isDev } from '@/config/config'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 import {
@@ -12,7 +13,7 @@ import {
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
 export const GaScript = () =>
-  process.env.VERCEL_ENV === 'production' ? (
+  !isDev ? (
     <>
       <Script
         strategy='afterInteractive'
@@ -57,7 +58,7 @@ export const GooglaAnalyticsProvider: FC<PropsWithChildren<unknown>> = ({
 
   // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
   const pageview = useCallback((url) => {
-    if (process.env.VERCEL_ENV !== 'production') {
+    if (isDev) {
       return
     }
     ;(window as any).gtag('config', GA_TRACKING_ID, {
@@ -67,7 +68,7 @@ export const GooglaAnalyticsProvider: FC<PropsWithChildren<unknown>> = ({
 
   // https://developers.google.com/analytics/devguides/collection/gtagjs/events
   const event = useCallback(({ action, category, label, value }) => {
-    if (process.env.VERCEL_ENV !== 'production') {
+    if (isDev) {
       return
     }
     ;(window as any).gtag('event', action, {
