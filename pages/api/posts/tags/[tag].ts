@@ -1,31 +1,27 @@
 import { getPageablePostsByTag } from '@/server/services/getAllPostByTagNotionhq'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { Get, Query, SetHeader, createHandler } from 'next-api-decorators'
 
-type RequestType = NextApiRequest & {
-  query: {
-    tag: string
-    limit: string
-    cursor: string
-  }
+type CursorPagiablePostListByTagRequestType = {
+  tag: string
+  limit: string
+  cursor: string
 }
 
-export default async (req: RequestType, res: NextApiResponse) => {
-  if (req.method !== 'GET') {
-    return res.status(405).send({ error: 'method not allowed' })
-  }
-
-  const query = req.query
-  const { tag, limit, cursor } = query
-
-  res.setHeader(
+class TagPosts {
+  @Get()
+  @SetHeader(
     'Cache-Control',
     'public, s-maxage=60, max-age=60, stale-while-revalidate=60'
   )
-  res.status(200).json(
-    await getPageablePostsByTag({ tag, limit: Number(limit), cursor }).catch(
-      (error) => {
-        res.status(500).send({ error: `NotionHq api error: ${error.message}` })
-      }
-    )
-  )
+  async cursorPagiablePostListByTag(
+    @Query() request: CursorPagiablePostListByTagRequestType
+  ) {
+    return await getPageablePostsByTag({
+      tag: request.tag,
+      limit: Number(request.limit),
+      cursor: request.cursor
+    })
+  }
 }
+
+export default createHandler(TagPosts)

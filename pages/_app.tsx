@@ -1,4 +1,3 @@
-// global styles shared across the entire site
 import type { AppProps } from 'next/app'
 
 import {

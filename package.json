@@ -31,6 +31,7 @@
     "@react-icons/all-files": "^4.1.0",
     "@tanstack/react-query": "^4.29.14",
     "@vercel/analytics": "^1.0.1",
+    "@vercel/kv": "^0.2.2",
     "@vercel/og": "^0.0.19",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
@@ -41,6 +42,7 @@
     "lqip-modern": "^1.2.0",
     "mermaid": "^10.2.3",
     "next": "13.4.4",
+    "next-api-decorators": "^2.0.2",
     "notion-utils": "^6.16.0",
     "p-map": "^5.5.0",
     "p-memoize": "^6.0.2",
@@ -50,6 +52,7 @@
     "react-notion-x": "^6.16.0",
     "react-type-animation": "^3.1.0",
     "react-use": "^17.4.0",
+    "reflect-metadata": "^0.1.13",
     "rss": "^1.2.2"
   },
   "devDependencies": {
@@ -62,6 +65,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "autoprefixer": "^10.4.14",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "cross-env": "^7.0.3",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.43.0",
