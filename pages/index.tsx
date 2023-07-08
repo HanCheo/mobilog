@@ -3,8 +3,7 @@ import { domain } from '@/config/config'
 import { resolveNotionPage } from '@/server/services/resolveNotionPage'
 import { TextTypeAnimator } from '@/client/components'
 import '@dotlottie/react-player/dist/index.css'
-import { Controls, DotLottiePlayer } from '@dotlottie/react-player'
-import { coreLottie } from '@/client/components/icons/lottie'
+import { DotLottiePlayer } from '@dotlottie/react-player'
 
 export const getStaticProps = async () => {
   try {
