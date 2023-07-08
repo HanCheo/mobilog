@@ -8,6 +8,9 @@ overrides:
   '@types/react': ^18.2.0
 
 dependencies:
+  '@dotlottie/react-player':
+    specifier: ^1.0.1
+    version: 1.0.1(react@18.2.0)
   '@giscus/react':
     specifier: ^2.2.8
     version: 2.2.8(react-dom@18.2.0)(react@18.2.0)
@@ -921,6 +924,14 @@ packages:
     dependencies:
       postcss-selector-parser: 6.0.13
     dev: true
+
+  /@dotlottie/react-player@1.0.1(react@18.2.0):
+    resolution: {integrity: sha512-5MLFO61ZJsLjyPtdcs42mf3BVQGBoB0YKH93hxotwLccoeE/n1SUcviUt1QjSsGlVnuYXhGa69t+mHRmraBEfA==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@emotion/is-prop-valid@0.8.8:
     resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}

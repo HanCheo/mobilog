@@ -26,6 +26,7 @@
     ">1%"
   ],
   "dependencies": {
+    "@dotlottie/react-player": "^1.0.1",
     "@giscus/react": "^2.2.8",
     "@notionhq/client": "^2.2.5",
     "@react-icons/all-files": "^4.1.0",

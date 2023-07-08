@@ -7,12 +7,12 @@ type ModalProps = {
   modalOpener: ({
     open
   }: {
-    open: (e?: MouseEvent<HTMLDivElement>) => void
+    open: (e?: MouseEvent<Element>) => void
   }) => ReactNode
   children: ({
     close
   }: {
-    close: (e?: MouseEvent<HTMLDivElement>) => void
+    close: (e?: MouseEvent<Element>) => void
   }) => ReactNode
 }
 
