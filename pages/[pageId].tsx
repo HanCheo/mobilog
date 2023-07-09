@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import { NotionPage } from 'client/layouts'
 import { domain, isDev, pageUrlOverrides } from '@/config/config'
-import { resolveNotionPage } from '@/server/services/resolveNotionPage'
+import { resolveNotionPage } from '@/server/services'
 import { PageProps, Params } from '@/config/types'
 
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
@@ -30,7 +30,7 @@ export async function getStaticPaths() {
     }
   }
 
-  const urlOverridePages = Object.keys(pageUrlOverrides);
+  const urlOverridePages = Object.keys(pageUrlOverrides)
 
   const staticPaths = {
     paths: urlOverridePages.map((pageId) => ({

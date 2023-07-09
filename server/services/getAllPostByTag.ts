@@ -1,4 +1,4 @@
-import { notionhqClient } from '@/server/infra'
+import { notionhqClient } from '@/server/datasource'
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 
 type GetAllPostByTag = {

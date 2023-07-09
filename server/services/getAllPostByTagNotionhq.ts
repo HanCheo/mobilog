@@ -1,4 +1,5 @@
-import { notionhqClient } from '@/server/infra'
+import { notionhqClient } from '@/server/datasource'
+
 import {
   GetPageablePostsByTagRequest,
   GetPageablePostsByTagResponse

@@ -1,14 +1,22 @@
+import 'reflect-metadata'
+import { SiteMap } from '@/config/types'
 import { getAllPagesInSpace, uuidToId } from 'notion-utils'
 import pMemoize from 'p-memoize'
+import { container } from 'tsyringe'
 import { getCanonicalPageId } from '../libs/get-canonical-page-id'
-import { notion } from '@/server/infra'
-import * as types from '@/config/types'
+import {
+  GetPageOptions,
+  NotionRepository,
+  NotionRepositoryToken
+} from './repository'
 
-const getPage = async (pageId: string, ...args) => {
-  console.log(`\n notion get page: ${uuidToId(pageId)} ${args}`)
-  return notion.getPage(pageId, ...args)
+const getPage = async (pageId: string, options?: GetPageOptions) => {
+  console.log(`\n notion get page: ${uuidToId(pageId)} ${options}`)
+  return container
+    .resolve<NotionRepository>(NotionRepositoryToken)
+    .getPage(pageId, options)
 }
-
+1
 const getPageMemo = pMemoize(getPage, {
   cacheKey: (...args) => JSON.stringify(args)
 })
@@ -16,7 +24,7 @@ const getPageMemo = pMemoize(getPage, {
 const getAllPagesImpl = async (
   rootNotionPageId: string,
   rootNotionSpaceId: string
-): Promise<Partial<types.SiteMap>> => {
+): Promise<Partial<SiteMap>> => {
   const pageMap = await getAllPagesInSpace(
     rootNotionPageId,
     rootNotionSpaceId,

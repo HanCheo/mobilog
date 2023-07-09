@@ -1,4 +1,4 @@
-import { notionhqClient } from '@/server/infra'
+import { notionhqClient } from '@/server/datasource'
 import { kv } from '@vercel/kv'
 
 type GetTagsResponse = {

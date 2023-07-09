@@ -1,6 +1,6 @@
 import { TextTypeAnimator } from '@/client/components'
 import { domain } from '@/config/config'
-import { resolveNotionPage } from '@/server/services/resolveNotionPage'
+import { resolveNotionPage } from '@/server/services'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import '@dotlottie/react-player/dist/index.css'
 import { NotionPage } from 'client/layouts'

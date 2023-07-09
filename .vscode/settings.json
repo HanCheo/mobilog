@@ -2,9 +2,7 @@
   "typescript.tsdk": "./node_modules/typescript/lib",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true,
-    "source.sortMembers": true
+    "source.fixAll": true
   },
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",

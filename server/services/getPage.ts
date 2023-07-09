@@ -1,14 +1,16 @@
-import { notion } from '@/server/infra'
-import { ExtendedRecordMap } from 'notion-types'
-import { mergeRecordMaps } from 'notion-utils'
-import pMap from 'p-map'
-import pMemoize from 'p-memoize'
 import {
   isPreviewImageSupportEnabled,
   navigationLinks,
   navigationStyle
 } from '@/config/config'
+import { ExtendedRecordMap } from 'notion-types'
+import { mergeRecordMaps } from 'notion-utils'
+import pMap from 'p-map'
+import pMemoize from 'p-memoize'
+import { container } from 'tsyringe'
+
 import { getPreviewImageMap } from './getPreviewImage'
+import { NotionRepository, NotionRepositoryToken } from './repository'
 
 const getNavigationLinkPages = pMemoize(
   async (): Promise<ExtendedRecordMap[]> => {
@@ -20,12 +22,14 @@ const getNavigationLinkPages = pMemoize(
       return pMap(
         navigationLinkPageIds,
         async (navigationLinkPageId) =>
-          notion.getPage(navigationLinkPageId, {
-            chunkLimit: 1,
-            fetchMissingBlocks: false,
-            fetchCollections: false,
-            signFileUrls: false
-          }),
+          container
+            .resolve<NotionRepository>(NotionRepositoryToken)
+            .getPage(navigationLinkPageId, {
+              chunkLimit: 1,
+              fetchMissingBlocks: false,
+              fetchCollections: false,
+              signFileUrls: false
+            }),
         {
           concurrency: 4
         }
@@ -37,7 +41,9 @@ const getNavigationLinkPages = pMemoize(
 )
 
 export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
-  let recordMap = await notion.getPage(pageId)
+  let recordMap = await container
+    .resolve<NotionRepository>(NotionRepositoryToken)
+    .getPage(pageId)
 
   if (navigationStyle !== 'default') {
     // ensure that any pages linked to in the custom navigation header have

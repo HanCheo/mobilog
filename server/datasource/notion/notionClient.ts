@@ -1,6 +1,8 @@
 // import { promises as fs } from 'fs'
-import * as notion from 'notion-types'
+import { NotionRepository } from '@/server/services/repository'
+import { log } from 'console'
 import got, { OptionsOfJSONResponseBody } from 'got'
+import * as notion from 'notion-types'
 import {
   getBlockCollectionId,
   getPageContentBlockIds,
@@ -8,10 +10,14 @@ import {
   uuidToId
 } from 'notion-utils'
 import pMap from 'p-map'
+import { inject } from 'tsyringe'
 
 export interface SignedUrlRequest {
   permissionRecord: PermissionRecord
   url: string
+}
+export interface SignedUrlResponse {
+  signedUrls: string[]
 }
 
 export interface PermissionRecord {
@@ -19,31 +25,33 @@ export interface PermissionRecord {
   id: notion.ID
 }
 
-export interface SignedUrlResponse {
-  signedUrls: string[]
+export class NotionClientConfig {
+  constructor(
+    public apiBaseUrl: string,
+    public authToken?: string,
+    public activeUser?: string,
+    public userTimeZone: string = 'GMT'
+  ) {
+    log('NotionClientConfig consturctor')
+  }
 }
 
-/**
+/*
  * Main Notion API client.
  */
-export class NotionAPI {
+export class NotionClient implements NotionRepository {
   private readonly _apiBaseUrl: string
   private readonly _authToken?: string
   private readonly _activeUser?: string
   private readonly _userTimeZone: string
 
   constructor({
-    apiBaseUrl = 'https://www.notion.so/api/v3',
+    apiBaseUrl,
     authToken,
     activeUser,
-    userTimeZone = 'GMT'
-  }: {
-    apiBaseUrl?: string
-    authToken?: string
-    userLocale?: string
-    userTimeZone?: string
-    activeUser?: string
-  } = {}) {
+    userTimeZone
+  }: NotionClientConfig) {
+    log('notionClient consturctor')
     this._apiBaseUrl = apiBaseUrl
     this._authToken = authToken
     this._activeUser = activeUser
@@ -212,78 +220,6 @@ export class NotionAPI {
     return recordMap
   }
 
-  public async addSignedUrls({
-    recordMap,
-    contentBlockIds,
-    gotOptions = {}
-  }: {
-    recordMap: notion.ExtendedRecordMap
-    contentBlockIds?: string[]
-    gotOptions?: OptionsOfJSONResponseBody
-  }) {
-    recordMap.signed_urls = {}
-
-    if (!contentBlockIds) {
-      contentBlockIds = getPageContentBlockIds(recordMap)
-    }
-
-    const allFileInstances = contentBlockIds.flatMap((blockId) => {
-      const block = recordMap.block[blockId]?.value
-
-      if (
-        block &&
-        (block.type === 'pdf' ||
-          block.type === 'audio' ||
-          (block.type === 'image' && block.file_ids?.length) ||
-          block.type === 'video' ||
-          block.type === 'file' ||
-          block.type === 'page')
-      ) {
-        const source =
-          block.type === 'page'
-            ? block.format?.page_cover
-            : block.properties?.source?.[0]?.[0]
-        // console.log(block, source)
-
-        if (source) {
-          if (!source.includes('secure.notion-static.com')) {
-            return []
-          }
-
-          return {
-            permissionRecord: {
-              table: 'block',
-              id: block.id
-            },
-            url: source
-          }
-        }
-      }
-
-      return []
-    })
-
-    if (allFileInstances.length > 0) {
-      try {
-        const { signedUrls } = await this.getSignedFileUrls(
-          allFileInstances,
-          gotOptions
-        )
-
-        if (signedUrls.length === allFileInstances.length) {
-          for (let i = 0; i < allFileInstances.length; ++i) {
-            const file = allFileInstances[i]
-            const signedUrl = signedUrls[i]
-
-            recordMap.signed_urls[file.permissionRecord.id] = signedUrl
-          }
-        }
-      } catch (err) {
-        console.warn('NotionAPI getSignedfileUrls error', err)
-      }
-    }
-  }
-
   public async getPageRaw(
     pageId: string,
     {
@@ -295,7 +231,7 @@ export class NotionAPI {
       chunkNumber?: number
       gotOptions?: OptionsOfJSONResponseBody
     } = {}
-  ) {
+  ): Promise<notion.PageChunk> {
     const parsedPageId = parsePageId(pageId)
 
     if (!parsedPageId) {
@@ -519,7 +455,7 @@ export class NotionAPI {
   public async getUsers(
     userIds: string[],
     gotOptions?: OptionsOfJSONResponseBody
-  ) {
+  ): Promise<notion.RecordValues<notion.User>> {
     return this.fetch<notion.RecordValues<notion.User>>({
       endpoint: 'getRecordValues',
       body: {
@@ -532,7 +468,7 @@ export class NotionAPI {
   public async getBlocks(
     blockIds: string[],
     gotOptions?: OptionsOfJSONResponseBody
-  ) {
+  ): Promise<notion.PageChunk> {
     return this.fetch<notion.PageChunk>({
       endpoint: 'syncRecordValues',
       body: {
@@ -550,7 +486,7 @@ export class NotionAPI {
   public async getSignedFileUrls(
     urls: SignedUrlRequest[],
     gotOptions?: OptionsOfJSONResponseBody
-  ) {
+  ): Promise<SignedUrlResponse> {
     return this.fetch<SignedUrlResponse>({
       endpoint: 'getSignedFileUrls',
       body: {
@@ -563,7 +499,7 @@ export class NotionAPI {
   public async search(
     params: notion.SearchParams,
     gotOptions?: OptionsOfJSONResponseBody
-  ) {
+  ): Promise<notion.SearchResults> {
     const body = {
       type: 'BlocksInAncestor',
       source: 'quick_find_public',
@@ -592,7 +528,79 @@ export class NotionAPI {
     })
   }
 
-  public async fetch<T>({
+  private async addSignedUrls({
+    recordMap,
+    contentBlockIds,
+    gotOptions = {}
+  }: {
+    recordMap: notion.ExtendedRecordMap
+    contentBlockIds?: string[]
+    gotOptions?: OptionsOfJSONResponseBody
+  }) {
+    recordMap.signed_urls = {}
+
+    if (!contentBlockIds) {
+      contentBlockIds = getPageContentBlockIds(recordMap)
+    }
+
+    const allFileInstances = contentBlockIds.flatMap((blockId) => {
+      const block = recordMap.block[blockId]?.value
+
+      if (
+        block &&
+        (block.type === 'pdf' ||
+          block.type === 'audio' ||
+          (block.type === 'image' && block.file_ids?.length) ||
+          block.type === 'video' ||
+          block.type === 'file' ||
+          block.type === 'page')
+      ) {
+        const source =
+          block.type === 'page'
+            ? block.format?.page_cover
+            : block.properties?.source?.[0]?.[0]
+        // console.log(block, source)
+
+        if (source) {
+          if (!source.includes('secure.notion-static.com')) {
+            return []
+          }
+
+          return {
+            permissionRecord: {
+              table: 'block',
+              id: block.id
+            },
+            url: source
+          }
+        }
+      }
+
+      return []
+    })
+
+    if (allFileInstances.length > 0) {
+      try {
+        const { signedUrls } = await this.getSignedFileUrls(
+          allFileInstances,
+          gotOptions
+        )
+
+        if (signedUrls.length === allFileInstances.length) {
+          for (let i = 0; i < allFileInstances.length; ++i) {
+            const file = allFileInstances[i]
+            const signedUrl = signedUrls[i]
+
+            recordMap.signed_urls[file.permissionRecord.id] = signedUrl
+          }
+        }
+      } catch (err) {
+        console.warn('NotionAPI getSignedfileUrls error', err)
+      }
+    }
+  }
+
+  private async fetch<T>({
     endpoint,
     body,
     gotOptions,

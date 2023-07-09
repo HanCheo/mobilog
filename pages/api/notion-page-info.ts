@@ -1,5 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
+import * as libConfig from '@/config/config'
+import { NotionPageInfo } from '@/config/types'
+import { mapImageUrl } from '@/server/libs/map-image-url'
+import {
+  NotionRepository,
+  NotionRepositoryToken
+} from '@/server/services/repository'
 import got from 'got'
 import { PageBlock } from 'notion-types'
 import {
@@ -9,11 +16,7 @@ import {
   isUrl,
   parsePageId
 } from 'notion-utils'
-
-import * as libConfig from '@/config/config'
-import { mapImageUrl } from '@/server/libs/map-image-url'
-import { notion } from '@/server/infra'
-import { NotionPageInfo } from '@/config/types'
+import { container } from 'tsyringe'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {
@@ -25,7 +28,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     throw new Error('Invalid notion page id')
   }
 
-  const recordMap = await notion.getPage(pageId)
+  const recordMap = await container
+    .resolve<NotionRepository>(NotionRepositoryToken)
+    .getPage(pageId)
 
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
