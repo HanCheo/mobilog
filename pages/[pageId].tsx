@@ -1,8 +1,9 @@
 import { GetStaticProps } from 'next'
 import { NotionPage } from 'client/layouts'
 import { domain, isDev, pageUrlOverrides } from '@/config/config'
-import { resolveNotionPage } from '@/server/services'
 import { PageProps, Params } from '@/config/types'
+import { NotionService } from '@/server/services/notion.service'
+import { container } from '@/server/datasource/container'
 
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   context
@@ -10,7 +11,9 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   const rawPageId = context.params.pageId as string
 
   try {
-    const props = await resolveNotionPage(rawPageId)
+    const props = await container
+      .resolve(NotionService)
+      .resolveNotionPage(rawPageId)
 
     return { props, revalidate: 10 }
   } catch (err) {

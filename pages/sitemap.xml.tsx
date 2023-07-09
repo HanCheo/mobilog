@@ -1,8 +1,9 @@
 import type { GetServerSideProps } from 'next'
 
 import { host } from '@/config/config'
-import { getSiteMap } from '@/server/services/getSiteMap'
 import type { SiteMap } from '@/config/types'
+import { container } from '@/server/datasource/container'
+import { NotionService } from '@/server/services/notion.service'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
@@ -15,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   }
 
-  const siteMap = await getSiteMap()
+  const siteMap = await container.resolve(NotionService).getSiteMap()
 
   // cache for up to 8 hours
   res.setHeader(

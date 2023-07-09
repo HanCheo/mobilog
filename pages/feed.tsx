@@ -9,9 +9,10 @@ import {
 } from 'notion-utils'
 import RSS from 'rss'
 import * as config from '@/config/config'
-import { getSiteMap } from '@/server/services/getSiteMap'
+import { container } from '@/server/datasource/container'
 import { getSocialImageUrl } from '@/client/libs/getSocialImageUrl'
 import { getCanonicalPageUrl } from '@/server/libs/map-page-url'
+import { NotionService } from '@/server/services/notion.service'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   if (req.method !== 'GET') {
@@ -22,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     return { props: {} }
   }
 
-  const siteMap = await getSiteMap()
+  const siteMap = await container.resolve(NotionService).getSiteMap()
   const ttlMinutes = 24 * 60 // 24 hours
   const ttlSeconds = ttlMinutes * 60
 

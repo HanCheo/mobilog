@@ -1,6 +1,5 @@
 // import { promises as fs } from 'fs'
 import { NotionRepository } from '@/server/services/repository'
-import { log } from 'console'
 import got, { OptionsOfJSONResponseBody } from 'got'
 import * as notion from 'notion-types'
 import {
@@ -10,7 +9,8 @@ import {
   uuidToId
 } from 'notion-utils'
 import pMap from 'p-map'
-import { inject } from 'tsyringe'
+import { pMemoizeDecorator } from 'p-memoize'
+import { container, inject, singleton } from 'tsyringe'
 
 export interface SignedUrlRequest {
   permissionRecord: PermissionRecord
@@ -27,37 +27,67 @@ export interface PermissionRecord {
 
 export class NotionClientConfig {
   constructor(
-    public apiBaseUrl: string,
+    public apiBaseUrl: string = 'https://www.notion.so/api/v3',
     public authToken?: string,
     public activeUser?: string,
     public userTimeZone: string = 'GMT'
-  ) {
-    log('NotionClientConfig consturctor')
-  }
+  ) {}
 }
 
 /*
  * Main Notion API client.
  */
+@singleton()
 export class NotionClient implements NotionRepository {
   private readonly _apiBaseUrl: string
   private readonly _authToken?: string
   private readonly _activeUser?: string
   private readonly _userTimeZone: string
 
-  constructor({
-    apiBaseUrl,
-    authToken,
-    activeUser,
-    userTimeZone
-  }: NotionClientConfig) {
-    log('notionClient consturctor')
+  constructor(
+    @inject(NotionClientConfig)
+    { apiBaseUrl, authToken, activeUser, userTimeZone }: NotionClientConfig
+  ) {
     this._apiBaseUrl = apiBaseUrl
     this._authToken = authToken
     this._activeUser = activeUser
     this._userTimeZone = userTimeZone
   }
 
+  public async getPageRaw(
+    pageId: string,
+    {
+      gotOptions,
+      chunkLimit = 100,
+      chunkNumber = 0
+    }: {
+      chunkLimit?: number
+      chunkNumber?: number
+      gotOptions?: OptionsOfJSONResponseBody
+    } = {}
+  ): Promise<notion.PageChunk> {
+    const parsedPageId = parsePageId(pageId)
+
+    if (!parsedPageId) {
+      throw new Error(`invalid notion pageId "${pageId}"`)
+    }
+
+    const body = {
+      pageId: parsedPageId,
+      limit: chunkLimit,
+      chunkNumber: chunkNumber,
+      cursor: { stack: [] },
+      verticalColumns: false
+    }
+
+    return this.fetch<notion.PageChunk>({
+      endpoint: 'loadPageChunk',
+      body,
+      gotOptions
+    })
+  }
+
+  @pMemoizeDecorator()
   public async getPage(
     pageId: string,
     {
@@ -78,7 +108,7 @@ export class NotionClient implements NotionRepository {
       gotOptions?: OptionsOfJSONResponseBody
     } = {}
   ): Promise<notion.ExtendedRecordMap> {
-    const page = await this.getPageRaw(pageId, {
+    const page = await container.resolve(NotionClient).getPageRaw(pageId, {
       chunkLimit,
       chunkNumber,
       gotOptions
@@ -111,10 +141,10 @@ export class NotionClient implements NotionRepository {
           break
         }
 
-        const newBlocks = await this.getBlocks(
-          pendingBlockIds,
-          gotOptions
-        ).then((res) => res.recordMap.block)
+        const newBlocks = await container
+          .resolve(NotionClient)
+          .getBlocks(pendingBlockIds, gotOptions)
+          .then((res) => res.recordMap.block)
 
         recordMap.block = { ...recordMap.block, ...newBlocks }
       }
@@ -158,14 +188,16 @@ export class NotionClient implements NotionRepository {
             recordMap.collection_view[collectionViewId]?.value
 
           try {
-            const collectionData = await this.getCollectionData(
-              collectionId,
-              collectionViewId,
-              collectionView,
-              {
-                gotOptions
-              }
-            )
+            const collectionData = await container
+              .resolve(NotionClient)
+              .getCollectionData(
+                collectionId,
+                collectionViewId,
+                collectionView,
+                {
+                  gotOptions
+                }
+              )
 
             // await fs.writeFile(
             //   `${collectionId}-${collectionViewId}.json`,
@@ -214,43 +246,12 @@ export class NotionClient implements NotionRepository {
     // because it is preferable for many use cases as opposed to making these API calls
     // lazily from the client-side.
     if (signFileUrls) {
-      await this.addSignedUrls({ recordMap, contentBlockIds, gotOptions })
+      await container
+        .resolve(NotionClient)
+        .addSignedUrls({ recordMap, contentBlockIds, gotOptions })
     }
 
     return recordMap
-  }
-
-  public async getPageRaw(
-    pageId: string,
-    {
-      gotOptions,
-      chunkLimit = 100,
-      chunkNumber = 0
-    }: {
-      chunkLimit?: number
-      chunkNumber?: number
-      gotOptions?: OptionsOfJSONResponseBody
-    } = {}
-  ): Promise<notion.PageChunk> {
-    const parsedPageId = parsePageId(pageId)
-
-    if (!parsedPageId) {
-      throw new Error(`invalid notion pageId "${pageId}"`)
-    }
-
-    const body = {
-      pageId: parsedPageId,
-      limit: chunkLimit,
-      chunkNumber: chunkNumber,
-      cursor: { stack: [] },
-      verticalColumns: false
-    }
-
-    return this.fetch<notion.PageChunk>({
-      endpoint: 'loadPageChunk',
-      body,
-      gotOptions
-    })
   }
 
   public async getCollectionData(

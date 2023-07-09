@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
 import { NotionPage } from 'client/layouts'
 import { domain, isDev } from '@/config/config'
-import { resolveNotionPage } from '@/server/services'
 import { PageProps, Params } from '@/config/types'
-import { getPostsCanonical } from '@/server/services/getAllPosts'
+import { NotionService } from '@/server/services/notion.service'
+import { container } from '@/server/datasource/container'
 
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   context
@@ -11,7 +11,9 @@ export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   const rawPostId = context.params.postId as string
 
   try {
-    const props = await resolveNotionPage(rawPostId)
+    const props = await container
+      .resolve(NotionService)
+      .resolveNotionPage(rawPostId)
 
     return { props, revalidate: 10 }
   } catch (err) {
@@ -31,7 +33,7 @@ export async function getStaticPaths() {
     }
   }
 
-  const allPosts = await getPostsCanonical()
+  const allPosts = await container.resolve(NotionService).getAllPosts()
 
   const staticPaths = {
     paths: allPosts.map(([postId]) => ({

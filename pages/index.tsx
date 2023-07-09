@@ -1,13 +1,14 @@
 import { TextTypeAnimator } from '@/client/components'
 import { domain } from '@/config/config'
-import { resolveNotionPage } from '@/server/services'
+import { container } from '@/server/datasource/container'
+import { NotionService } from '@/server/services/notion.service'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import '@dotlottie/react-player/dist/index.css'
 import { NotionPage } from 'client/layouts'
 
 export const getStaticProps = async () => {
   try {
-    const props = await resolveNotionPage()
+    const props = await container.resolve(NotionService).resolveNotionPage()
 
     return { props, revalidate: 10 }
   } catch (err) {

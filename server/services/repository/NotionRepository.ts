@@ -1,5 +1,5 @@
-import * as notion from 'notion-types'
 import type { OptionsOfJSONResponseBody } from 'got'
+import * as notion from 'notion-types'
 
 export type GetPageOptions = {
   concurrency?: number
@@ -73,4 +73,4 @@ export interface NotionRepository {
   ) => Promise<notion.SearchResults>
 }
 
-export const NotionRepositoryToken = Symbol('notion-repository')
+export const NotionRepositoryToken = Symbol.for('notion-repository')

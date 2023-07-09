@@ -5,6 +5,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
   staticPageGenerationTimeout: 300,
+  experimental: {
+    workerThreads: false,
+    cpus: 1
+  },
   images: {
     domains: [
       'www.notion.so',
