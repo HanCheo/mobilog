@@ -1,18 +1,18 @@
-import { getTags } from '@/server/services/getTags'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { getTags } from '@/server/services'
+import { Get, SetHeader, createHandler } from 'next-api-decorators'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== 'GET') {
-    return res.status(405).send({ error: 'method not allowed' })
-  }
 
-  const tags = await getTags().catch((error) => {
-    res.status(500).send({ error: `Notion api error: ${error.message}` })
-  })
-
-  res.setHeader(
+class Tags {
+  @Get()
+  @SetHeader(
     'Cache-Control',
     'public, s-maxage=60, max-age=60, stale-while-revalidate=60'
   )
-  res.status(200).json(tags)
+  async cursorPagiablePostListByTag() {
+    return await getTags().catch((error) => {
+      throw new Error( `Notion api error: ${error.message}`)
+    })
+  }
 }
+
+export default createHandler(Tags)
