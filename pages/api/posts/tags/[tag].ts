@@ -1,7 +1,7 @@
 import { getPageablePostsByTag } from '@/server/services/getAllPostByTagNotionhq'
 import {
-  Catch,
   Get,
+  InternalServerErrorException,
   Query,
   SetHeader,
   createHandler
@@ -19,9 +19,6 @@ class TagPosts {
     'Cache-Control',
     'public, s-maxage=60, max-age=60, stale-while-revalidate=60'
   )
-  @Catch<Error>((error, _, res) => {
-    res.status(500).send({ error: `Internal Server Error: ${error.message}` })
-  })
   async cursorPagiablePostListByTag(
     @Query() request: CursorPagiablePostListByTagRequestType
   ) {
@@ -29,7 +26,7 @@ class TagPosts {
       tag: request.tag,
       limit: Number(request.limit),
       cursor: request.cursor
-    })
+    }).catch((error) => new InternalServerErrorException(error.message))
   }
 }
 
