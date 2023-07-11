@@ -1,6 +1,12 @@
 import "reflect-metadata"
 import { getPageablePostsByTag } from '@/server/services/getAllPostByTagNotionhq'
-import { Get, Query, SetHeader, createHandler } from 'next-api-decorators'
+import {
+  Catch,
+  Get,
+  Query,
+  SetHeader,
+  createHandler
+} from 'next-api-decorators'
 
 type CursorPagiablePostListByTagRequestType = {
   tag: string
@@ -14,6 +20,9 @@ class TagPosts {
     'Cache-Control',
     'public, s-maxage=60, max-age=60, stale-while-revalidate=60'
   )
+  @Catch<Error>((error, _, res) => {
+    res.status(500).send({ error: `Internal Server Error: ${error.message}` })
+  })
   async cursorPagiablePostListByTag(
     @Query() request: CursorPagiablePostListByTagRequestType
   ) {
