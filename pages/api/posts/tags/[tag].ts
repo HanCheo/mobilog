@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import { getPageablePostsByTag } from '@/server/services/getAllPostByTagNotionhq'
 import { Get, Query, SetHeader, createHandler } from 'next-api-decorators'
 
