@@ -1,4 +1,3 @@
-import "reflect-metadata"
 import { getPageablePostsByTag } from '@/server/services/getAllPostByTagNotionhq'
 import {
   Catch,
