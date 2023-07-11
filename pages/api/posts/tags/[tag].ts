@@ -26,7 +26,9 @@ class TagPosts {
       tag: request.tag,
       limit: Number(request.limit),
       cursor: request.cursor
-    }).catch((error) => new InternalServerErrorException(error.message))
+    }).catch((error) => {
+      throw new InternalServerErrorException(error.message)
+    })
   }
 }
 
