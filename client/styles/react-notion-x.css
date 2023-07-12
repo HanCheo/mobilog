@@ -30,15 +30,15 @@
 
 .notion-page-content {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin: auto;
+  max-width: var(--notion-max-width)
 }
 
 @media (min-width: 1300px) and (min-height: 300px) {
   .notion-page-content-has-aside {
-    display: flex;
     flex-direction: row;
-    width: calc((100vw + var(--notion-max-width)) / 2);
   }
 
   .notion-page-content-has-aside .notion-aside {
@@ -59,17 +59,38 @@
 }
 
 .notion-aside {
-  position: sticky;
-  top: 148px;
+  position: fixed;
+  top: 300px;
+  border: 1px solid var(--bg-color-0);
+  right: 0;
+  transform: translateX(100%);
   z-index: 101;
-  /* top: calc((100vh - 48px - 100%) / 2); */
-
   align-self: flex-start;
-  flex: 1;
-
   display: none;
   flex-direction: column;
   align-items: center;
+  background-color: var(--bg-color);
+  box-shadow: 4px 2px 6px rgba(0,0,0,.3);
+  padding-bottom: 16px;
+  transition: transform .5s ease-in-out;
+}
+
+.notion-aside::before {
+  content: "‹";
+  font-size: 30px;
+  position: absolute;
+  top: 0;
+  color: var(--fg-color-4);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  left: 0;
+  transform: translateX(-100%);
+  padding: 5px 5px;
+  background-color: var(--bg-color-2);
+}
+
+.notion-aside:hover {
+  transform: translateX(0%);
 }
 
 .notion-aside-table-of-contents {
@@ -156,6 +177,7 @@
 }
 
 .notion-page-scroller {
+  background-color: var(--bg-color);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -426,7 +448,7 @@
 }
 
 .notion-page-has-cover {
-  margin-top: 30vh;
+  margin-top: calc(30vh + 8px);
   background: var(--bg-color);
   padding-top: 96px;
 }
@@ -526,13 +548,6 @@ svg.notion-page-icon {
 
 .notion-page-icon-inline img {
   object-fit: cover;
-}
-
-.notion-page {
-  box-sizing: border-box;
-  width: var(--notion-max-width);
-  padding-left: calc(min(16px, 8vw));
-  padding-right: calc(min(16px, 8vw));
 }
 
 .notion-full-width {
@@ -1609,6 +1624,7 @@ svg.notion-page-icon {
 
 .notion-table-of-contents {
   width: 100%;
+  padding-left: 12px;
   margin: 4px 0;
 }
 
