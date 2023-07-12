@@ -94,6 +94,7 @@ export class NotionClient implements NotionRepository {
       concurrency = 3,
       fetchMissingBlocks = true,
       fetchCollections = true,
+      collectionLimit = 10,
       signFileUrls = true,
       chunkLimit = 100,
       chunkNumber = 0,
@@ -102,6 +103,7 @@ export class NotionClient implements NotionRepository {
       concurrency?: number
       fetchMissingBlocks?: boolean
       fetchCollections?: boolean
+      collectionLimit?: number
       signFileUrls?: boolean
       chunkLimit?: number
       chunkNumber?: number
@@ -194,7 +196,10 @@ export class NotionClient implements NotionRepository {
                 collectionId,
                 collectionViewId,
                 collectionView,
-                { gotOptions }
+                {
+                  gotOptions,
+                  limit: collectionLimit
+                }
               )
 
             // await fs.writeFile(
