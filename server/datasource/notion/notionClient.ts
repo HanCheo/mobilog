@@ -194,9 +194,7 @@ export class NotionClient implements NotionRepository {
                 collectionId,
                 collectionViewId,
                 collectionView,
-                {
-                  gotOptions
-                }
+                { gotOptions }
               )
 
             // await fs.writeFile(
@@ -260,7 +258,7 @@ export class NotionClient implements NotionRepository {
     collectionView: any,
     {
       sort,
-      limit = 9999,
+      limit,
       searchQuery = '',
       userTimeZone = this._userTimeZone,
       loadContentCover = true,
