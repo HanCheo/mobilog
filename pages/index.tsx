@@ -44,8 +44,8 @@ export default function NotionDomainPage(props) {
           />
         </div>
       </div>
-      <div className='flex max-w-1200 mx-auto px-6 mt-3 flex justify-between'>
-        <div>
+      <div className='flex max-sm:flex-col max-sm:items-center gap-2 max-w-1200 mx-auto px-6 mt-3 flex justify-between'>
+        <div className='self-start'>
           <VisitorCounter />
         </div>
         <div>
