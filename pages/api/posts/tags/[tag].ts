@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { getPageablePostsByTag } from '@/server/services/getAllPostByTagNotionhq'
+import { getPageablePostsByTag } from '@/server/services/getPageablePostsByTag'
 import {
   Get,
   InternalServerErrorException,
