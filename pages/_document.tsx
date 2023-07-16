@@ -15,7 +15,7 @@ export default () => {
           />
           <meta
             name='naver-site-verification'
-            content='f27a9e9c59cf024a065a45ccd1f034304ec66a43'
+            content='5770b408b415c074792f17dc04f3c22bf425cd93'
           />
         </Head>
 
