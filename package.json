@@ -28,6 +28,7 @@
   "dependencies": {
     "@dotlottie/react-player": "^1.0.1",
     "@giscus/react": "^2.2.8",
+    "@google-analytics/data": "^3.3.0",
     "@notionhq/client": "^2.2.5",
     "@react-icons/all-files": "^4.1.0",
     "@tanstack/react-query": "^4.29.14",

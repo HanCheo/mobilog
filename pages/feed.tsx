@@ -9,7 +9,7 @@ import {
 } from 'notion-utils'
 import RSS from 'rss'
 import * as config from '@/config/config'
-import { container } from '@/server/datasource/container'
+import { container } from '@/server/core'
 import { getSocialImageUrl } from '@/client/libs/getSocialImageUrl'
 import { getCanonicalPageUrl } from '@/server/libs/map-page-url'
 import { NotionService } from '@/server/services/notion.service'

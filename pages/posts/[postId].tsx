@@ -3,7 +3,7 @@ import { NotionPage } from 'client/layouts'
 import { domain, isDev } from '@/config/config'
 import { PageProps, Params } from '@/config/types'
 import { NotionService } from '@/server/services/notion.service'
-import { container } from '@/server/datasource/container'
+import { container } from '@/server/core'
 
 export const getStaticProps: GetStaticProps<PageProps, Params> = async (
   context
