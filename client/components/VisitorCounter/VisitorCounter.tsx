@@ -24,7 +24,7 @@ export const VisitorCounter: FC = () => {
     <div className='w-full flex flex-col'>
       <span>Total Visitor</span>
       {isLoading && (
-        <div className='flex w-full py-20 items-center justify-center'>
+        <div className='flex items-center justify-center'>
           <Icon.Loading />
         </div>
       )}
