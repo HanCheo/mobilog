@@ -1,5 +1,8 @@
-import { TextTypeAnimator, VisitorCounter } from '@/client/components'
-import { BuyMeACoffee } from '@/client/components/BuyMeACoffee/BuyMeACoffee'
+import {
+  TextTypeAnimator,
+  VisitorCounter,
+  BuyMeACoffee
+} from '@/client/components'
 import { domain } from '@/config/config'
 import { container } from '@/server/core'
 import { NotionService } from '@/server/services/notion.service'
