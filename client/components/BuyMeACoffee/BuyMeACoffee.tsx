@@ -7,7 +7,7 @@ export const BuyMeACoffee = () => (
   <Modal
     modalOpener={({ open }) => (
       <button
-        className='flex text-stone-800 justify-center items-center gap-2 font-bold bg-notion-yellow rounded-md px-3 py-1'
+        className='flex text-stone-800 justify-center items-center gap-2 font-bold bg-yellow-300 rounded-md px-3 py-1'
         onClick={open}
       >
         <FiCoffee />
