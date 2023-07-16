@@ -38,14 +38,14 @@ export const BuyMeACoffee = () => (
               width={30}
               height={30}
               className='rounded-full'
-              src='/kakao-bank-logo.png'
-              alt='kakao-bank-logo'
+              src='/kakao-pay-logo.png'
+              alt='kakao-pay-logo'
             />
             <Image
               width={100}
               height={100}
-              src='/kakao-bank-qr.png'
-              alt='kakao-bank-qr'
+              src='/kakao-pay-qr.png'
+              alt='kakao-pay-qr'
             />
           </div>
           <div className='flex flex-col justify-center items-center gap-2'>
@@ -53,15 +53,10 @@ export const BuyMeACoffee = () => (
               width={30}
               height={30}
               className='rounded-full'
-              src='/toss-bank-logo.png'
-              alt='toss-bank-logo'
+              src='/toss-logo.png'
+              alt='toss-logo'
             />
-            <Image
-              width={100}
-              height={100}
-              src='/toss-bank-qr.png'
-              alt='toss-bank-qr'
-            />
+            <Image width={100} height={100} src='/toss-qr.png' alt='toss-qr' />
           </div>
         </div>
       </div>
