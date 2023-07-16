@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next'
 
-import { host, pageUrlOverrides } from '@/config/config'
+import { host, navigationLinks } from '@/config/config'
 import type { SiteMap } from '@/config/types'
 import { container } from '@/server/core'
 import { NotionService } from '@/server/services/notion.service'
@@ -44,10 +44,10 @@ const createSitemap = (siteMap: SiteMap) =>
     </url>
 
 
-    ${Object.keys(pageUrlOverrides).map(
-      (url) =>
+    ${navigationLinks.map(
+      ({ url }) =>
         `<url>
-          <loc>${host}/${url}</loc>
+          <loc>${host}${url}</loc>
         </url>`
     )}
 
