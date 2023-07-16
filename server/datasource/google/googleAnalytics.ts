@@ -1,3 +1,4 @@
+import { AnalyticsRepository } from '@/server/services/repository/AnalyticsRepository'
 import { BetaAnalyticsDataClient } from '@google-analytics/data'
 import { singleton } from 'tsyringe'
 
@@ -11,7 +12,10 @@ export class GoogleAnalitycsConfig {
 }
 
 @singleton()
-export class GoogleAnalitycs extends BetaAnalyticsDataClient {
+export class GoogleAnalytics
+  extends BetaAnalyticsDataClient
+  implements AnalyticsRepository
+{
   private _propertyId: string
 
   constructor(private googleAnalitycsConfig: GoogleAnalitycsConfig) {

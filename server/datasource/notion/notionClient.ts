@@ -10,7 +10,7 @@ import {
 } from 'notion-utils'
 import pMap from 'p-map'
 import { pMemoizeDecorator } from 'p-memoize'
-import { container, inject, singleton } from 'tsyringe'
+import { container, singleton } from 'tsyringe'
 
 export interface SignedUrlRequest {
   permissionRecord: PermissionRecord
@@ -44,10 +44,12 @@ export class NotionClient implements NotionRepository {
   private readonly _activeUser?: string
   private readonly _userTimeZone: string
 
-  constructor(
-    @inject(NotionClientConfig)
-    { apiBaseUrl, authToken, activeUser, userTimeZone }: NotionClientConfig
-  ) {
+  constructor({
+    apiBaseUrl,
+    authToken,
+    activeUser,
+    userTimeZone
+  }: NotionClientConfig) {
     this._apiBaseUrl = apiBaseUrl
     this._authToken = authToken
     this._activeUser = activeUser

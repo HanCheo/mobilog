@@ -1,11 +1,18 @@
 import 'reflect-metadata'
 import { container } from 'tsyringe'
-import { NotionRepositoryToken } from '@/server/services/repository'
+import {
+  NotionRepositoryToken,
+  AnalyticsRepository,
+  AnalyticsRepositoryToken
+} from '@/server/services/repository'
 import {
   NotionClient,
   NotionClientConfig
 } from '../datasource/notion/notionClient'
-import { GoogleAnalitycsConfig } from '../datasource/google/googleAnalytics'
+import {
+  GoogleAnalitycsConfig,
+  GoogleAnalytics
+} from '../datasource/google/googleAnalytics'
 
 if (!container.isRegistered(NotionClientConfig)) {
   container.register<NotionClientConfig>(NotionClientConfig, {
@@ -31,6 +38,13 @@ if (!container.isRegistered(GoogleAnalitycsConfig)) {
       process.env.GOOGLE_ANALYTICE_PROPERTIY_ID
     )
   })
+}
+
+if (!container.isRegistered(AnalyticsRepositoryToken)) {
+  container.registerSingleton<AnalyticsRepository>(
+    AnalyticsRepositoryToken,
+    GoogleAnalytics
+  )
 }
 
 export { container }

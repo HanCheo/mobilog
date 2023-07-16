@@ -1,2 +1,2 @@
 export { NotionAPI, notionhqClient } from './notion'
-export { GoogleAnalitycs } from './google'
+export { GoogleAnalytics } from './google'
