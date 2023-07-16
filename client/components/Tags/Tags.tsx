@@ -2,6 +2,7 @@ import { host } from '@/config/config'
 import { useQuery } from '@tanstack/react-query'
 import { FC, useCallback } from 'react'
 import { useRouter } from 'next/router'
+import * as Icon from '../icons'
 
 type GetTagsResponse = {
   id: string
@@ -40,6 +41,11 @@ export const Tags: FC<TagsProps> = () => {
     <div className='w-full'>
       <div className='notion-collection-header-title'>Tags</div>
       <div className='flex gap-2 flex-wrap mt-3'>
+        {isLoading && (
+          <div className='flex w-full py-20 items-center justify-center'>
+            <Icon.Loading />
+          </div>
+        )}
         {!isLoading &&
           tags?.map(({ id, name }) => (
             <button
