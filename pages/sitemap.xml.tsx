@@ -47,7 +47,7 @@ const createSitemap = (siteMap: SiteMap) =>
     ${Object.keys(pageUrlOverrides).map(
       (url) =>
         `<url>
-          <loc>${host}${url}</loc>
+          <loc>${host}/${url}</loc>
         </url>`
     )}
 
