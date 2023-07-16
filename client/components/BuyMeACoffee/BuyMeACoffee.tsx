@@ -33,7 +33,7 @@ export const BuyMeACoffee = () => (
       <div>
         <span className='text-md font-bold'>QR Code</span>
         <div className='flex text-sm gap-3 mt-2 justify-between'>
-          <div className='flex flex-col justify-center items-center gap-1'>
+          <div className='flex flex-col justify-center items-center gap-2'>
             <Image
               width={30}
               height={30}
@@ -48,7 +48,7 @@ export const BuyMeACoffee = () => (
               alt='kakao-bank-qr'
             />
           </div>
-          <div className='flex flex-col justify-center items-center gap-1'>
+          <div className='flex flex-col justify-center items-center gap-2'>
             <Image
               width={30}
               height={30}
