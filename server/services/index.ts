@@ -1,5 +1,5 @@
-import 'reflect-metadata';
-import '../datasource';
-
+import 'reflect-metadata'
+import '../datasource'
 export { getPage } from './getPage'
 export { getTags } from './getTags'
+export { GetVisitorCount } from './useCases'

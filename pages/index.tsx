@@ -1,4 +1,4 @@
-import { TextTypeAnimator } from '@/client/components'
+import { TextTypeAnimator, VisitorCounter } from '@/client/components'
 import { BuyMeACoffee } from '@/client/components/BuyMeACoffee/BuyMeACoffee'
 import { domain } from '@/config/config'
 import { container } from '@/server/core'
@@ -44,9 +44,13 @@ export default function NotionDomainPage(props) {
           />
         </div>
       </div>
-
-      <div className='max-w-1200 mx-auto px-6 mt-3 flex justify-end'>
-        <BuyMeACoffee />
+      <div className='flex max-w-1200 mx-auto px-6 mt-3 flex justify-between'>
+        <div>
+          <VisitorCounter />
+        </div>
+        <div>
+          <BuyMeACoffee />
+        </div>
       </div>
       <NotionPage {...props} />
       <div className='h-6' />

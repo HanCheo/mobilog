@@ -64,8 +64,7 @@ export class GoogleAnalytics
     const [response] = await super.runReport({
       property: `properties/${this._propertyId}`,
       metrics: [{ name: 'sessions' }],
-      dateRanges: [{ startDate: '2023-05-28', endDate: 'today' }],
-      orderBys: [{ metric: { metricName: 'totalUsers' }, desc: true }]
+      dateRanges: [{ startDate: '2023-05-28', endDate: 'today' }]
     })
 
     return Number(response.rows[0].metricValues[0].value) ?? 0
