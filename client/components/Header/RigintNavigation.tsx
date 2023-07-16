@@ -35,7 +35,12 @@ export const RightNavigation = () => {
             <components.PageLink
               href={link.url}
               key={index}
-              className={cs(styles.navLink, 'breadcrumb', 'button')}
+              className={cs(
+                styles.navLink,
+                'breadcrumb',
+                '!p-3',
+                'max-sm:!px-1'
+              )}
             >
               {link.title}
             </components.PageLink>
