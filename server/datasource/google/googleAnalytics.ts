@@ -55,4 +55,15 @@ export class GoogleAnalitycs extends BetaAnalyticsDataClient {
       viewCount: Number(metricValues[0].value) ?? 0
     }))
   }
+
+  public async totalVisitor(): Promise<number> {
+    const [response] = await super.runReport({
+      property: `properties/${this._propertyId}`,
+      metrics: [{ name: 'sessions' }],
+      dateRanges: [{ startDate: '2023-05-28', endDate: 'today' }],
+      orderBys: [{ metric: { metricName: 'totalUsers' }, desc: true }]
+    })
+
+    return Number(response.rows[0].metricValues[0].value) ?? 0
+  }
 }
