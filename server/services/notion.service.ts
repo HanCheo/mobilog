@@ -152,9 +152,18 @@ export class NotionService {
       config.rootNotionSpaceId
     )
 
+    const allPages = Object.entries(partialSiteMap.canonicalPageMap)
+
+    const allPosts = allPages.filter(([, pageId]) => {
+      const page = partialSiteMap.pageMap[pageId].block[pageId].value
+
+      return this.isPostType(page)
+    })
+
     return {
       site: config.site,
-      ...partialSiteMap
+      ...partialSiteMap,
+      canonicalPageMap: Object.fromEntries(allPosts)
     } as types.SiteMap
   }
 

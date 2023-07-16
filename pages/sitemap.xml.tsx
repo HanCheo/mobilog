@@ -47,7 +47,7 @@ const createSitemap = (siteMap: SiteMap) =>
       .map((canonicalPagePath) =>
         `
           <url>
-            <loc>${host}/${canonicalPagePath}</loc>
+            <loc>${host}/posts/${canonicalPagePath}</loc>
           </url>
         `.trim()
       )
