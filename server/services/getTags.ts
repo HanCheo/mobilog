@@ -22,9 +22,11 @@ export const getTags = async (): Promise<GetTagsResponse> => {
     throw new Error('Tags is not multi-select type')
   }
 
-  await kv.set('getTags', collectionInfo.properties.Tags.multi_select.options, {
-    ex: 60 * 60
-  })
+  await kv.setex(
+    'getTags',
+    60 * 60,
+    collectionInfo.properties.Tags.multi_select.options
+  )
 
   return collectionInfo.properties.Tags.multi_select.options
 }
