@@ -1,1 +1,0 @@
-export { PageSocial } from './PageSocial'
