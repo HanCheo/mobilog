@@ -49,7 +49,7 @@ export const siteConfig: SiteConfigType = {
 
   // basic site info (required)
   name: 'Mobilog',
-  domain: 'mobilog.vercel.app',
+  domain: 'mobilog.me',
   author: 'Moby',
 
   // open graph metadata (optional)

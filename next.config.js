@@ -25,7 +25,7 @@ module.exports = withBundleAnalyzer({
       { key: 'Access-Control-Allow-Credentials', value: 'true' },
       {
         key: 'Access-Control-Allow-Origin',
-        value: 'https://mobilog.vercel.app/*'
+        value: 'https://mobilog.me/*'
       },
       {
         key: 'Access-Control-Allow-Methods',
