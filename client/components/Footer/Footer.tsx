@@ -23,7 +23,7 @@ export const FooterImpl: FC = () => {
   useEffect(() => {
     const sentinelEl = sentinelRef.current
     const observer = new window.IntersectionObserver(handler, {
-      rootMargin: '-30px'
+      rootMargin: '-60px'
     })
     observer.observe(sentinelEl)
 
@@ -34,7 +34,7 @@ export const FooterImpl: FC = () => {
 
   return (
     <div>
-      <div ref={sentinelRef} className='h-16 max-sm:h-32' />
+      <div ref={sentinelRef} className='h-16 max-sm:h-32 mt-5' />
 
       <footer className={styles.footer} ref={footerRef}>
         <div className={styles.copyright}>Copyright 2023 {config.author}</div>
