@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next'
 
-import { host } from '@/config/config'
+import { host, pageUrlOverrides } from '@/config/config'
 import type { SiteMap } from '@/config/types'
 import { container } from '@/server/core'
 import { NotionService } from '@/server/services/notion.service'
@@ -42,6 +42,14 @@ const createSitemap = (siteMap: SiteMap) =>
     <url>
       <loc>${host}/</loc>
     </url>
+
+
+    ${Object.keys(pageUrlOverrides).map(
+      (url) =>
+        `<url>
+          <loc>${host}${url}</loc>
+        </url>`
+    )}
 
     ${Object.keys(siteMap.canonicalPageMap)
       .map((canonicalPagePath) =>
