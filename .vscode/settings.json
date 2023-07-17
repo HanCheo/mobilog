@@ -17,34 +17,6 @@
     "json"
   ],
   "files.exclude": {
-    "**/.dummy": true,
-    "**/.eslintcache": true,
-    "**/.google.json": true,
-    "**/.grunt": true,
-    "**/.lock-wscript": true,
-    "**/.node_repl_history": true,
-    "**/.now/": true,
-    "**/.npm": true,
-    "**/.nyc_output": true,
-    "**/.snapshots/": true,
-    "**/.vercel/": true,
-    "**/.yarn-integrity": true,
-    "**/*.log": true,
-    "**/*.pid": true,
-    "**/*.pid.lock": true,
-    "**/*.seed": true,
-    "**/*.tgz": true,
-    "**/bower_components": true,
-    "**/build/": true,
-    "**/coverage": true,
-    "**/dist/": true,
-    "**/jspm_packages/": true,
-    "**/lib-cov": true,
-    "**/logs": true,
-    "**/npm-debug.log*": true,
-    "**/pids": true,
-    "**/typings/": true,
-    "**/yarn-debug.log*": true,
-    "**/yarn-error.log*": true
+    "**/node_modules": true
   }
 }
