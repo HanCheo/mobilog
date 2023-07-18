@@ -7,7 +7,7 @@ class Visitor {
   @Get()
   @SetHeader(
     'Cache-Control',
-    'public, s-maxage=60, max-age=60, stale-while-revalidate=60'
+    'public, s-maxage=1800, stale-while-revalidate=1500'
   )
   async cursorPagiablePostListByTag() {
     return await container.resolve(GetVisitorCount).execute()
