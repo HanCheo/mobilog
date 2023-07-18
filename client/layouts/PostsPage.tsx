@@ -1,9 +1,8 @@
 import { siteConfig } from '@/config/siteConfig'
-import { Head, Tags } from 'client/components'
+import { Head, PostList, Tags } from 'client/components'
 import { useRouter } from 'next/router'
-import { TagPostList } from '../components/TagPostList/TagPostList'
 
-export const TagPage: React.FC = () => {
+export const PostsPage: React.FC = () => {
   const router = useRouter()
   const tag = router.query.tag as string
 
@@ -12,7 +11,7 @@ export const TagPage: React.FC = () => {
       <Head title={`${siteConfig.name + (tag ? ' | ' + tag : '')}`} />
       <div className='flex flex-col mx-auto gap-3 mt-6 px-6 w-full max-w-1200'>
         <Tags />
-        {tag && <TagPostList tag={tag} />}
+        <PostList tag={tag} />
       </div>
     </>
   )

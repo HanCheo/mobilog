@@ -3,7 +3,7 @@ import { inject, singleton } from 'tsyringe'
 import {
   type AnalyticsRepository,
   AnalyticsRepositoryToken
-} from '../repository'
+} from '../../repository'
 
 type Response = {
   totalVisitor: number

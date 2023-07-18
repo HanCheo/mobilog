@@ -85,8 +85,8 @@ export const siteConfig: SiteConfigType = {
   // navigationStyle: 'custom',
   navigationLinks: [
     {
-      title: 'Tags',
-      url: '/tags'
+      title: 'Posts',
+      url: '/posts'
     },
     {
       title: 'About',

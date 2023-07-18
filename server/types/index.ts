@@ -1,5 +1,5 @@
 export type {
-  GetPageablePostsByTagRequest,
-  GetPageablePostsByTagResponse,
+  GetPageablePostsRequest,
+  GetPageablePostsResponse,
   Post
-} from './GetAllPostByTagNotionhqType'
+} from '../services/useCases/GetPageablePosts/GetPageablePostsType'

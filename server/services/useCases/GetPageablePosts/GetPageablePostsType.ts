@@ -1,12 +1,12 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 
-export type GetPageablePostsByTagRequest = {
-  tag: string
+export type GetPageablePostsRequest = {
+  tag?: string
   limit: number
   cursor?: string
 }
 
-export type GetPageablePostsByTagResponse = Omit<
+export type GetPageablePostsResponse = Omit<
   QueryDatabaseResponse,
   'results'
 > & {

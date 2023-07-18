@@ -1,5 +1,5 @@
 import { host } from '@/config/config'
-import { GetPageablePostsByTagResponse } from '@/server/types'
+import { GetPageablePostsResponse } from '@/server/types'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { FC, useCallback, useEffect, useRef } from 'react'
 import * as Icon from '../icons'
@@ -13,16 +13,18 @@ const getTagPostList = ({
   tag: string
   limit: number
   cursor?: string
-}): Promise<GetPageablePostsByTagResponse> => {
+}): Promise<GetPageablePostsResponse> => {
   return fetch(
-    `${host}/api/posts/tags/${tag}?limit=${limit}` +
+    `${host}/api/posts?` +
+      (tag ? `tag=${tag}&` : '') +
+      `limit=${limit}` +
       (cursor ? `&cursor=${cursor}` : '')
   ).then((response) => response.json())
 }
 
 const PER_PAGE_SIZE = 10
 
-export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
+export const PostList: FC<{ tag: string }> = ({ tag }: { tag?: string }) => {
   const {
     data: postList,
     isLoading,
@@ -63,7 +65,7 @@ export const TagPostList: FC<{ tag: string }> = ({ tag }: { tag: string }) => {
   return (
     <div className='w-full'>
       <div className='notion-collection-header'>
-        <div className='notion-collection-header-title'>{tag}</div>
+        <div className='notion-collection-header-title'>{tag ?? 'ALL'}</div>
       </div>
       {isLoading ? (
         <div className='flex w-full py-20 items-center justify-center'>
