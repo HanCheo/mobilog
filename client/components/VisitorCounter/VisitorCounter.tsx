@@ -1,8 +1,8 @@
 import { host } from '@/config/config'
 import { useQuery } from '@tanstack/react-query'
 import { FC } from 'react'
-import * as Icon from '../icons'
 import { AnimatedNumber } from '../AnimatedNumber'
+import Skeleton from 'react-loading-skeleton'
 
 type GetVisitorResponse = {
   totalVisitor: number
@@ -23,19 +23,17 @@ export const VisitorCounter: FC = () => {
   return (
     <div className='w-full flex flex-col'>
       <span>Total Visitor</span>
-      {isLoading && (
-        <div className='flex items-center justify-center'>
-          <Icon.Loading />
-        </div>
-      )}
-      {!isLoading && (
-        <div className='font-bold text-green-500 dark:text-green-400 '>
+
+      <div className='font-bold text-green-500 dark:text-green-400 h-7'>
+        {isLoading ? (
+          <Skeleton width={70} height={30} />
+        ) : (
           <AnimatedNumber
             num={visitorCountInfo.totalVisitor}
-            fontStyle={{ fontSize: 20 }}
+            fontStyle={{ fontSize: 22 }}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

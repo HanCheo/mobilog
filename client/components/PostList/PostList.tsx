@@ -2,8 +2,7 @@ import { host } from '@/config/config'
 import { GetPageablePostsResponse } from '@/server/types'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { FC, useCallback, useEffect, useRef } from 'react'
-import * as Icon from '../icons'
-import { PostItem } from '../PostItem'
+import { PostItem, PostItemSkeleton } from '../PostItem'
 
 const getTagPostList = ({
   tag,
@@ -62,23 +61,25 @@ export const PostList: FC<{ tag: string }> = ({ tag }: { tag?: string }) => {
     }
   }, [handler])
 
+  const isEmpty = !isLoading && postList.pages[0].results.length === 0
+
   return (
     <div className='w-full'>
       <div className='notion-collection-header'>
         <div className='notion-collection-header-title'>{tag ?? 'ALL'}</div>
       </div>
-      {isLoading ? (
-        <div className='flex w-full py-20 items-center justify-center'>
-          <Icon.Loading />
-        </div>
-      ) : postList.pages[0].results.length === 0 ? (
+      {isEmpty ? (
         <div className='w-full text-center py-8'>
           {tag}에 작성된 Post가 없습니다.
         </div>
       ) : (
         <div className='notion-gallery-grid notion-gallery-grid-size-small'>
-          {postList.pages.map((list) =>
-            list.results.map((post) => <PostItem key={post.id} post={post} />)
+          {isLoading ? (
+            <PostItemSkeleton count={10} />
+          ) : (
+            postList.pages.map((list) =>
+              list.results.map((post) => <PostItem key={post.id} post={post} />)
+            )
           )}
         </div>
       )}
