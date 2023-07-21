@@ -27,6 +27,12 @@ if (!container.isRegistered(NotionClientConfig)) {
   })
 }
 
+if (!container.isRegistered(NotionHqClientConfig)) {
+  container.register<NotionHqClientConfig>(NotionHqClientConfig, {
+    useValue: new NotionHqClientConfig(process.env.NOTIONHQ_API_TOKEN)
+  })
+}
+
 if (!container.isRegistered(NotionHqRepositoryToken)) {
   container.registerSingleton<NotionHqClient>(
     NotionHqRepositoryToken,
@@ -34,11 +40,6 @@ if (!container.isRegistered(NotionHqRepositoryToken)) {
   )
 }
 
-if (!container.isRegistered(NotionHqClientConfig)) {
-  container.register<NotionHqClientConfig>(NotionHqClientConfig, {
-    useValue: new NotionHqClientConfig(process.env.NOTIONHQ_API_TOKEN)
-  })
-}
 if (!container.isRegistered(NotionRepositoryToken)) {
   container.registerSingleton<NotionClient>(NotionRepositoryToken, NotionClient)
 }
