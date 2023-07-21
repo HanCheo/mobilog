@@ -1,5 +1,6 @@
-import { notionhqClient } from '@/server/datasource'
 import { kv } from '@vercel/kv'
+import { container } from 'tsyringe'
+import { NotionHqRepository, NotionHqRepositoryToken } from './repository'
 
 type GetTagsResponse = {
   id: string
@@ -14,9 +15,11 @@ export const getTags = async (): Promise<GetTagsResponse> => {
     return tagInfo
   }
 
-  const collectionInfo = await notionhqClient.databases.retrieve({
-    database_id: process.env.NOTIONHQ_DATABASE_ID
-  })
+  const collectionInfo = await container
+    .resolve<NotionHqRepository>(NotionHqRepositoryToken)
+    .databases.retrieve({
+      database_id: process.env.NOTIONHQ_DATABASE_ID
+    })
 
   if (collectionInfo.properties.Tags.type !== 'multi_select') {
     throw new Error('Tags is not multi-select type')

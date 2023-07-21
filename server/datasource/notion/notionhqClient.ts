@@ -12,9 +12,9 @@ export class NotionHqClientConfig {
 
 @singleton()
 export class NotionHqClient extends Client implements NotionHqRepository {
-  constructor(private notionHqClientConfig: NotionHqClientConfig) {
+  constructor({ auth }: NotionHqClientConfig) {
     super({
-      auth: notionHqClientConfig.auth
+      auth
     })
   }
 }
