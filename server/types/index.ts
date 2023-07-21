@@ -1,5 +1,6 @@
 export type {
   GetPageablePostsRequest,
-  GetPageablePostsResponse,
-  Post
+  GetPageablePostsResponse
 } from '../services/useCases/GetPageablePosts/GetPageablePostsType'
+export type { Post } from './Post'
+export type { UseCase } from './UseCase'

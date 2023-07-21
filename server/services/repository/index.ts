@@ -1,5 +1,12 @@
-export { NotionRepositoryToken } from './NotionRepository'
-export type { NotionRepository, GetPageOptions } from './NotionRepository'
+export {
+  type NotionRepository,
+  type GetPageOptions,
+  NotionRepositoryToken
+} from './NotionRepository'
+export {
+  type NotionHqRepository,
+  NotionHqRepositoryToken
+} from './NotionHqRepository'
 export {
   type AnalyticsRepository,
   AnalyticsRepositoryToken

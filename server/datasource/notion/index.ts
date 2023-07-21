@@ -1,2 +1,6 @@
 export { NotionClient as NotionAPI } from './notionClient'
-export { notionhqClient } from './notionhqClient'
+export {
+  notionhqClient,
+  NotionHqClientConfig,
+  NotionHqClient
+} from './notionhqClient'

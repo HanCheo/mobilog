@@ -45,7 +45,7 @@ export class GoogleAnalytics
           fieldName: 'pagePath',
           stringFilter: {
             matchType: 'BEGINS_WITH',
-            value: '/posts',
+            value: '/posts/',
             caseSensitive: false
           }
         }

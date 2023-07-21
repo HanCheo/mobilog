@@ -1,0 +1,1 @@
+export { GetPopulerPosts } from './GetPopulerPosts'

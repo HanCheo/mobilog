@@ -3,7 +3,8 @@ import { container } from 'tsyringe'
 import {
   NotionRepositoryToken,
   AnalyticsRepository,
-  AnalyticsRepositoryToken
+  AnalyticsRepositoryToken,
+  NotionHqRepositoryToken
 } from '@/server/services/repository'
 import {
   NotionClient,
@@ -13,6 +14,7 @@ import {
   GoogleAnalitycsConfig,
   GoogleAnalytics
 } from '../datasource/google/googleAnalytics'
+import { NotionHqClient, NotionHqClientConfig } from '../datasource/notion'
 
 if (!container.isRegistered(NotionClientConfig)) {
   container.register<NotionClientConfig>(NotionClientConfig, {
@@ -25,6 +27,18 @@ if (!container.isRegistered(NotionClientConfig)) {
   })
 }
 
+if (!container.isRegistered(NotionHqRepositoryToken)) {
+  container.registerSingleton<NotionHqClient>(
+    NotionHqRepositoryToken,
+    NotionHqClient
+  )
+}
+
+if (!container.isRegistered(NotionHqClientConfig)) {
+  container.register<NotionHqClientConfig>(NotionHqClientConfig, {
+    useValue: new NotionHqClientConfig(process.env.NOTIONHQ_API_TOKEN)
+  })
+}
 if (!container.isRegistered(NotionRepositoryToken)) {
   container.registerSingleton<NotionClient>(NotionRepositoryToken, NotionClient)
 }

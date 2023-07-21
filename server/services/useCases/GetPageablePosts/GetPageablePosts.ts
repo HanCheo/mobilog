@@ -1,24 +1,30 @@
-import { notionhqClient } from '@/server/datasource'
 import {
   GetPageablePostsRequest,
   GetPageablePostsResponse
 } from './GetPageablePostsType'
-import { UseCase } from '@/server/types/UseCase'
-import { singleton } from 'tsyringe'
+import { UseCase } from '@/server/types'
+import { inject, singleton } from 'tsyringe'
+import {
+  type NotionHqRepository,
+  NotionHqRepositoryToken
+} from '../../repository'
 
 @singleton()
 export class GetPageablePosts
   implements
     UseCase<GetPageablePostsRequest, Promise<GetPageablePostsResponse>>
 {
-  constructor() {}
+  constructor(
+    @inject(NotionHqRepositoryToken)
+    private notionHqRepositoy: NotionHqRepository
+  ) {}
 
   public async execute({
     tag,
     limit,
     cursor
   }: GetPageablePostsRequest): Promise<GetPageablePostsResponse> {
-    return (await notionhqClient.databases.query({
+    return (await this.notionHqRepositoy.databases.query({
       database_id: process.env.NOTIONHQ_DATABASE_ID,
       sorts: [{ property: 'Published', direction: 'descending' }],
       filter: {
