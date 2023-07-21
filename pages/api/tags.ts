@@ -6,9 +6,7 @@ class Tags {
   @Get()
   @SetHeader(
     'Cache-Control',
-    `s-maxage=${hoursToSeconds(24)}, stale-while-revalidate=${hoursToSeconds(
-      18
-    )}`
+    `s-maxage=${hoursToSeconds(24)}, stale-while-revalidate=60`
   )
   @Catch<Error>((error, _, res) => {
     res.status(500).send({ error: `Internal Server Error: ${error.message}` })
