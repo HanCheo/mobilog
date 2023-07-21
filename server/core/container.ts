@@ -11,11 +11,12 @@ import {
   NotionClientConfig
 } from '../datasource/notion/notionClient'
 import {
-  GoogleAnalitycsConfig,
+  GoogleAnalyticsConfig,
   GoogleAnalytics
 } from '../datasource/google/googleAnalytics'
 import { NotionHqClient, NotionHqClientConfig } from '../datasource/notion'
 
+// * Notion Repository
 if (!container.isRegistered(NotionClientConfig)) {
   container.register<NotionClientConfig>(NotionClientConfig, {
     useValue: new NotionClientConfig(
@@ -27,6 +28,11 @@ if (!container.isRegistered(NotionClientConfig)) {
   })
 }
 
+if (!container.isRegistered(NotionRepositoryToken)) {
+  container.registerSingleton<NotionClient>(NotionRepositoryToken, NotionClient)
+}
+
+// * NotionHq Repository
 if (!container.isRegistered(NotionHqClientConfig)) {
   container.register<NotionHqClientConfig>(NotionHqClientConfig, {
     useValue: new NotionHqClientConfig(process.env.NOTIONHQ_API_TOKEN)
@@ -40,13 +46,10 @@ if (!container.isRegistered(NotionHqRepositoryToken)) {
   )
 }
 
-if (!container.isRegistered(NotionRepositoryToken)) {
-  container.registerSingleton<NotionClient>(NotionRepositoryToken, NotionClient)
-}
-
-if (!container.isRegistered(GoogleAnalitycsConfig)) {
-  container.register<GoogleAnalitycsConfig>(GoogleAnalitycsConfig, {
-    useValue: new GoogleAnalitycsConfig(
+// * GoogleAnalytics Repository
+if (!container.isRegistered(GoogleAnalyticsConfig)) {
+  container.register<GoogleAnalyticsConfig>(GoogleAnalyticsConfig, {
+    useValue: new GoogleAnalyticsConfig(
       process.env.GOOGLE_SERVICE_ACCOUNT_PROJECT_ID,
       process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL,
       process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,

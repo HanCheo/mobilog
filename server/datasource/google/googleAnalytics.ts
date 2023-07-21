@@ -2,7 +2,7 @@ import { AnalyticsRepository } from '@/server/services/repository/AnalyticsRepos
 import { BetaAnalyticsDataClient } from '@google-analytics/data'
 import { singleton } from 'tsyringe'
 
-export class GoogleAnalitycsConfig {
+export class GoogleAnalyticsConfig {
   constructor(
     public projectId: string,
     public clientEmail: string,
@@ -18,15 +18,15 @@ export class GoogleAnalytics
 {
   private _propertyId: string
 
-  constructor(private googleAnalitycsConfig: GoogleAnalitycsConfig) {
+  constructor(private googleAnalyticsConfig: GoogleAnalyticsConfig) {
     super({
-      projectId: googleAnalitycsConfig.projectId,
+      projectId: googleAnalyticsConfig.projectId,
       credentials: {
-        client_email: googleAnalitycsConfig.clientEmail,
-        private_key: googleAnalitycsConfig.privateKey
+        client_email: googleAnalyticsConfig.clientEmail,
+        private_key: googleAnalyticsConfig.privateKey
       }
     })
-    this._propertyId = googleAnalitycsConfig.propertyId
+    this._propertyId = googleAnalyticsConfig.propertyId
   }
 
   public async getPopulerPost(limit?: number): Promise<
