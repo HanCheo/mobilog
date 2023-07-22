@@ -1,7 +1,8 @@
 import {
   TextTypeAnimator,
   VisitorCounter,
-  BuyMeACoffee
+  BuyMeACoffee,
+  GithubJandi
 } from '@/client/components'
 import { domain } from '@/config/config'
 import { container } from '@/server/core'
@@ -47,7 +48,7 @@ export default function NotionDomainPage(props) {
           />
         </div>
       </div>
-      <div className='flex max-sm:flex-col max-sm:items-center gap-2 max-w-1200 mx-auto px-6 mt-3 flex justify-between'>
+      <div className='flex max-sm:flex-col max-sm:items-center gap-2 max-w-1200 mx-auto px-6 mt-3 justify-between'>
         <div className='self-start'>
           <VisitorCounter />
         </div>
@@ -56,6 +57,9 @@ export default function NotionDomainPage(props) {
         </div>
       </div>
       <NotionPage {...props} />
+      <div className='max-w-1200 mx-auto px-6 mt-3'>
+        <GithubJandi />
+      </div>
       <div className='h-6' />
     </div>
   )
