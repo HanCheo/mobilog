@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <GooglaAnalyticsProvider>
           <GaScript />
-          <ThemeProvider defaultTheme={THEME.Dark}>
+          <ThemeProvider defaultTheme={THEME.Light}>
             <Header />
             <Component {...pageProps} />
             <Footer />
