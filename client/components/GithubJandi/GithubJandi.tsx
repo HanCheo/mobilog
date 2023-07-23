@@ -6,9 +6,9 @@ export const GithubJandi = () => {
 
   return (
     <div>
-      <span className='font-bold text-xl'>Jandi</span>
+      <div className='font-bold text-xl py-1'>Jandi</div>
 
-      <div className='max-sm:flex-col flex text-sm gap-2'>
+      <div className='max-sm:grid-cols-1 grid grid-cols-2 text-sm gap-2'>
         <div className='flex flex-col gap-2'>
           <Link
             href={'https://github.com/moby-101'}
@@ -19,7 +19,9 @@ export const GithubJandi = () => {
           </Link>
           <img
             src={`https://github.com/moby-101/moby-101/raw/main/profile-3d-contrib/${
-              isDarkMode ? 'profile-night-rainbow.svg' : 'profile-green.svg'
+              isDarkMode
+                ? 'profile-night-rainbow.svg'
+                : 'profile-green-animate.svg'
             }`}
             alt={'moby-jandi'}
             width={'100%'}
@@ -36,7 +38,9 @@ export const GithubJandi = () => {
           </Link>
           <img
             src={`https://github.com/HanCheo/HanCheo/raw/master/profile-3d-contrib/${
-              isDarkMode ? 'profile-night-rainbow.svg' : 'profile-green.svg'
+              isDarkMode
+                ? 'profile-night-rainbow.svg'
+                : 'profile-green-animate.svg'
             }`}
             alt={'hancheo-jandi'}
             width={'100%'}

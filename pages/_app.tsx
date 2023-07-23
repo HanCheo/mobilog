@@ -6,7 +6,6 @@ import {
   GaScript,
   GooglaAnalyticsProvider
 } from 'client/providers/GoogleAnalyticsProvider'
-import { ThemeProvider } from 'client/providers/ThemeProvider'
 import { Analytics } from '@vercel/analytics/react'
 import {
   Hydrate,
@@ -24,7 +23,19 @@ import '@/styles/global.css'
 import '@/styles/notion.css'
 // global style overrides for prism theme (optional)
 import { useState } from 'react'
-import { Footer, Header } from '@/client/components'
+import { Footer, Header, Loading } from '@/client/components'
+import dynamic from 'next/dynamic'
+
+const ThemeProviderNoSsr = dynamic(
+  () =>
+    import('client/providers/ThemeProvider').then(
+      (module) => module.ThemeProvider
+    ),
+  {
+    loading: () => <Loading />,
+    ssr: false
+  }
+)
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
@@ -34,12 +45,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <Analytics />
         <GooglaAnalyticsProvider>
-          <ThemeProvider>
+          <GaScript />
+          <ThemeProviderNoSsr>
             <Header />
-            <GaScript />
             <Component {...pageProps} />
             <Footer />
-          </ThemeProvider>
+          </ThemeProviderNoSsr>
         </GooglaAnalyticsProvider>
       </Hydrate>
     </QueryClientProvider>
