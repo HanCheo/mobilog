@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { Get, Query, SetHeader, createHandler } from 'next-api-decorators'
 import { container } from '@/server/core'
 import { GetPageablePosts, GetPopulerPosts } from '@/server/services/useCases'
-import { hoursToSeconds } from 'date-fns'
+import { hoursToSeconds, minutesToSeconds } from 'date-fns'
 
 type CursorPagiablePostListByTagRequest = {
   tag?: string
@@ -18,7 +18,9 @@ class PostController {
   @Get()
   @SetHeader(
     'Cache-Control',
-    `s-maxage=${hoursToSeconds(6)}, stale-while-revalidate=60`
+    `s-maxage=${hoursToSeconds(1)}, stale-while-revalidate=${minutesToSeconds(
+      40
+    )}`
   )
   async cursorPagiablePostList(
     @Query() request: CursorPagiablePostListByTagRequest
@@ -33,8 +35,8 @@ class PostController {
   @Get('/populer')
   @SetHeader(
     'Cache-Control',
-    `s-maxage=${hoursToSeconds(24)}, stale-while-revalidate=${hoursToSeconds(
-      18
+    `s-maxage=${hoursToSeconds(1)}, stale-while-revalidate=${minutesToSeconds(
+      40
     )}`
   )
   async papulerPostList(@Query() request: PapulerPostListRequest) {
