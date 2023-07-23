@@ -2,30 +2,13 @@ import {
   TextTypeAnimator,
   VisitorCounter,
   BuyMeACoffee,
-  GithubJandi
+  GithubJandi,
+  RecentPostList
 } from '@/client/components'
-import { domain } from '@/config/config'
-import { container } from '@/server/core'
-import { NotionService } from '@/server/services/notion.service'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import '@dotlottie/react-player/dist/index.css'
-import { NotionPage } from 'client/layouts'
 
-export const getStaticProps = async () => {
-  try {
-    const props = await container.resolve(NotionService).resolveNotionPage()
-
-    return { props, revalidate: 10 }
-  } catch (err) {
-    console.error('page error', domain, err)
-
-    // we don't want to publish the error version of this page, so
-    // let next.js know explicitly that incremental SSG failed
-    throw err
-  }
-}
-
-export default function NotionDomainPage(props) {
+export default function NotionDomainPage() {
   return (
     <div>
       <div className='max-w-1200 mx-auto pt-20 pb-10 px-6 flex max-md:pt-20 max-md:pb-10 justify-between relative items-center overflow-hidden'>
@@ -56,8 +39,8 @@ export default function NotionDomainPage(props) {
           <BuyMeACoffee />
         </div>
       </div>
-      <NotionPage {...props} />
-      <div className='max-w-1200 mx-auto px-6 mt-3'>
+      <div className='max-w-1200 mx-auto px-6 mt-3 grid gap-2'>
+        <RecentPostList />
         <GithubJandi />
       </div>
       <div className='h-6' />

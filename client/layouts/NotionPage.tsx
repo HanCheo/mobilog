@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { FC, ReactNode, createElement, useMemo } from 'react'
 import { Head, Comment, Loading } from 'client/components'
 import { useTheme } from 'client/providers/ThemeProvider'
-import cs from 'classnames'
 import { format } from 'date-fns'
 import { PageBlock } from 'notion-types'
 import { getBlockTitle, getPageProperty, getTextContent } from 'notion-utils'
@@ -218,10 +217,9 @@ export const NotionPage: FC<types.PageProps> = ({
         url={canonicalPageUrl}
       />
       <NotionRenderer
-        bodyClassName={cs(
-          styles.notion,
-          pageId === site.rootNotionPageId && 'index-page'
-        )}
+        bodyClassName={`${styles.notion}${
+          pageId === site.rootNotionPageId ? ' index-page' : ''
+        }`}
         darkMode={isDarkMode}
         components={components}
         recordMap={recordMap}

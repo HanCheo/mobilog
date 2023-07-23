@@ -30,7 +30,7 @@ export const PostList: FC<{ tag: string }> = ({ tag }: { tag?: string }) => {
     hasNextPage,
     fetchNextPage
   } = useInfiniteQuery({
-    queryKey: [tag, PER_PAGE_SIZE],
+    queryKey: ['/api/posts', tag, PER_PAGE_SIZE],
     queryFn: ({ pageParam }) =>
       getTagPostList({
         tag,

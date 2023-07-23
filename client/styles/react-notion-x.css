@@ -1043,7 +1043,7 @@ svg.notion-page-icon {
   display: flex;
   align-items: center;
   height: 42px;
-  padding: 4px 2px;
+  padding: 4px 0px;
   white-space: nowrap;
   overflow: hidden;
 }

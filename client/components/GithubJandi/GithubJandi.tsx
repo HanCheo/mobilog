@@ -6,9 +6,10 @@ export const GithubJandi = () => {
 
   return (
     <div>
-      <div className='font-bold text-xl py-1'>Jandi</div>
-
-      <div className='max-sm:grid-cols-1 grid grid-cols-2 text-sm gap-2'>
+      <div className='notion-collection-header border-b border-solid border-fg-color-1'>
+        <div className='notion-collection-header-title'>Github Info</div>
+      </div>
+      <div className='max-sm:grid-cols-1 grid grid-cols-2 text-sm gap-2 mt-4'>
         <div className='flex flex-col gap-2'>
           <Link
             href={'https://github.com/moby-101'}

@@ -25,6 +25,7 @@ import '@/styles/notion.css'
 import { useState } from 'react'
 import { Footer, Header, Loading } from '@/client/components'
 import dynamic from 'next/dynamic'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const ThemeProviderNoSsr = dynamic(
   () =>
@@ -53,6 +54,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </ThemeProviderNoSsr>
         </GooglaAnalyticsProvider>
       </Hydrate>
+      <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   )
 }
