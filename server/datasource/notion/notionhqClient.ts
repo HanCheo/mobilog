@@ -10,6 +10,9 @@ export class NotionHqClientConfig {
   constructor(public auth: string) {}
 }
 
+/*
+ * Official Notion API
+ */
 @singleton()
 export class NotionHqClient extends Client implements NotionHqRepository {
   constructor({ auth }: NotionHqClientConfig) {
