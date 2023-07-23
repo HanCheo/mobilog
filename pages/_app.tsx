@@ -23,17 +23,28 @@ import '@/styles/global.css'
 import '@/styles/notion.css'
 // global style overrides for prism theme (optional)
 import { useState } from 'react'
-import { Footer, Header } from '@/client/components'
+import { Footer, Head, Header } from '@/client/components'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { THEME, ThemeProvider } from 'client/providers/ThemeProvider'
+import { defaultPageCover, description, domain, name } from '@/config/config'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
+  const title = name
+  const canonicalPageUrl = `https://${domain}`
+  const socialImage = defaultPageCover
+  const socialDescription = description
 
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Analytics />
+        <Head
+          title={title}
+          description={socialDescription}
+          image={socialImage}
+          url={canonicalPageUrl}
+        />
         <GooglaAnalyticsProvider>
           <GaScript />
           <ThemeProvider defaultTheme={THEME.Dark}>
