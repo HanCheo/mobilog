@@ -18,7 +18,7 @@ class PostController {
   @Get()
   @SetHeader(
     'Cache-Control',
-    `s-maxage=${hoursToSeconds(24)}, stale-while-revalidate=60`
+    `s-maxage=${hoursToSeconds(6)}, stale-while-revalidate=60`
   )
   async cursorPagiablePostList(
     @Query() request: CursorPagiablePostListByTagRequest
