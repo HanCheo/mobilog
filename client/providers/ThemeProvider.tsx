@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect
 } from 'react'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
 import { useLocalStorage, useMedia } from 'react-use'
 
@@ -26,24 +27,30 @@ const THEME = {
 
 export const ThemeProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   const isDarkModeMedia = useMedia('(prefers-color-scheme: dark)', null)
-  const [isDarkMode, setIsDarkMode] = useLocalStorage(
+  const [theme, setTheme] = useLocalStorage(
     'theme',
     isDarkModeMedia ? THEME.Dark : THEME.Light
   )
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDarkMode === THEME.Dark)
-  }, [isDarkMode])
+    document.documentElement.classList.toggle('dark', theme === THEME.Dark)
+  }, [theme])
 
   const toggleTheme = useCallback(() => {
-    setIsDarkMode(isDarkMode === THEME.Dark ? THEME.Light : THEME.Dark)
-  }, [isDarkMode, setIsDarkMode])
+    setTheme(theme === THEME.Dark ? THEME.Light : THEME.Dark)
+  }, [theme, setTheme])
+
+  const isDarkMode = theme === THEME.Dark
 
   return (
-    <ThemeContext.Provider
-      value={{ isDarkMode: isDarkMode === THEME.Dark, toggleTheme }}
-    >
-      {children}
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+      <SkeletonTheme
+        baseColor={isDarkMode ? 'hsl(0deg 0% 50.00%)' : undefined}
+        highlightColor={isDarkMode ? '#999' : undefined}
+        borderRadius={0}
+      >
+        {children}
+      </SkeletonTheme>
     </ThemeContext.Provider>
   )
 }
