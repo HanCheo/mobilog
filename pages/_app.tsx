@@ -23,20 +23,9 @@ import '@/styles/global.css'
 import '@/styles/notion.css'
 // global style overrides for prism theme (optional)
 import { useState } from 'react'
-import { Footer, Header, Loading } from '@/client/components'
-import dynamic from 'next/dynamic'
+import { Footer, Header } from '@/client/components'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
-const ThemeProviderNoSsr = dynamic(
-  () =>
-    import('client/providers/ThemeProvider').then(
-      (module) => module.ThemeProvider
-    ),
-  {
-    loading: () => <Loading />,
-    ssr: false
-  }
-)
+import { THEME, ThemeProvider } from 'client/providers/ThemeProvider'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
@@ -47,11 +36,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <Analytics />
         <GooglaAnalyticsProvider>
           <GaScript />
-          <ThemeProviderNoSsr>
+          <ThemeProvider defaultTheme={THEME.Dark}>
             <Header />
             <Component {...pageProps} />
             <Footer />
-          </ThemeProviderNoSsr>
+          </ThemeProvider>
         </GooglaAnalyticsProvider>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={true} />

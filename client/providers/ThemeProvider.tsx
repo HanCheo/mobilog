@@ -8,7 +8,7 @@ import {
 } from 'react'
 import { SkeletonTheme } from 'react-loading-skeleton'
 
-import { useLocalStorage, useMedia } from 'react-use'
+import { useLocalStorage } from 'react-use'
 
 type ThemeContextProps = {
   isDarkMode: boolean
@@ -20,13 +20,20 @@ const ThemeContext = createContext<ThemeContextProps>({
   toggleTheme: () => {}
 })
 
-const THEME = {
+export const THEME = {
   Dark: 'Dark',
   Light: 'Light'
 } as const
 
-export const ThemeProvider: FC<PropsWithChildren<unknown>> = ({ children }) => {
-  const isDarkModeMedia = useMedia('(prefers-color-scheme: dark)', null)
+type ThemeProviderProps = {
+  defaultTheme?: (typeof THEME)[keyof typeof THEME]
+}
+
+export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
+  children,
+  defaultTheme
+}) => {
+  const isDarkModeMedia = defaultTheme === THEME.Dark
   const [theme, setTheme] = useLocalStorage(
     'theme',
     isDarkModeMedia ? THEME.Dark : THEME.Light
