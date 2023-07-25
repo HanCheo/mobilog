@@ -16,7 +16,7 @@ import {
   isUrl,
   parsePageId
 } from 'notion-utils'
-import { container } from 'tsyringe'
+import { container } from '@/server/core'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'POST') {

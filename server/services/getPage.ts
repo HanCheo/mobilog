@@ -7,7 +7,7 @@ import { ExtendedRecordMap } from 'notion-types'
 import { mergeRecordMaps } from 'notion-utils'
 import pMap from 'p-map'
 import pMemoize from 'p-memoize'
-import { container } from 'tsyringe'
+import { container } from '@/server/core'
 
 import { getPreviewImageMap } from './getPreviewImage'
 import { NotionRepository, NotionRepositoryToken } from './repository'

@@ -10,7 +10,7 @@ import {
 } from 'notion-utils'
 import pMap from 'p-map'
 import { pMemoizeDecorator } from 'p-memoize'
-import { container, singleton } from 'tsyringe'
+import { singleton, container } from 'tsyringe'
 
 export interface SignedUrlRequest {
   permissionRecord: PermissionRecord

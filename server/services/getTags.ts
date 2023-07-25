@@ -1,5 +1,5 @@
 import { kv } from '@vercel/kv'
-import { container } from 'tsyringe'
+import { container } from '@/server/core'
 import { NotionHqRepository, NotionHqRepositoryToken } from './repository'
 
 type GetTagsResponse = {
