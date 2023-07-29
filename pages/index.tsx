@@ -3,14 +3,27 @@ import {
   VisitorCounter,
   BuyMeACoffee,
   GithubJandi,
-  RecentPostList
+  RecentPostList,
+  Head
 } from '@/client/components'
+import { defaultPageCover, name, domain, description } from '@/config/config'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import '@dotlottie/react-player/dist/index.css'
 
 export default function NotionDomainPage() {
+  const title = name
+  const canonicalPageUrl = `https://${domain}`
+  const socialImage = defaultPageCover
+  const socialDescription = description
+
   return (
     <div>
+      <Head
+        title={title}
+        description={socialDescription}
+        image={socialImage}
+        url={canonicalPageUrl}
+      />
       <div className='max-w-1200 mx-auto pt-20 pb-10 px-6 flex max-md:pt-20 max-md:pb-10 justify-between relative items-center overflow-hidden'>
         <div className='font-extrabold max-sm:text-2xl text-3xl z-10'>
           <div>Hello!</div>
