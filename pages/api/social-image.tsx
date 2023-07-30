@@ -1,10 +1,9 @@
 import { NextRequest } from 'next/server'
 import { ImageResponse } from '@vercel/og'
 import { api, apiHost, rootNotionPageId } from '@/config/config'
-import { Page } from '@/client/components/icons'
-import { NotionPageInfo } from '@/config/types'
+import { Page } from '@/client/components/icons/Page'
+import type { NotionPageInfo } from '@/config/types'
 import { format } from 'date-fns'
-import { siteConfig } from '@/config/siteConfig'
 
 const fontReguler = fetch(
   new URL('../../public/fonts/GmarketSansMedium.woff', import.meta.url)
@@ -43,9 +42,9 @@ export default async function OGImage(req: NextRequest) {
           height: '100%',
           alignItems: 'center',
           justifyContent: 'space-between',
+          fontFamily: 'Gmarket-Sans',
           display: 'flex',
-          flexDirection: 'column',
-          fontFamily: '"Gmarket-Sans", sans-serif'
+          flexDirection: 'column'
         }}
       >
         {pageInfo.image && (
@@ -101,8 +100,7 @@ export default async function OGImage(req: NextRequest) {
           <div
             style={{
               fontSize: 25,
-              fontWeight: 700,
-              fontFamily: 'Gmarket-Sans'
+              fontWeight: 700
             }}
           >
             {pageInfo.title}
@@ -111,8 +109,7 @@ export default async function OGImage(req: NextRequest) {
           <div
             style={{
               fontSize: 20,
-              fontWeight: 700,
-              fontFamily: 'Gmarket-Sans'
+              fontWeight: 700
             }}
           >
             {pageInfo.detail}
@@ -132,7 +129,7 @@ export default async function OGImage(req: NextRequest) {
           }}
         >
           <img src={'./favicon.png'} width={40} />
-          <div style={{ fontSize: 20 }}>{siteConfig.domain}</div>
+          <div style={{ fontSize: 20 }}>mobilog.me</div>
           {pageInfo.publishedAt && (
             <div>{format(new Date(pageInfo.publishedAt), 'yy-MM-dd')}</div>
           )}
@@ -146,14 +143,7 @@ export default async function OGImage(req: NextRequest) {
         {
           name: 'Gmarket-Sans',
           data: RegularFont,
-          style: 'normal',
-          weight: 400
-        },
-        {
-          name: 'Gmarket-Sans',
-          data: RegularFont,
-          style: 'normal',
-          weight: 700
+          style: 'normal'
         }
       ]
     }
