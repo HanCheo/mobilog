@@ -533,11 +533,13 @@ svg.notion-page-icon {
 }
 
 .notion-page-icon-inline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 22px;
   height: 22px;
   max-width: 22px;
   max-height: 22px;
-  margin: 0 4px;
 }
 
 .notion-page-icon-inline span {
@@ -1893,16 +1895,6 @@ svg.notion-page-icon {
   transition: background 120ms ease-in 0s;
 }
 
-.notion-page-title-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 22px;
-  width: 22px;
-  border-radius: 3px;
-  flex-shrink: 0;
-}
-
 .notion-page-title .notion-page-icon-inline {
   align-self: baseline;
   margin-left: 2px;
@@ -1919,12 +1911,6 @@ svg.notion-page-icon {
 
 .notion-collection-card-property .notion-page-title:hover {
   background: unset;
-}
-
-.notion-collection-card-property .notion-page-title-icon {
-  margin-left: 0;
-  height: 18px;
-  width: 18px;
 }
 
 .notion-collection-card-property .notion-page-title-text {
