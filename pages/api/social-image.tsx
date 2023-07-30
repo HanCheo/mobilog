@@ -3,7 +3,6 @@ import { ImageResponse } from '@vercel/og'
 import { api, apiHost, rootNotionPageId } from '@/config/config'
 import type { NotionPageInfo } from '@/config/types'
 import { siteConfig } from '@/config/siteConfig'
-import { Page } from '@/client/components/icons'
 
 const fontReguler = fetch(
   new URL('../../public/fonts/GmarketSansMedium.woff', import.meta.url)
@@ -96,15 +95,13 @@ export default async function OGImage(req: NextRequest) {
                 }}
               />
             ) : (
-              <div
+              <img
+                src={'https://mobilog.me/android-chrome-192x192.png'}
                 style={{
-                  display: 'flex',
                   width: '100%',
-                  padding: 12
+                  height: '100%'
                 }}
-              >
-                <Page width={70} />
-              </div>
+              />
             )}
           </div>
           <div
