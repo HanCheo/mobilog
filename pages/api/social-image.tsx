@@ -1,16 +1,17 @@
 import { NextRequest } from 'next/server'
-
 import { ImageResponse } from '@vercel/og'
-
 import { api, apiHost, rootNotionPageId } from '@/config/config'
+import { Page } from '@/client/components/icons'
 import { NotionPageInfo } from '@/config/types'
+import { format } from 'date-fns'
+import { siteConfig } from '@/config/siteConfig'
 
-const interRegularFontP = fetch(
-  new URL('../../public/fonts/Inter-Regular.ttf', import.meta.url)
+const fontReguler = fetch(
+  new URL('../../public/fonts/GmarketSansMedium.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
-const interBoldFontP = fetch(
-  new URL('../../public/fonts/Inter-SemiBold.ttf', import.meta.url)
+const fontBold = fetch(
+  new URL('../../public/fonts/GmarketSansBold.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export const config = {
@@ -35,10 +36,7 @@ export default async function OGImage(req: NextRequest) {
     return new Response(pageInfoRes.statusText, { status: pageInfoRes.status })
   }
   const pageInfo: NotionPageInfo = await pageInfoRes.json()
-  const [interRegularFont, interBoldFont] = await Promise.all([
-    interRegularFontP,
-    interBoldFontP
-  ])
+  const [RegularFont, BoldFont] = await Promise.all([fontReguler, fontBold])
 
   return new ImageResponse(
     (
@@ -47,13 +45,11 @@ export default async function OGImage(req: NextRequest) {
           position: 'relative',
           width: '100%',
           height: '100%',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           display: 'flex',
           flexDirection: 'column',
-          backgroundColor: '#1F2027',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: '"Inter", sans-serif',
-          color: 'black'
+          fontFamily: '"Gmarket-Sans", sans-serif'
         }}
       >
         {pageInfo.image && (
@@ -62,82 +58,89 @@ export default async function OGImage(req: NextRequest) {
             style={{
               position: 'absolute',
               width: '100%',
-              height: '100%'
+              height: '100%',
+              filter: 'blur(5px)'
             }}
           />
         )}
 
         <div
           style={{
-            position: 'relative',
-            width: 900,
-            height: 465,
+            marginTop: 150,
+            zIndex: '1',
+            background: 'rgba(255,255,255,0.8)',
             display: 'flex',
+            width: 600,
+            borderRadius: 16,
+            gap: 20,
             flexDirection: 'column',
-            border: '16px solid rgba(0,0,0,0.3)',
-            borderRadius: 8,
-            zIndex: '1'
+            justifyContent: 'space-around',
+            padding: 48,
+            alignItems: 'center',
+            textAlign: 'center'
           }}
         >
           <div
             style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-around',
-              backgroundColor: '#fff',
-              padding: 24,
-              alignItems: 'center',
-              textAlign: 'center'
+              height: 94,
+              width: 94,
+              overflow: 'hidden',
+              borderRadius: '50%'
             }}
           >
-            {pageInfo.detail && (
-              <div style={{ fontSize: 32, opacity: 0 }}>{pageInfo.detail}</div>
-            )}
-
-            <div
-              style={{
-                fontSize: 70,
-                fontWeight: 700,
-                fontFamily: 'Inter'
-              }}
-            >
-              {pageInfo.title}
-            </div>
-
-            {pageInfo.detail && (
-              <div style={{ fontSize: 32, opacity: 0.6 }}>
-                {pageInfo.detail}
+            {!pageInfo.authorImage ? (
+              <img
+                src={pageInfo.authorImage}
+                style={{
+                  width: '100%',
+                  height: '100%'
+                }}
+              />
+            ) : (
+              <div style={{ padding: 12 }}>
+                <Page width={'100%'} />
               </div>
             )}
           </div>
-        </div>
-
-        {pageInfo.authorImage && (
           <div
             style={{
-              position: 'absolute',
-              top: 47,
-              left: 104,
-              height: 128,
-              width: 128,
-              display: 'flex',
-              borderRadius: '50%',
-              border: '4px solid #fff',
-              zIndex: '5'
+              fontSize: 25,
+              fontWeight: 700,
+              fontFamily: 'Gmarket-Sans'
             }}
           >
-            <img
-              src={pageInfo.authorImage}
-              style={{
-                width: '100%',
-                height: '100%'
-                // transform: 'scale(1.04)'
-              }}
-            />
+            {pageInfo.title}
           </div>
-        )}
+
+          <div
+            style={{
+              fontSize: 20,
+              fontWeight: 700,
+              fontFamily: 'Gmarket-Sans'
+            }}
+          >
+            {pageInfo.detail}
+          </div>
+        </div>
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: 140,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            background: 'rgba(255,255,255,0.8)',
+            zIndex: '1'
+          }}
+        >
+          <img src={'./favicon.png'} width={40} />
+          <div style={{ fontSize: 20 }}>{siteConfig.domain}</div>
+          {pageInfo.publishedAt && (
+            <div>{format(new Date(pageInfo.publishedAt), 'yy-MM-dd')}</div>
+          )}
+        </div>
       </div>
     ),
     {
@@ -145,14 +148,14 @@ export default async function OGImage(req: NextRequest) {
       height: 630,
       fonts: [
         {
-          name: 'Inter',
-          data: interRegularFont,
+          name: 'Gmarket-Sans',
+          data: RegularFont,
           style: 'normal',
           weight: 400
         },
         {
-          name: 'Inter',
-          data: interBoldFont,
+          name: 'Gmarket-Sans',
+          data: BoldFont,
           style: 'normal',
           weight: 700
         }

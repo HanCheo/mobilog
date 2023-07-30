@@ -65,8 +65,8 @@ export interface NotionPageInfo {
   pageId: string
   title: string
   image: string
-  imageObjectPosition: string
   author: string
   authorImage: string
+  publishedAt?: Date
   detail: string
 }

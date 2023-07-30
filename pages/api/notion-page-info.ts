@@ -51,17 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   }
 
-  const isBlogPost =
-    block.type === 'page' && block.parent_table === 'collection'
   const title = getBlockTitle(block, recordMap) || libConfig.name
-
-  const imageCoverPosition =
-    (block as PageBlock).format?.page_cover_position ??
-    libConfig.defaultPageCoverPosition
-  const imageObjectPosition = imageCoverPosition
-    ? `center ${(1 - imageCoverPosition) * 100}%`
-    : null
-
   const imageBlockUrl = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
       (block as PageBlock).format?.page_cover,
@@ -83,38 +73,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const author =
     getPageProperty<string>('Author', block, recordMap) || libConfig.author
 
-  // const socialDescription =
-  //   getPageProperty<string>('Description', block, recordMap) ||
-  //   libConfig.description
-
-  // const lastEditedTime = getPageProperty<number>(
-  //   'Last edited time',
-  //   block,
-  //   recordMap
-  // )
+  const socialDescription =
+    getPageProperty<string>('Description', block, recordMap) ||
+    libConfig.description
+  const lastEditedTime =
+    getPageProperty<number>('Last edited time', block, recordMap) ?? new Date()
+  const dateUpdated = lastEditedTime ? new Date(lastEditedTime) : undefined
   const publishedTime = getPageProperty<number>('Published', block, recordMap)
   const datePublished = publishedTime ? new Date(publishedTime) : undefined
-  // const dateUpdated = lastEditedTime
-  //   ? new Date(lastEditedTime)
-  //   : publishedTime
-  //   ? new Date(publishedTime)
-  //   : undefined
-  const date =
-    isBlogPost && datePublished
-      ? `${datePublished.toLocaleString('en-US', {
-          month: 'long'
-        })} ${datePublished.getFullYear()}`
-      : undefined
-  const detail = date || author || libConfig.domain
 
   const pageInfo: NotionPageInfo = {
     pageId,
     title,
     image,
-    imageObjectPosition,
+    publishedAt: datePublished ?? dateUpdated,
     author,
     authorImage,
-    detail
+    detail: socialDescription
   }
 
   res.setHeader(
