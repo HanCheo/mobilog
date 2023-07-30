@@ -5,7 +5,7 @@ import type { NotionPageInfo } from '@/config/types'
 import { siteConfig } from '@/config/siteConfig'
 
 const fontReguler = fetch(
-  new URL('../../public/fonts/GmarketSansMedium.woff', import.meta.url)
+  new URL('../../public/fonts/GmarketSansLight.woff', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export const config = {
