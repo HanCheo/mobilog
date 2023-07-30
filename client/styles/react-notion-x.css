@@ -311,11 +311,15 @@
 }
 
 .notion-title {
+  max-width: var(--notion-max-width);
+  padding: 0 24px;
+  margin: auto;
   width: 100%;
   font-size: 2.5em;
   font-weight: 600;
   margin-bottom: 20px;
   line-height: 1.2;
+  word-break: break-word;
 }
 
 .notion-h {
