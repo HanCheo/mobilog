@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import { siteConfig } from '@/config/siteConfig'
 
 const fontReguler = fetch(
-  new URL('../../public/fonts/GmarketSansMedium.ttf', import.meta.url)
+  new URL('../../public/fonts/GmarketSansMedium.oft', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export const config = {
