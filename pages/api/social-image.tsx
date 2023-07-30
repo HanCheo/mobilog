@@ -37,8 +37,6 @@ export default async function OGImage(req: NextRequest) {
     ? new Date(pageInfo.publishedAt)
     : undefined
 
-  console.log(pageInfo)
-
   return new ImageResponse(
     (
       <div
