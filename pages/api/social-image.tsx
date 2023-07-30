@@ -1,16 +1,16 @@
 import { NextRequest } from 'next/server'
 import { ImageResponse } from '@vercel/og'
 import { api, apiHost, rootNotionPageId } from '@/config/config'
-import { Page } from '@/client/components/icons/Page'
 import type { NotionPageInfo } from '@/config/types'
-import { format } from 'date-fns'
+import { siteConfig } from '@/config/siteConfig'
+import { Page } from '@/client/components/icons'
 
 const fontReguler = fetch(
   new URL('../../public/fonts/GmarketSansMedium.woff', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export const config = {
-  runtime: 'experimental-edge'
+  runtime: 'edge'
 }
 
 export default async function OGImage(req: NextRequest) {
@@ -33,6 +33,12 @@ export default async function OGImage(req: NextRequest) {
   const pageInfo: NotionPageInfo = await pageInfoRes.json()
   const [RegularFont] = await Promise.all([fontReguler])
 
+  const publishedAt = pageInfo.publishedAt
+    ? new Date(pageInfo.publishedAt)
+    : undefined
+
+  console.log(pageInfo)
+
   return new ImageResponse(
     (
       <div
@@ -42,11 +48,12 @@ export default async function OGImage(req: NextRequest) {
           height: '100%',
           alignItems: 'center',
           justifyContent: 'space-between',
-          fontFamily: 'Gmarket-Sans',
+          fontFamily: 'Gmarket-Sans, sans-serif',
           display: 'flex',
           flexDirection: 'column'
         }}
       >
+        <div />
         {pageInfo.image && (
           <img
             src={pageInfo.image}
@@ -61,16 +68,13 @@ export default async function OGImage(req: NextRequest) {
 
         <div
           style={{
-            marginTop: 150,
             zIndex: '1',
             background: 'rgba(255,255,255,0.8)',
             display: 'flex',
             width: 600,
             borderRadius: 16,
-            gap: 20,
             flexDirection: 'column',
-            justifyContent: 'space-around',
-            padding: 48,
+            padding: '24px 48px',
             alignItems: 'center',
             textAlign: 'center'
           }}
@@ -79,11 +83,13 @@ export default async function OGImage(req: NextRequest) {
             style={{
               height: 94,
               width: 94,
+              display: 'flex',
+              marginBottom: 20,
               overflow: 'hidden',
               borderRadius: '50%'
             }}
           >
-            {!pageInfo.authorImage ? (
+            {pageInfo.authorImage ? (
               <img
                 src={pageInfo.authorImage}
                 style={{
@@ -92,14 +98,23 @@ export default async function OGImage(req: NextRequest) {
                 }}
               />
             ) : (
-              <div style={{ padding: 12 }}>
-                <Page width={'100%'} />
+              <div
+                style={{
+                  display: 'flex',
+                  width: '100%',
+                  padding: 12
+                }}
+              >
+                <Page width={70} />
               </div>
             )}
           </div>
           <div
             style={{
+              display: 'flex',
+              marginBottom: 20,
               fontSize: 25,
+              wordBreak: 'normal',
               fontWeight: 700
             }}
           >
@@ -108,12 +123,31 @@ export default async function OGImage(req: NextRequest) {
 
           <div
             style={{
+              display: 'flex',
               fontSize: 20,
               fontWeight: 700
             }}
           >
             {pageInfo.detail}
           </div>
+          {publishedAt && (
+            <div
+              style={{
+                display: 'flex',
+                marginTop: 24
+              }}
+            >
+              {publishedAt.getFullYear().toString().slice(2, 4) +
+                '.' +
+                (publishedAt.getMonth() + 1 < 10
+                  ? '0' + (publishedAt.getMonth() + 1)
+                  : publishedAt.getMonth() + 1) +
+                '.' +
+                (publishedAt.getDate() + 1 < 10
+                  ? '0' + (publishedAt.getDate() + 1)
+                  : publishedAt.getDate() + 1)}
+            </div>
+          )}
         </div>
         <div
           style={{
@@ -124,15 +158,19 @@ export default async function OGImage(req: NextRequest) {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
-            background: 'rgba(255,255,255,0.8)',
-            zIndex: '1'
+            background: 'rgba(255,255,255,0.8)'
           }}
         >
-          <img src={'./favicon.png'} width={40} />
-          <div style={{ fontSize: 20 }}>mobilog.me</div>
-          {pageInfo.publishedAt && (
-            <div>{format(new Date(pageInfo.publishedAt), 'yy-MM-dd')}</div>
-          )}
+          <img src={'https://mobilog.me/favicon.png'} width={40} />
+          <div
+            style={{
+              display: 'flex',
+              fontSize: 20,
+              marginTop: 5
+            }}
+          >
+            {siteConfig.domain}
+          </div>
         </div>
       </div>
     ),
