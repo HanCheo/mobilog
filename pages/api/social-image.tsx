@@ -4,10 +4,6 @@ import { api, apiHost, rootNotionPageId } from '@/config/config'
 import type { NotionPageInfo } from '@/config/types'
 import { siteConfig } from '@/config/siteConfig'
 
-const fontReguler = fetch(
-  new URL('../../public/fonts/GmarketSansLight.woff', import.meta.url)
-).then((res) => res.arrayBuffer())
-
 export const config = {
   runtime: 'edge'
 }
@@ -30,7 +26,6 @@ export default async function OGImage(req: NextRequest) {
     return new Response(pageInfoRes.statusText, { status: pageInfoRes.status })
   }
   const pageInfo: NotionPageInfo = await pageInfoRes.json()
-  const [RegularFont] = await Promise.all([fontReguler])
 
   const publishedAt = pageInfo.publishedAt
     ? new Date(pageInfo.publishedAt)
@@ -171,14 +166,7 @@ export default async function OGImage(req: NextRequest) {
     ),
     {
       width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: 'Gmarket-Sans',
-          data: RegularFont,
-          style: 'normal'
-        }
-      ]
+      height: 630
     }
   )
 }
