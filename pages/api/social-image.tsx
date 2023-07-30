@@ -10,10 +10,6 @@ const fontReguler = fetch(
   new URL('../../public/fonts/GmarketSansMedium.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
-const fontBold = fetch(
-  new URL('../../public/fonts/GmarketSansBold.ttf', import.meta.url)
-).then((res) => res.arrayBuffer())
-
 export const config = {
   runtime: 'experimental-edge'
 }
@@ -36,7 +32,7 @@ export default async function OGImage(req: NextRequest) {
     return new Response(pageInfoRes.statusText, { status: pageInfoRes.status })
   }
   const pageInfo: NotionPageInfo = await pageInfoRes.json()
-  const [RegularFont, BoldFont] = await Promise.all([fontReguler, fontBold])
+  const [RegularFont] = await Promise.all([fontReguler])
 
   return new ImageResponse(
     (
@@ -155,7 +151,7 @@ export default async function OGImage(req: NextRequest) {
         },
         {
           name: 'Gmarket-Sans',
-          data: BoldFont,
+          data: RegularFont,
           style: 'normal',
           weight: 700
         }
