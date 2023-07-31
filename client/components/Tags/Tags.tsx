@@ -52,7 +52,7 @@ export const Tags: FC<TagsProps> = () => {
           tags?.map(({ id, name }) => (
             <button
               key={id}
-              className={`border-solid border rounded-3xl p-1 px-2 cursor-pointer hover:bg-bg-color-0 flex-wrap ${
+              className={`border-solid border rounded-3xl text-sm p-1 px-2 cursor-pointer hover:bg-bg-color-0 flex-wrap ${
                 name === tag && 'bg-bg-color-0'
               }`}
               onClick={() => changeTag(name)}
