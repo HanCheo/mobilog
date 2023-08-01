@@ -4,30 +4,17 @@ import { FC } from 'react'
 import { PostItem, PostItemSkeleton } from '../PostItem'
 import { useQuery } from '@tanstack/react-query'
 
-const getRecentPostList = ({
-  limit,
-  cursor
-}: {
-  limit: number
-  cursor?: string
-}): Promise<GetPageablePostsResponse> => {
-  return fetch(
-    `${host}/api/posts?` +
-      `limit=${limit}` +
-      (cursor ? `&cursor=${cursor}` : '')
-  ).then((response) => response.json())
+const RECENT_POSTLIST_SIZE = 10
+const getRecentPostList = (): Promise<GetPageablePostsResponse> => {
+  return fetch(`${host}/api/posts?limit=${RECENT_POSTLIST_SIZE}`).then(
+    (response) => response.json()
+  )
 }
-
-const PER_PAGE_SIZE = 10
 
 export const RecentPostList: FC = () => {
   const { data: postList, isLoading } = useQuery({
-    queryKey: ['/api/posts', 'recent', PER_PAGE_SIZE],
-    queryFn: ({ pageParam }) =>
-      getRecentPostList({
-        limit: PER_PAGE_SIZE,
-        cursor: pageParam
-      })
+    queryKey: ['/api/posts', 'recent', RECENT_POSTLIST_SIZE],
+    queryFn: getRecentPostList
   })
   return (
     <div className='w-full'>
