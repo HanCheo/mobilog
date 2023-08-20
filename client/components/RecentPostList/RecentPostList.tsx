@@ -3,6 +3,7 @@ import { GetPageablePostsResponse } from '@/server/types'
 import { FC } from 'react'
 import { PostItem, PostItemSkeleton } from '../PostItem'
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 
 const RECENT_POSTLIST_SIZE = 10
 const getRecentPostList = (): Promise<GetPageablePostsResponse> => {
@@ -18,8 +19,9 @@ export const RecentPostList: FC = () => {
   })
   return (
     <div className='w-full'>
-      <div className='notion-collection-header'>
+      <div className='notion-collection-header justify-between'>
         <div className='notion-collection-header-title'>Recent Posts</div>
+        <Link href={'/posts'}>See All</Link>
       </div>
       <div className='notion-gallery-grid notion-gallery-grid-size-small'>
         {isLoading ? (
