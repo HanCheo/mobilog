@@ -1,93 +1,79 @@
 import { Post } from '@/server/types'
 import Image from 'next/image'
-import { FC, useCallback } from 'react'
-import { useRouter } from 'next/router'
+import { FC } from 'react'
 import { format } from 'date-fns'
 import { Page } from '../icons'
+import { Badge, Text, Card, Flex, Inset } from '@radix-ui/themes'
+import Link from 'next/link'
 
 export const PostItem: FC<{ post: Post }> = ({ post }: { post: Post }) => {
-  const router = useRouter()
-
-  const goToPost = useCallback(() => {
-    router.push(`/posts/${post.id.replace(/-/g, '')}`)
-  }, [post.id, router])
+  const postPage = `/posts/${post.id.replace(/-/g, '')}`
 
   return (
-    <div
-      className='notion-collection-card notion-collection-card-size-small'
-      onClick={goToPost}
-    >
-      <div className='notion-collection-card-cover'>
-        {post.cover.file?.url ? (
-          <Image
-            alt={post.properties.Name.title[0].plain_text}
-            loading='lazy'
-            width='300'
-            height='300'
-            src={post.cover.file?.url}
-            decoding='async'
-            data-nimg='1'
-          />
-        ) : (
-          <img
-            alt={post.properties.Name.title[0].plain_text}
-            loading='lazy'
-            width='300'
-            height='300'
-            src={post.cover.external?.url}
-            decoding='async'
-            data-nimg='1'
-          />
-        )}
-      </div>
-      <div className='notion-collection-card-body'>
-        <div className='notion-collection-card-property'>
-          <span className='notion-property notion-property-title'>
-            <span className='notion-page-link'>
-              <span className='notion-page-title'>
-                <div className='notion-page-icon-inline notion-page-icon-image'>
-                  {post.icon?.file.url ? (
-                    <img
-                      src={post.icon?.file.url}
-                      alt={post.properties.Name.title[0].plain_text}
-                    />
-                  ) : (
-                    <Page />
-                  )}
-                </div>
-                <span className='notion-page-title-text'>
-                  {post.properties.Name.title[0].plain_text ?? ''}
-                </span>
-              </span>
-            </span>
-          </span>
-        </div>
-        <div className='notion-collection-card-property'>
-          <span className='notion-property notion-property-date'>
+    <Card asChild>
+      <Link href={postPage}>
+        <Inset clip='border-box' side='top'>
+          {post.cover.file?.url ? (
+            <Image
+              alt={post.properties.Name.title[0].plain_text}
+              loading='lazy'
+              width='300'
+              height='140'
+              src={post.cover.file?.url}
+              decoding='async'
+              data-nimg='1'
+              style={{ width: '100%', maxHeight: '140px', height: 140 }}
+            />
+          ) : (
+            <img
+              alt={post.properties.Name.title[0].plain_text}
+              loading='lazy'
+              style={{ width: '100%', maxHeight: '140px', height: 140 }}
+              src={post.cover.external?.url}
+              decoding='async'
+              data-nimg='1'
+            />
+          )}
+        </Inset>
+        <Flex direction='column' pt='2' gap='1' align={'stretch'}>
+          <Flex direction='column' gap='1' mb='2'>
+            <Flex direction='row' gap='1'>
+              <div className='notion-page-icon-inline notion-page-icon-image'>
+                {post.icon?.file.url ? (
+                  <img
+                    src={post.icon?.file.url}
+                    alt={post.properties.Name.title[0].plain_text}
+                  />
+                ) : (
+                  <Page />
+                )}
+              </div>
+              <Text weight='medium' size='2'>
+                {post.properties.Name.title[0].plain_text ?? ''}
+              </Text>
+            </Flex>
+            <Text weight='regular' size='1'>
+              {post.properties.Description.rich_text[0]?.plain_text ?? ''}
+            </Text>
+          </Flex>
+          <Text weight='regular' size='2'>
             {format(
               new Date(post.properties.Published.date.start),
               'yyyy-MM-dd'
             ) ?? ''}
-          </span>
-        </div>
-        <div className='notion-collection-card-property'>
-          <span className='notion-property notion-property-text'>
-            {post.properties.Description.rich_text[0]?.plain_text ?? ''}
-          </span>
-        </div>
-        <div className='notion-collection-card-property'>
-          <span className='notion-property notion-property-multi_select'>
+          </Text>
+          <Flex gap={'1'}>
             {post.properties.Tags.multi_select.map((tag, index) => (
-              <div
+              <Badge
                 key={index}
-                className={`notion-property-multi_select-item notion-item-${tag.color}`}
+                color={tag.color as typeof Badge.defaultProps.color}
               >
                 {tag.name}
-              </div>
+              </Badge>
             ))}
-          </span>
-        </div>
-      </div>
-    </div>
+          </Flex>
+        </Flex>
+      </Link>
+    </Card>
   )
 }

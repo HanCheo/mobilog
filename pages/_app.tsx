@@ -1,7 +1,8 @@
 import 'reflect-metadata'
 import 'react-loading-skeleton/dist/skeleton.css'
+import '@radix-ui/themes/styles.css';
+import { Theme } from '@radix-ui/themes';
 import type { AppProps } from 'next/app'
-
 import {
   GaScript,
   GooglaAnalyticsProvider
@@ -36,11 +37,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <Analytics />
         <GooglaAnalyticsProvider>
           <GaScript />
-          <ThemeProvider defaultTheme={THEME.Light}>
-            <Header />
-            <Component {...pageProps} />
-            <Footer />
-          </ThemeProvider>
+          <Theme>
+            <ThemeProvider defaultTheme={THEME.Light}>
+              <Header />
+              <Component {...pageProps} />
+              <Footer />
+            </ThemeProvider>
+          </Theme>
         </GooglaAnalyticsProvider>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={true} />
