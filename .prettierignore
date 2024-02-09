@@ -7,3 +7,21 @@ node_modules/
 
 .demo/
 .renderer/
+
+
+{
+  "totSellamnt": 109335581000, // 총 판매액
+  "returnValue": "success",
+  "drwNoDate": "2023-10-28",
+  "firstWinamnt": 2898470459, // 1등 상금
+  "drwtNo6": 30,
+  "drwtNo4": 24,
+  "firstPrzwnerCo": 9,
+  "drwtNo5": 28,
+  "bnusNo": 44,
+  "firstAccumamnt": 26086234131, // 1등 총상금
+  "drwNo": 1091,
+  "drwtNo2": 20,
+  "drwtNo3": 23,
+  "drwtNo1": 6
+}

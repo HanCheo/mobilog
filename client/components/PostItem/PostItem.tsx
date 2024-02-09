@@ -21,7 +21,6 @@ export const PostItem: FC<{ post: Post }> = ({ post }: { post: Post }) => {
               height='140'
               src={post.cover.file?.url}
               decoding='async'
-              data-nimg='1'
               style={{ width: '100%', maxHeight: '140px', height: 140 }}
             />
           ) : (
@@ -31,7 +30,6 @@ export const PostItem: FC<{ post: Post }> = ({ post }: { post: Post }) => {
               style={{ width: '100%', maxHeight: '140px', height: 140 }}
               src={post.cover.external?.url}
               decoding='async'
-              data-nimg='1'
             />
           )}
         </Inset>

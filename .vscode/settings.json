@@ -2,8 +2,8 @@
   "typescript.tsdk": "./node_modules/typescript/lib",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.removeUnusedImports": true
+    "source.fixAll": "explicit",
+    "source.removeUnusedImports": "explicit"
   },
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
