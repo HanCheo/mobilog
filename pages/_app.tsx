@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import 'react-loading-skeleton/dist/skeleton.css'
-import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
+import '@radix-ui/themes/styles.css'
+import { Theme } from '@radix-ui/themes'
 import type { AppProps } from 'next/app'
 import {
   GaScript,
@@ -27,6 +27,7 @@ import { useState } from 'react'
 import { Footer, Header } from '@/client/components'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { THEME, ThemeProvider } from 'client/providers/ThemeProvider'
+import { IconContext } from '@react-icons/all-files'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
@@ -37,13 +38,15 @@ export default function App({ Component, pageProps }: AppProps) {
         <Analytics />
         <GooglaAnalyticsProvider>
           <GaScript />
-          <Theme>
-            <ThemeProvider defaultTheme={THEME.Light}>
-              <Header />
-              <Component {...pageProps} />
-              <Footer />
-            </ThemeProvider>
-          </Theme>
+          <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
+            <Theme>
+              <ThemeProvider defaultTheme={THEME.Light}>
+                <Header />
+                <Component {...pageProps} />
+                <Footer />
+              </ThemeProvider>
+            </Theme>
+          </IconContext.Provider>
         </GooglaAnalyticsProvider>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={true} />
