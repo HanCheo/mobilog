@@ -11,6 +11,11 @@ export default () => {
           name='naver-site-verification'
           content='5770b408b415c074792f17dc04f3c22bf425cd93'
         />
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2614705753736856'
+          crossOrigin='anonymous'
+        ></script>
       </Head>
 
       <body>
