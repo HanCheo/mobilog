@@ -33,7 +33,7 @@ export const FooterImpl: FC = () => {
   }, [handler])
 
   return (
-    <div>
+    <div className='relative mt-auto overflow-hidden'>
       <div ref={sentinelRef} className='h-16 max-sm:h-32 mt-5' />
 
       <footer className={styles.footer} ref={footerRef}>
