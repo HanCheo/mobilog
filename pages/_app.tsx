@@ -27,7 +27,6 @@ import { useState } from 'react'
 import { Footer, Header } from '@/client/components'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { THEME, ThemeProvider } from 'client/providers/ThemeProvider'
-import { IconContext } from '@react-icons/all-files'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
@@ -38,15 +37,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <Analytics />
         <GooglaAnalyticsProvider>
           <GaScript />
-          <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
-            <Theme>
-              <ThemeProvider defaultTheme={THEME.Light}>
-                <Header />
-                <Component {...pageProps} />
-                <Footer />
-              </ThemeProvider>
-            </Theme>
-          </IconContext.Provider>
+          <Theme hasBackground={false}>
+            <ThemeProvider defaultTheme={THEME.Light}>
+              <Header />
+              <Component {...pageProps} />
+              <Footer />
+            </ThemeProvider>
+          </Theme>
         </GooglaAnalyticsProvider>
       </Hydrate>
       <ReactQueryDevtools initialIsOpen={true} />
