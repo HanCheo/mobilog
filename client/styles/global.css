@@ -155,9 +155,13 @@ a {
 }
 
 body,
-html {
+html,
+#__next {
   padding: 0;
   margin: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: overlay;
 }
 
 body {
@@ -170,6 +174,13 @@ body {
   color: var(--fg-color);
   caret-color: var(--fg-color);
   font-family: var(--notion-font);
+}
+
+.radix-themes {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
 }
 
 .static-tweet blockquote {

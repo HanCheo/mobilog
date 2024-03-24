@@ -9,7 +9,7 @@ export const PostsPage: React.FC = () => {
   return (
     <>
       <Head title={`${siteConfig.name + (tag ? ' | ' + tag : '')}`} />
-      <div className='flex flex-col mx-auto gap-3 mt-6 px-6 w-full max-w-1200'>
+      <div className='flex flex-1 flex-col mx-auto gap-3 mt-6 px-6 w-full max-w-1200'>
         <Tags />
         <PostList tag={tag} />
       </div>
