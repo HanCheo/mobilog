@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://mobilog.me">
-    <img alt="mobilog page" src="https://mobilog.me/default_page_cover_v2.png" width="689">
+    <img alt="mobilog page" src="https://mobilog.me/default_page_cover_v3.png" width="689">
   </a>
 </p>
 
