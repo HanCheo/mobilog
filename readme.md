@@ -1,12 +1,14 @@
 # Mobilog
 
 <p align="center">
+  <Strong>Blogging with Notion without deployment</Strong>
+  <br />
+  <br />
   <a href="https://mobilog.me">
     <img alt="mobilog page" src="https://mobilog.me/default_page_cover_v3.png" width="360">
   </a>
 </p>
 
-### Blogging with notions without deployment
 
 ### Customizing
 - Page Route
