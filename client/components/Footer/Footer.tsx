@@ -1,9 +1,7 @@
 import { FC, memo, useCallback, useEffect, useRef } from 'react'
 
-import { FaEnvelopeOpenText } from '@react-icons/all-files/fa/FaEnvelopeOpenText'
 import { FaGithub } from '@react-icons/all-files/fa/FaGithub'
 import { FaLinkedin } from '@react-icons/all-files/fa/FaLinkedin'
-import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
 
 import * as config from '@/config/config'
 import styles from '@/styles/styles.module.css'
@@ -34,13 +32,12 @@ export const FooterImpl: FC = () => {
 
   return (
     <div
-      className='relative overflow-hidden'
+      ref={sentinelRef}
+      className='relative overflow-hidden min-h-[4rem] max-sm:min-h-[8rem] mt-5 bg-'
       style={{
         backgroundColor: 'var(--bg-color)'
       }}
     >
-      <div ref={sentinelRef} className='h-16 max-sm:h-32 mt-5' />
-
       <footer className={styles.footer} ref={footerRef}>
         <div className={styles.copyright}>Copyright 2023 {config.author}</div>
 
@@ -66,30 +63,6 @@ export const FooterImpl: FC = () => {
               rel='noopener noreferrer'
             >
               <FaLinkedin />
-            </a>
-          )}
-
-          {config.newsletter && (
-            <a
-              className={styles.newsletter}
-              href={`${config.newsletter}`}
-              title={`Newsletter ${config.author}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <FaEnvelopeOpenText />
-            </a>
-          )}
-
-          {config.youtube && (
-            <a
-              className={styles.youtube}
-              href={`https://www.youtube.com/${config.youtube}`}
-              title={`YouTube ${config.author}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <FaYoutube />
             </a>
           )}
         </div>
