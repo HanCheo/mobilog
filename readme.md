@@ -6,8 +6,7 @@
   </a>
 </p>
 
-Custom blog base on Next.js [Notion Starter Kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
-CMS is Notion
+### Blogging with notions without deployment
 
 ### Customizing
 - Page Route
